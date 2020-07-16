@@ -1,0 +1,14 @@
+
+
+
+
+.img-magnifier-glass {
+  position: absolute;
+  border: 3px solid #000;
+  border-radius: 0%;
+  cursor: copy;
+  /*Set the size of the magnifier glass:*/
+  width: 150px;
+  height: 150px;
+  z-index: 1;
+}

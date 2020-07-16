@@ -8,22 +8,33 @@
   <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   <script src="/static/script.js"></script>
+  <script src="/static/boxes.js"></script>
+  <script src="/static/download.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+
+  <script src="/static/magnifier.js"></script>
+  <link rel="stylesheet" href="/static/styles.css">
 
 
+  <script id="filetable-item-template" type="text/x-jQuery-tmpl">
+    <tr class="ui title" filename="${filename}">
+      <td> <i class="dropdown icon"></i>${filename}</td>
+      <td id="detected_${filename}"></td>
+      <td onclick="on_flag(event);">
+        <i class="flag icon" id="flag_${filename}" style="display:block;  margin-left:auto; margin-right:auto;"></i>
+      </td>
+    </tr>
+    <tr style="display:none">
+      <td colspan="5" class="ui content" filename="${filename}">
 
-  <script id="filelist-item-template" type="text/x-jQuery-tmpl">
-      <div class="title">
-        <i class="dropdown icon"></i>
-        ${filename}
-      </div>
-      <div class="content" filename="${filename}">
-
-      </div>
+      </td>
+    </tr>
   </script>
 
   <script id="filelist-item-content-template" type="text/x-jQuery-tmpl">
-      <div class="ui large images">
-          <img class="ui image" src="/images/${filename}">
+    <div filename="${filename}">
+      <div class="ui big images">
           <div class="ui image">
             <div class="ui dimmer" id='dimmer_${filename}'>
                   <div class="content">
@@ -33,20 +44,92 @@
                     </div>
                   </div>
             </div>
-            <img src="/images/${filename}" id="segmented_${filename}">
+
+            <div class="image-container">
+            <img class="ui image"       src="/images/${filename}"
+                 id="image_${filename}" style="margin:0;">
+            </div>
+            
+            <div class="ui top right attached label icon" style="border-top-right-radius: 0;">
+              <i class="zoom-in icon" style="cursor:pointer; display:none;" onclick="on_zoom_button(event)" title="Zoom"></i>
+              <i class="plus icon" style="cursor:pointer" onclick="on_add_custom_box_button(event)"  title="Add Custom Box"></i>
+            </div>
           </div>
       </div>
-      <div class="ui small images" id="patches_${filename}">
-        <!-- <img class="ui image" src="/images/patch_${i}_${filename}"> -->
+
+
+      <div class="ui two column stackable grid" id="patches_${filename}">
+          <!-- result-details-template -->
       </div>
+    </div>
+  </script>
+
+
+  <script id="result-details-template" type="text/x-jQuery-tmpl">
+    <div class="column result-details" index="${index}" filename="${filename}" >
+    <div class="ui segment" style="padding-top: 0px;">
+      <a class="ui top right attached label" onclick="on_remove_prediction(event)">
+          <i class="close icon" style="cursor:pointer"></i>
+      </a>
+      <div class="ui grid">
+            <img class="ui small image six wide column" style="padding-right:0" src="/images/patch_${i}_${filename}?_=${time}">
+            <table class="ui compact table ten wide column" style="border:0; padding:0;">
+                <!--checkbox-confidence-template-->
+              <tfoot class="full-width">
+              <tr>
+                <th class="collapsing">
+                    <div class="ui fitted checkbox" index="-1">
+                      <input type="checkbox"> <label></label>
+                    </div>
+                </th>
+                <th colspan="4" class="ui tiny form sixteen wide">
+                    <input type="text" name="new-label" placeholder="Other" oninput="on_custom_label_input(event)">
+                </th>
+              </tr>
+              </tfoot>
+            </table>
+        </div>
+    </div></div>
+  </script>
+
+
+  <script id="checkbox-confidence-template" type="text/x-jQuery-tmpl">
+  <tr>
+    <td class="collapsing">
+      <div class="ui fitted checkbox" index="${index}">
+        <input type="checkbox"> <label></label>
+      </div>
+    </td>
+    <td class="six wide ">${label}</td>
+    <td class="ten wide">
+        <div class="ui small progress" style="margin-bottom: 0px;">
+          <div class="bar"></div>
+        </div>
+    </td>
+  </tr>
+  </script>
+
+  <script id="box-overlay-template" type="text/x-jQuery-tmpl">
+    <div style="position:absolute; 
+                outline: solid #ffffff 2px;
+                top:${box[0]*100}%;        left:${box[1]*100}%; 
+                bottom:${100-box[2]*100}%; right:${100-box[3]*100}%;"
+         class="box-overlay" index="${index}">
+    </div>
   </script>
 
 </head>
 
 
 
+
+
+
+
+
 <body>
 <div class="ui container segment" style="margin-top:5px">
+
   <div>
      <label for="input_images" class="ui icon button">
         <i class="images icon"></i>
@@ -66,34 +149,43 @@
          <i class="play icon"></i>
          Process All Images
      </label>
-
-     <label class="ui icon button right floated column" onclick="on_download_csv()" id="download-csv-button">
-         <i class="download icon"></i>
-         Download CSV
+     <label class="ui red button" onclick="cancel_processing()" id="cancel-processing-button" style="display: none;">
+         <i class="x icon"></i>
+         Cancel
      </label>
+
+     <!--<label class="ui icon button right floated column" onclick="on_settings()"
+            id="settings-button" data-tooltip="Settings" data-position="bottom center">
+         <i class="cogs icon"></i>
+     </label>-->
+      
+     <!--<label class="ui icon button right floated column" onclick="on_download_csv()" 
+            id="download-csv-button" data-tooltip="Download CSV" data-position="bottom center">
+         <i class="download icon"></i>
+     </label>-->
+
+      <div class="ui icon button right floated column" id="download-button">
+        <i class="download icon"></i>
+      </div>
+      <div class="ui flowing popup top left transition hidden vertical menu" style="padding:0;">
+          <a class="item" onclick="on_download_csv()" id="download-csv-button">Download CSV</a>
+          <a class="item" onclick="on_download_labelme()" id="download-labelme-button">Download LabelMe JSON</a>
+      </div>
+      <script>$('#download-button').popup({hoverable:true});</script>
+
+      <label class="ui icon button right floated column" onclick="on_metadata()"
+             id="metadata-button" data-tooltip="Metadata" data-position="bottom center">
+         <i class="list icon"></i>
+      </label>
   </div>
 </div>
-
-
-
-
-<script id="filetable-item-template" type="text/x-jQuery-tmpl">
-<tr class="ui title">
-  <td> <i class="dropdown icon"></i>${filename}</td>
-  <td id="detected_${filename}"></td>
-</tr>
-<tr style="display:none">
-  <td colspan="5" class="ui content" filename="${filename}">
-
-  </td>
-</tr>
-</script>
 
 <div class="ui container">
 <table class="ui basic celled table accordion" id="filetable">
       <thead><tr>
-    <th>Filename</th>
-    <th>Detected Bats</th>
+    <th class="six wide">Filename</th>
+    <th class="nine wide">Detected Bats</th>
+    <th class="one wide"></th>
     </tr></thead>
   <tbody>
     <tr class="ui">
@@ -107,6 +199,116 @@
 <style>
 .ui.table td.active, .ui.table tr.active { background: #fff!important;  }
 </style>
+
+
+
+
+
+
+
+
+<div class="ui tiny modal" id="settings-dialog">
+  <i class="close icon"></i>
+  <div class="header"> Settings </div>
+
+  <div class="ui form content">
+  <div class="inline fields">
+    <label class="twelve wide field">Set flag on low confidence</label>
+    <div class="four wide ui checkbox">
+      <input type="checkbox"  checked="" id="settings_flag_low_confidence">
+      <label></label>
+    </div>
+  </div>
+  <hr/>
+     
+  <div class="inline fields">
+    <label class="twelve wide field">Set flag if no predictions</label>
+    <div class="four wide ui checkbox">
+      <input type="checkbox"  checked="" id="settings_flag_no_predictions">
+      <label></label>
+    </div>
+  </div>
+  <hr/>
+
+  <div class="inline fields">
+    <label class="twelve wide field">Set flag if more than one prediction</label>
+    <div class="four wide ui checkbox">
+      <input type="checkbox"  checked="" id="settings_flag_many_predictions">
+      <label></label>
+    </div>
+  </div>
+</div>
+
+  <div class="actions">
+      <div class="ui negative button">
+        Cancel
+      </div>
+      <div class="ui positive right labeled icon button">
+        Save
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+</div>
+
+
+
+<div class="ui small modal" id="metadata-dialog">
+  <i class="close icon"></i>
+  <div class="header"> Metadata </div>
+    
+    <div class="ui form content">
+      <div class="fields">
+        <div class="six wide field">
+          <label>Site Name</label>
+          <input type="text" id="input_site_name">
+        </div>
+        <div class="six wide field">
+          <label>Site Location</label>
+          <input type="text" id="input_site_location">
+        </div>
+        <div class="six wide field">
+          <label>Site Responsible</label>
+          <input type="text" id="input_site_responsible">
+        </div>
+      </div>
+      <div class="fields">
+        <div class="six wide field">
+          <label>Country</label>
+          <input type="text" id="input_country">
+        </div>
+        <div class="six wide field">
+          <label>Latitude</label>
+          <input type="text" id="input_latitude">
+        </div>
+        <div class="six wide field">
+          <label>Longitude</label>
+          <input type="text" id="input_longitude">
+        </div>
+      </div>
+      <div class="fields">
+        <div class="eight wide field">
+          <label>Camera ID</label>
+          <input type="text" id="input_camera_id">
+        </div>
+      </div>
+      <div class="field">
+        <label>Other</label>
+        <textarea rows="4" id="input_other"></textarea>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <div class="ui negative button">
+        Cancel
+      </div>
+      <div class="ui positive right labeled icon button">
+        Save
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+</div>
+
+
 
 </body>
 </html>

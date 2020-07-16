@@ -1,13 +1,34 @@
 import webbrowser, os, tempfile, io, sys
+import json
 import flask
 from flask import Flask, escape, request
 
 import processing
 
+#need to import all the packages here in the main file because of dill-ed ipython model
+import tensorflow as tf
+import tensorflow.keras as keras
+
+import numpy as np
+arange = np.arange
+import skimage.io              as skio
+import skimage.draw            as skdraw
+import skimage.transform       as sktransform
+import skimage.measure         as skmeasure
+import skimage.morphology      as skmorph
+import sklearn.svm             as sksvm
+import sklearn.model_selection as skms
+import sklearn.utils           as skutils
+import skimage.util            as skimgutil
+import util
+
+
 
 
 
 app        = Flask('Bat Detector', static_folder=os.path.abspath('./HTML'))
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
 TEMPFOLDER = tempfile.TemporaryDirectory(prefix='bat_detector_')
 print('Temporary Directory: %s'%TEMPFOLDER.name)
 
@@ -43,10 +64,9 @@ def process_image(imgname):
     image        = processing.load_image(fullpath)
     result       = processing.process_image(image)
 
-    processing.write_as_png(os.path.join(TEMPFOLDER.name, 'segmented_'+imgname), result.detectionmap)
-    for i,patch in enumerate(result.patches):
-        processing.write_as_png(os.path.join(TEMPFOLDER.name, 'patch_%i_%s'%(i,imgname)), patch)
-    return flask.jsonify({'labels':result.labels})
+    for i,patch in enumerate(result.blended_patches):
+        processing.write_as_jpeg(os.path.join(TEMPFOLDER.name, 'patch_%i_%s'%(i,imgname)), patch)
+    return flask.jsonify({'labels':result.labels, 'flag':result.flag, 'boxes':np.array(result.boxes).tolist() })
 
 
 @app.route('/delete_image/<imgname>')
@@ -57,12 +77,35 @@ def delete_image(imgname):
         os.remove(fullpath)
     return 'OK'
 
+@app.route('/custom_patch/<imgname>')
+def custom_patch(imgname):
+    box      = json.loads(request.args.get('box'))
+    print(request.args.get('box'))
+    index    = int(request.args.get('index'))
+    print(f'CUSTOM PATCH: {imgname} @box={box}')
+    fullpath = os.path.join(TEMPFOLDER.name, imgname)
+    image    = processing.load_image(fullpath)
+    patch    = processing.extract_patch(image, box)
+    processing.write_as_jpeg(os.path.join(TEMPFOLDER.name, 'patch_%i_%s'%(index,imgname)), patch)
+    return 'OK'
+
+
+
+
+@app.after_request
+def add_header(r):
+    r.headers["Cache-Control"]  = "no-cache, no-store, must-revalidate, public, max-age=0"
+    r.headers["Pragma"]         = "no-cache"
+    r.headers["Expires"]        = "0"
+    return r
 
 
 is_debug = sys.argv[0].endswith('.py')
-if not is_debug:
+if os.environ.get("WERKZEUG_RUN_MAIN") == "true" or not is_debug:  #to avoid flask starting twice
     with app.app_context():
-    	print('Flask started')
-    	webbrowser.open('http://localhost:5000', new=2)
+        processing.init()
+        if not is_debug:
+        	print('Flask started')
+        	webbrowser.open('http://localhost:5000', new=2)
 
 app.run(host='127.0.0.1',port=5000, debug=is_debug)
