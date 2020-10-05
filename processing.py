@@ -50,15 +50,14 @@ def write_as_jpeg(path,x):
 
 
 if __name__=='__main__':
-    fname = '/home/AD.IGD.FRAUNHOFER.DE/gillert/Desktop/Projects/Bats/SEGMENTED/Myotis dasycneme_segment/P1000221.JPG'
-    bigimage                = load_image(fname)
-    result                  = process_image(bigimage)
-    print(result.labels)
-    print(result.patches[0].shape)
+    import tempfile, sys, glob
+    import skimage.transform as sktransform, skimage.util as skimgutil
 
-    tf.io.write_file('y.jpg', tf.io.encode_jpeg(result.detectionmap[...,tf.newaxis]*255))
-    #tf.io.write_file('ym.jpg', tf.io.encode_jpeg(masks[0][...,tf.newaxis]*255))
-    tf.io.write_file('yp.jpg', tf.io.encode_jpeg(result.patches[0].numpy().astype(np.uint8)))
+    imgs = sorted(glob.glob('/home/AD.IGD.FRAUNHOFER.DE/gillert/Desktop/Projects/Bats/TRAINING_DATA_20191121/*/*.JPG'))[:64]
+    json = sorted(glob.glob('/home/AD.IGD.FRAUNHOFER.DE/gillert/Desktop/Projects/Bats/TRAINING_DATA_20191121/*/*.json'))[:64]
 
+    init()
+    
+    batdetector.retrain_object_detector(imgs, json, epochs=5)
 
     #tf.io.write_file('y.jpg', tf.io.encode_jpeg(y[0]*255))

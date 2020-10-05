@@ -13,13 +13,21 @@
   
   <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
 
-  <script src="/static/magnifier.js"></script>
-  <link rel="stylesheet" href="/static/styles.css">
+  <!--<script src="/static/magnifier.js"></script>
+  <link rel="stylesheet" href="/static/styles.css">-->
 
 
   <script id="filetable-item-template" type="text/x-jQuery-tmpl">
     <tr class="ui title" filename="${filename}">
-      <td> <i class="dropdown icon"></i>${filename}</td>
+      <!--<td> <i class="dropdown icon"></i>${filename}</td>-->
+      <td> 
+        <i class="dropdown icon"></i>
+        <i class="icons" style="font-style: normal;">
+          <i class="image icon"></i>
+          <i class="top left corner violet add icon has-mask-indicator" style="display:none"></i>
+          ${filename}
+        </i>
+      </td>
       <td id="detected_${filename}"></td>
       <td onclick="on_flag(event);">
         <i class="flag icon" id="flag_${filename}" style="display:block;  margin-left:auto; margin-right:auto;"></i>
@@ -128,57 +136,91 @@
 
 
 <body>
-<div class="ui container segment" style="margin-top:5px">
 
-  <div>
-     <label for="input_images" class="ui icon button">
+<div class="ui container menu" style="margin-top:5px">
+
+  <div class="ui simple dropdown item">
+    <span class="text">Files</span>
+    <i class="dropdown icon"></i>
+    <div class="ui menu">
+      <label for="input_images" class="ui icon item">
         <i class="images icon"></i>
         Select Input Images
-     </label>
-     <input type="file" id="input_images" style="display:none"
-           onchange="on_inputfiles_select(event)" accept="image/*" multiple>
+      </label>
+      <input type="file" id="input_images" style="display:none"
+            onchange="on_inputfiles_select(event)" accept="image/*" multiple>
+      
 
-     <label for="input_folder" class="ui icon button">
+      <label for="input_folder" class="ui icon item">
         <i class="folder icon"></i>
         Select Input Folder
-     </label>
-     <input type="file" id="input_folder" style="display:none"
-           onchange="on_inputfolder_select(this)"  webkitdirectory directory multiple>
-
-     <label class="ui primary button" onclick="process_all()" id="process-all-button">
-         <i class="play icon"></i>
-         Process All Images
-     </label>
-     <label class="ui red button" onclick="cancel_processing()" id="cancel-processing-button" style="display: none;">
-         <i class="x icon"></i>
-         Cancel
-     </label>
-
-     <!--<label class="ui icon button right floated column" onclick="on_settings()"
-            id="settings-button" data-tooltip="Settings" data-position="bottom center">
-         <i class="cogs icon"></i>
-     </label>-->
-      
-     <!--<label class="ui icon button right floated column" onclick="on_download_csv()" 
-            id="download-csv-button" data-tooltip="Download CSV" data-position="bottom center">
-         <i class="download icon"></i>
-     </label>-->
-
-      <div class="ui icon button right floated column" id="download-button">
-        <i class="download icon"></i>
-      </div>
-      <div class="ui flowing popup top left transition hidden vertical menu" style="padding:0;">
-          <a class="item" onclick="on_download_csv()" id="download-csv-button">Download CSV</a>
-          <a class="item" onclick="on_download_labelme()" id="download-labelme-button">Download LabelMe JSON</a>
-      </div>
-      <script>$('#download-button').popup({hoverable:true});</script>
-
-      <label class="ui icon button right floated column" onclick="on_metadata()"
-             id="metadata-button" data-tooltip="Metadata" data-position="bottom center">
-         <i class="list icon"></i>
       </label>
+      <input type="file" id="input_folder" style="display:none"
+            onchange="on_inputfolder_select(this)"  webkitdirectory directory multiple>
+      <div class="divider"></div>
+
+      <label for="input_training_images" class="ui icon item">
+        <i class="outline images icon"></i>
+        Select Training Images
+      </label>
+      <input type="file" id="input_training_images" style="display:none" onclick="this.value=null;"
+            onchange="on_training_images_select(event)" accept="image/*" multiple>
+      
+      <label for="input_training_json" class="ui icon item">
+        <i class="outline clone icon"></i>
+        Select Training JSON files
+      </label>
+      <input type="file" id="input_training_json" style="display:none" onclick="this.value=null;"
+            onchange="on_training_json_select(event)" accept=".json" multiple>
+
+    </div>
+  </div>
+
+  <div class="item">
+  <div class="buttons">
+  <label class="ui primary button" onclick="process_all()" id="process-all-button">
+      <i class="play icon"></i>
+      Process All Images
+  </label>
+  <label class="ui violet button" onclick="retrain()" id="retrain-button" >
+    <i class="redo alternate icon"></i>
+    Retrain
+  </label>
+  <label class="ui red button" onclick="cancel_processing()" id="cancel-processing-button" style="display:none;">
+      <i class="x icon"></i>
+      Cancel
+  </label>
   </div>
 </div>
+
+
+<div class="ui secondary right menu">
+    <div class="item">
+      <div class="ui buttons">
+        <label class="ui button" onclick="on_metadata()"
+            id="metadata-button" data-tooltip="Metadata" data-position="bottom center">
+        <i class="list icon"></i>
+        </label>
+        <label class="ui icon button right floated column" id="download-button" data-position="bottom left">
+          <i class="download icon"></i>
+        </label>
+        <div class="ui popup transition hidden vertical menu" style="padding:0">
+            <a class="item" onclick="on_download_csv()"     id="download-csv-button"     
+              style="align-self:auto;margin:0px"> Download CSV</a>
+            <a class="item" onclick="on_download_labelme()" id="download-labelme-button" 
+              style="align-self:auto;margin:0px">
+              Download LabelMe JSON</a>
+        </div>
+        <script>$('#download-button').popup({hoverable:true});</script>
+        <label class="ui button" onclick="on_settings()"
+              id="settings-button" data-tooltip="Settings" data-position="bottom center">
+          <i class="wrench icon"></i>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="ui container">
 <table class="ui basic celled table accordion" id="filetable">

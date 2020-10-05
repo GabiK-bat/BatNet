@@ -398,3 +398,24 @@ function add_custom_box(filename, box){
 }
 
 //
+
+
+filebasename = (filename) => filename.split('.').slice(0, -1).join('.');
+
+//called when user selected JSON files (in the 'File' menu)
+function on_training_json_select(input){
+  console.log(input.target.files);
+  for(maskfile of input.target.files){
+    var maskbasename = filebasename(maskfile.name);
+    for(inputfile of Object.values(global.input_files)){
+      if(filebasename(inputfile.name) == maskbasename){
+        console.log('Matched mask for input file ',inputfile.name);
+
+        //indicate in the file table that a mask is available
+        var $tablerow = $(`.ui.title[filename="${inputfile.name}"]`)
+        $tablerow.find('.has-mask-indicator').show();
+        $tablerow.find('.image.icon').addClass('outline');
+      }
+    }
+  }
+}
