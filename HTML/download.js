@@ -55,7 +55,9 @@ labelme_template = {
     lineColor: [ 0, 255, 0, 128 ],
     fillColor: [255,  0, 0, 128 ],
     imagePath: "",
-    imageData: null
+    imageData: null,
+    imageHeight: 3456,
+    imageWidth : 4608,
 }
 
 labelme_shape_template = {
@@ -69,27 +71,29 @@ labelme_shape_template = {
 }
 
 
+function create_json_from_predictions(filename){
+    var f        = global.input_files[filename];
+    var jsondata = deepcopy(labelme_template);
+    jsondata.imagePath = filename;
+    var height   = EXIF.getTag(f.file, "PixelYDimension");
+    var width    = EXIF.getTag(f.file, "PixelXDimension");
+    jsondata.imageHeight = height;
+    jsondata.imageWidth  = width;
+
+    for(r of Object.values(f.results)){
+        var jsonshape    = deepcopy(labelme_shape_template);
+        jsonshape.label  = get_selected_label(r);
+        jsonshape.points = [ [r.box[1]*width, r.box[0]*height], [r.box[3]*width, r.box[2]*height] ];
+        jsondata.shapes.push(jsonshape);
+    }
+    return jsondata;
+}
+
+
 function on_download_labelme(){
     for(filename of Object.keys(global.input_files)){
-        var f = global.input_files[filename];
-
-        var jsondata = deepcopy(labelme_template);
-        jsondata.imagePath = filename;
-        height = EXIF.getTag(f.file, "PixelYDimension");
-        width  = EXIF.getTag(f.file, "PixelXDimension");
-
-        /*EXIF.getData(f.file, function() {
-            width  = EXIF.getTag(this, "PixelXDimension");
-            height = EXIF.getTag(this, "PixelYDimension");
-        })*/
-        for(r of Object.values(f.results)){
-            var jsonshape    = deepcopy(labelme_shape_template);
-            jsonshape.label  = get_selected_label(r);
-            jsonshape.points = [ [r.box[1]*width, r.box[0]*height], [r.box[3]*width, r.box[2]*height] ];
-            jsondata.shapes.push(jsonshape);
-        }
-
-        var jsonfilename = filename.split('.').slice(0, -1).join('.')+'.json'
+        var jsondata     = create_json_from_predictions(filename);
+        var jsonfilename = filebasename(filename)+'.json';
         download(jsonfilename, JSON.stringify(jsondata, null, 2));
     }
 }

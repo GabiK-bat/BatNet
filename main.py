@@ -80,7 +80,6 @@ def delete_image(imgname):
 @app.route('/custom_patch/<imgname>')
 def custom_patch(imgname):
     box      = json.loads(request.args.get('box'))
-    print(request.args.get('box'))
     index    = int(request.args.get('index'))
     print(f'CUSTOM PATCH: {imgname} @box={box}')
     fullpath = os.path.join(TEMPFOLDER.name, imgname)
@@ -89,6 +88,19 @@ def custom_patch(imgname):
     processing.write_as_jpeg(os.path.join(TEMPFOLDER.name, 'patch_%i_%s'%(index,imgname)), patch)
     return 'OK'
 
+@app.route('/start_training', methods=['POST'])
+def start_training():
+    imagefiles = dict(request.form.lists())['filenames[]']
+    imagefiles = [os.path.join(TEMPFOLDER.name, fname) for fname in imagefiles]
+    imagefiles = [fname for fname in imagefiles if os.path.exists(fname)]
+    jsonfiles  = [os.path.splitext(fname)[0]+'.json'   for fname in imagefiles]
+    imagefiles = [imgf  for imgf,jsonf in zip(imagefiles, jsonfiles) if os.path.exists(jsonf)]
+    jsonfiles  = [jsonf for jsonf      in jsonfiles                  if os.path.exists(jsonf)]
+    if len(imagefiles)>0:
+        processing.retrain(imagefiles, jsonfiles)
+        return 'OK'
+    else:
+        flask.abort(404)
 
 
 

@@ -29,7 +29,6 @@ const RESULT = { prediction: {},      //{label:score}
 
 
 
-deepcopy = function(x){return JSON.parse(JSON.stringify(x))};
 
 
 function update_inputfiles_list(){
@@ -70,16 +69,9 @@ function on_inputfolder_select(input){
 }
 
 
+//uploads the image file to the flask server and creates the ui element in the accordion
 function upload_file(file){
-  var formData = new FormData();
-  formData.append('files', file );
-  result = $.ajax({
-      url: 'file_upload',      type: 'POST',
-      data: formData,          async: false,
-      cache: false,            contentType: false,
-      enctype: 'multipart/form-data',
-      processData: false,
-  }).done(function (response) {
+  var result = upload_file_to_flask('file_upload', file).done(function (response) {
     target  = $(`td.content[filename="${file.name}"]`);
     if(target.html().trim().length>0)
       //only do this once
@@ -93,7 +85,6 @@ function upload_file(file){
   return result;
 }
 
-function escapeSelector(s){  return s.replace( /(:|\.|\[|\])/g, "\\$1" ); }
 
 function sortObjectByValue(o) {
     return Object.keys(o).sort(function(a,b){return o[b]-o[a]}).reduce((r, k) => (r[k] = o[k], r), {});
@@ -217,10 +208,8 @@ function add_new_prediction(filename, prediction, box, i){
   add_box_overlay(filename, box, i);
 }
 
-
-
 function set_flag(filename, value){
-  if(value==true)  value=['lowconf'];
+  if(value==true)  value=['lowconf'];  //legacy
   if(value==false) value=[];
   global.input_files[filename].flag = value;
 
@@ -235,36 +224,40 @@ function set_flag(filename, value){
   else               $flag_icon.hide();
 }
 
+function set_predictions_for_file(filename, labels, boxes, flag){
+  //$(escapeSelector(`#segmented_${filename}`)).attr('src', "/images/segmented_"+filename); //obsolete
+  $(escapeSelector(`#dimmer_${filename}`)).dimmer('hide');
+
+  for(i in labels)
+      add_new_prediction(filename, labels[i], boxes[i], i);
+  set_flag(filename, flag);
+  //refresh gui
+  update_per_file_results(filename);
+  global.input_files[filename].processed=true;
+}
+
 function process_file(filename){
   upload_file(global.input_files[filename].file);
   //send a processing request to python, callback updates gui with the results
   return $.get(`/process_image/${filename}`).done(function(data){
-      $(escapeSelector(`#segmented_${filename}`)).attr('src', "/images/segmented_"+filename);
-      $(escapeSelector(`#dimmer_${filename}`)).dimmer('hide');
-
-      for(i in data.labels)
-          add_new_prediction(filename, data.labels[i], data.boxes[i], i);
-      set_flag(filename, data.flag);
-      //refresh gui
-      update_per_file_results(filename);
-
-      global.input_files[filename].processed=true;
+      set_predictions_for_file(filename, data.labels, data.boxes, data.flag);
       delete_image(filename);
     });
 }
 
+//sends request to the flask server to remove the image file from temporary folder
 function delete_image(filename){
   $.get(`/delete_image/${filename}`);
 }
 
 
 function on_accordion_open(x){
-  target     = this;
-  contentdiv = this.find('.content');
-  if(contentdiv[0].innerHTML.trim())
+  var contentdiv              = this.find('.content');
+  var content_already_created = !!(contentdiv[0].innerHTML.trim())
+  if(content_already_created)
     return;
-  filename   = contentdiv.attr('filename');
-  file       = global.input_files[filename].file;
+  var filename   = contentdiv.attr('filename');
+  var file       = global.input_files[filename].file;
   upload_file(file);
 }
 
@@ -400,22 +393,64 @@ function add_custom_box(filename, box){
 //
 
 
-filebasename = (filename) => filename.split('.').slice(0, -1).join('.');
 
 //called when user selected JSON files (in the 'File' menu)
 function on_training_json_select(input){
   console.log(input.target.files);
-  for(maskfile of input.target.files){
-    var maskbasename = filebasename(maskfile.name);
+  for(jsonfile of input.target.files){
+    var jsonbasename = filebasename(jsonfile.name);
     for(inputfile of Object.values(global.input_files)){
-      if(filebasename(inputfile.name) == maskbasename){
-        console.log('Matched mask for input file ',inputfile.name);
+      if(filebasename(inputfile.name) == jsonbasename){
+        console.log('Matched json for input file ',inputfile.name);
 
         //indicate in the file table that a mask is available
         var $tablerow = $(`.ui.title[filename="${inputfile.name}"]`)
-        $tablerow.find('.has-mask-indicator').show();
-        $tablerow.find('.image.icon').addClass('outline');
+        //$tablerow.find('.has-mask-indicator').show();
+        //$tablerow.find('.image.icon').addClass('outline');
+        $tablerow.find('.image.icon').addClass('violet');
+
+        load_json_annotation(jsonfile, inputfile.name);
       }
     }
   }
+}
+
+
+async function load_json_annotation(jsonfile, jpgfile){
+  console.log('Loading JSON file: ',jsonfile.name);
+  
+  await upload_file(global.input_files[jpgfile].file);
+  var freader = new FileReader();
+  freader.onload = (ev) => { 
+    var jsondata = JSON.parse(ev.target.result); 
+    var labels = [], boxes = [];
+    var img_element = $(`img[id="image_${jpgfile}"]`)[0];
+    for(var shape of jsondata.shapes){
+      labels.push( {[shape.label]:1} )
+      boxes.push( [Math.min(shape.points[0][1], shape.points[1][1])/img_element.naturalHeight,
+                   Math.min(shape.points[0][0], shape.points[1][0])/img_element.naturalWidth,
+                   Math.max(shape.points[0][1], shape.points[1][1])/img_element.naturalHeight,
+                   Math.max(shape.points[0][0], shape.points[1][0])/img_element.naturalWidth ] );
+    }
+    set_predictions_for_file(jpgfile, labels, boxes, false);
+    delete_image(jpgfile);
+  };
+  freader.readAsText(jsonfile);
+}
+
+
+//called when user pressed the "Retrain" button
+function on_retrain(){
+  //collect files with predictions
+  var files = Object.values(global.input_files).filter(x => x.processed);
+
+  //upload images and json files (generated from predictions)
+  for(var f of files){
+    var json = create_json_from_predictions(f.name);
+    upload_textfile('/file_upload', filebasename(f.name)+'.json', JSON.stringify(json));
+    upload_file(f.file);
+  }
+
+  var filenames = files.map(x => x.name);
+  $.post('/start_training', {'filenames':filenames});
 }

@@ -46,6 +46,8 @@ def write_as_jpeg(path,x):
     tf.io.write_file(path, tf.image.encode_jpeg(  tf.cast(x, tf.uint8)  ))
 
 
+def retrain(imagefiles, jsonfiles):
+    batdetector.retrain_object_detector(imagefiles, jsonfiles, epochs=100)
 
 
 
