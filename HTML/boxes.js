@@ -3,7 +3,7 @@
 
 function add_box_overlay(filename, box, index){
     var $overlay = $("#box-overlay-template").tmpl( [ {box:box, index:index} ] );
-    $parent      = $(`div[filename="${filename}"]`).find('.dimmable');
+    $parent      = $(`div[filename="${filename}"]`).find('.image-container');
     $parent.append($overlay);    
 }
 

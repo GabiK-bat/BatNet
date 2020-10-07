@@ -2,10 +2,9 @@ import os
 #restrict gpu usage
 os.environ["CUDA_VISIBLE_DEVICES"]=""
 
-import glob
+import glob, datetime
 import dill
 import numpy as np
-import itertools
 import util
 
 import tensorflow as tf
@@ -19,10 +18,22 @@ import skimage.morphology as skmorph
 
 batdetector = None
 
+class SETTINGS:
+    active_model = None
+
+
+
 def init():
-    global batdetector
-    batdetector = dill.load(open('models/batdetector.dill', 'rb'))
+    load_model('batdetector')
     #load_settings()
+
+def load_model(name):
+    global batdetector
+    path                  = os.path.join('models', name+'.dill')
+    print('Loading model ',path)
+    batdetector           = dill.load(open(path, 'rb'))
+    print('Finished loading')
+    SETTINGS.active_model = name
 
 def load_image(path):
     return batdetector.load_image(path)
@@ -45,9 +56,20 @@ def write_as_jpeg(path,x):
     x = x*255 if tf.reduce_max(x)<=1 else x
     tf.io.write_file(path, tf.image.encode_jpeg(  tf.cast(x, tf.uint8)  ))
 
-
 def retrain(imagefiles, jsonfiles):
     batdetector.retrain_object_detector(imagefiles, jsonfiles, epochs=100)
+    now = datetime.datetime.now().strftime('%Y%m%d_%Hh%Mm%Ss')
+    open(f'models/{now}.dill','wb').write(dill.dumps(batdetector))
+
+def get_settings():
+    modelfiles = glob.glob('models/*.dill')
+    modelnames = [os.path.splitext(os.path.basename(fname))[0] for fname in modelfiles]
+    return dict(models=modelnames, active_model=SETTINGS.active_model)
+
+def set_settings(newsettings):
+    print('New settings: ',newsettings)
+    if SETTINGS.active_model!=newsettings['active_model']:
+        load_model(newsettings['active_model'])
 
 
 

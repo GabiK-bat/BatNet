@@ -152,16 +152,12 @@
             onchange="on_inputfolder_select(this)"  webkitdirectory directory multiple>
       <div class="divider"></div>
 
-      <label for="input_training_images" class="ui icon item">
-        <i class="outline images icon"></i>
-        Select Training Images
-      </label>
       <input type="file" id="input_training_images" style="display:none" onclick="this.value=null;"
             onchange="on_training_images_select(event)" accept="image/*" multiple>
       
       <label for="input_training_json" class="ui icon item">
         <i class="outline clone icon"></i>
-        Select Training JSON files
+        Select JSON files
       </label>
       <input type="file" id="input_training_json" style="display:none" onclick="this.value=null;"
             onchange="on_training_json_select(event)" accept=".json" multiple>
@@ -247,43 +243,38 @@
   <div class="header"> Settings </div>
 
   <div class="ui form content">
-  <div class="inline fields">
-    <label class="twelve wide field">Set flag on low confidence</label>
-    <div class="four wide ui checkbox">
-      <input type="checkbox"  checked="" id="settings_flag_low_confidence">
-      <label></label>
+    <div class="field">
+    <label>Model to use</label>
+    <div class="ui dropdown selection" id="settings-active-model">
+      <input type="hidden" name="active-model">
+      <i class="dropdown icon"></i>
+      <div class="default text">Select a model</div>
+      <div class="menu">
+        <div class="item" data-value="0">Basemodel</div>
+        <div class="item" data-value="1">Another one</div>
+      </div>
     </div>
-  </div>
-  <hr/>
-     
-  <div class="inline fields">
-    <label class="twelve wide field">Set flag if no predictions</label>
-    <div class="four wide ui checkbox">
-      <input type="checkbox"  checked="" id="settings_flag_no_predictions">
-      <label></label>
     </div>
-  </div>
-  <hr/>
 
-  <div class="inline fields">
-    <label class="twelve wide field">Set flag if more than one prediction</label>
-    <div class="four wide ui checkbox">
-      <input type="checkbox"  checked="" id="settings_flag_many_predictions">
-      <label></label>
+    <div class="field">
+      <label>Retraining</label>
+      <div class="ui toggle checkbox" id="settings-enable-retraining">
+        <input type="checkbox">
+        <label>Enable retraining</label>
+      </div>
     </div>
-  </div>
-</div>
 
   <div class="actions">
       <div class="ui negative button">
         Cancel
       </div>
-      <div class="ui positive right labeled icon button">
+      <div class="ui positive right labeled icon button" id="settings-ok-button">
         Save
         <i class="checkmark icon"></i>
       </div>
     </div>
 </div>
+
 
 
 

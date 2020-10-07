@@ -5,7 +5,7 @@ global = {
   metadata    : {},
 
   cancel_requested : false,
-  
+  settings         : {}
 };
 
 
@@ -317,22 +317,31 @@ function on_flag(e){
 
 
 function save_settings(_){
-  flag_confidence = $('#settings_flag_confidence').val();
-  flag_no_preds   = $('#settings_flag_no_predictions').val();
-  flag_multiple   = $('#settings_flag_many_predictions').val();
-  
-  
-  $.post(`/settings?flag_confidence=${flag_confidence}`);
+  global.settings.active_model = $('#settings-active-model').dropdown('get value');
+  $('#settings-ok-button').addClass('loading');
+  $.post(`/settings`,{active_model:global.settings.active_model}).done( (x)=>{
+    $('#settings-dialog').modal('hide');
+    $('#settings-ok-button').removeClass('loading');
+    console.log('Settings:',x)
+  } );
+  return false;
 }
 
 function on_settings(){
+  load_settings();
   $('#settings-dialog').modal({onApprove: save_settings}).modal('show');
 }
 
 function load_settings(){
   $.get('/settings').done( function(settings){
-    settings = JSON.parse(settings);
-    $('#settings_magnification').val(settings.magnification);
+    console.log(settings)
+    global.settings.models       = settings.models;
+    global.settings.active_model = settings.active_model;
+    
+    var models_list = []
+    for(modelname of global.settings.models)
+      models_list.push({name:modelname, value:modelname, selected:(modelname==global.settings.active_model)})
+    $('.ui.dropdown#settings-active-model').dropdown({values: models_list, showOnFocus:false });
   } );
 }
 

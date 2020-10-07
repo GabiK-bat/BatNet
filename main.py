@@ -102,6 +102,14 @@ def start_training():
     else:
         flask.abort(404)
 
+@app.route('/settings', methods=['GET', 'POST'])
+def settings():
+    if request.method=='POST':
+        processing.set_settings(dict(request.form))
+        return 'OK'
+    elif request.method=='GET':
+        return flask.jsonify(processing.get_settings())
+
 
 
 @app.after_request
