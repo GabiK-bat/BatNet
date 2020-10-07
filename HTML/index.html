@@ -171,7 +171,7 @@
       <i class="play icon"></i>
       Process All Images
   </label>
-  <label class="ui violet button" onclick="on_retrain()" id="retrain-button" >
+  <label class="ui violet button" onclick="on_retrain()" id="retrain-button" style="display:none;">
     <i class="redo alternate icon"></i>
     Retrain
   </label>
@@ -264,15 +264,26 @@
       </div>
     </div>
 
-  <div class="actions">
-      <div class="ui negative button">
-        Cancel
-      </div>
-      <div class="ui positive right labeled icon button" id="settings-ok-button">
-        Save
-        <i class="checkmark icon"></i>
+    <div class="field" id="settings-new-modelname-field">
+      <label>Save retrained model</label>
+      <div class="ui action input">
+        <input type="text" placeholder="New model name" id="settings-new-modelname">
+        <button class="ui violet right labeled icon button" onclick="on_save_model()">
+          <i class="save icon"></i>
+          Save
+        </button>
       </div>
     </div>
+
+  <div class="actions">
+    <div class="ui negative button">
+      Cancel
+    </div>
+    <div class="ui positive right labeled icon button" id="settings-ok-button">
+      Save
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
 </div>
 
 

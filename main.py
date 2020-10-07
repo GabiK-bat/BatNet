@@ -110,6 +110,11 @@ def settings():
     elif request.method=='GET':
         return flask.jsonify(processing.get_settings())
 
+@app.route('/save_model')
+def save_model():
+    processing.save_model(request.args['newname'])
+    return 'OK'
+
 
 
 @app.after_request

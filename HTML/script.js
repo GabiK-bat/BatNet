@@ -5,7 +5,8 @@ global = {
   metadata    : {},
 
   cancel_requested : false,
-  settings         : {}
+  settings         : {},
+  active_mode      : 'inference',     //'inference' or 'training'
 };
 
 
@@ -313,7 +314,17 @@ function on_flag(e){
 
 
 
-
+function set_training_mode(x){
+  if(x){
+    global.active_mode = 'training';
+    //$('#process-all-button').hide();
+    $('#retrain-button').show();
+  } else {
+    global.active_mode = 'inference';
+    //$('#process-all-button').show();
+    $('#retrain-button').hide();
+  }
+}
 
 
 function save_settings(_){
@@ -324,6 +335,7 @@ function save_settings(_){
     $('#settings-ok-button').removeClass('loading');
     console.log('Settings:',x)
   } );
+  set_training_mode($('#settings-enable-retraining').checkbox('is checked'));
   return false;
 }
 
@@ -339,10 +351,26 @@ function load_settings(){
     global.settings.active_model = settings.active_model;
     
     var models_list = []
-    for(modelname of global.settings.models)
+    for(var modelname of global.settings.models)
       models_list.push({name:modelname, value:modelname, selected:(modelname==global.settings.active_model)})
+    if(settings.active_model=='')
+      models_list.push({name:'[UNSAVED MODEL]', value:'', selected:true})
     $('.ui.dropdown#settings-active-model').dropdown({values: models_list, showOnFocus:false });
+
+    var $new_name_elements = $("#settings-new-modelname-field");
+    (settings.active_model=='')? $new_name_elements.show(): $new_name_elements.hide();
   } );
+}
+
+
+//called when user clicks on the save button in settings to save a retrained model
+function on_save_model(){
+  var newname = $('#settings-new-modelname')[0].value
+  if(newname.length==0){
+    console.log('Name too short!')
+    return;
+  }
+  $.get('/save_model', {newname:newname}).done(load_settings);
 }
 
 
@@ -453,6 +481,8 @@ async function load_json_annotation(jsonfile, jpgfile){
 function on_retrain(){
   //collect files with predictions
   var files = Object.values(global.input_files).filter(x => x.processed);
+  if(files.length==0)
+    return;
 
   //upload images and json files (generated from predictions)
   for(var f of files){

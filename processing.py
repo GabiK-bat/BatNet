@@ -57,9 +57,10 @@ def write_as_jpeg(path,x):
     tf.io.write_file(path, tf.image.encode_jpeg(  tf.cast(x, tf.uint8)  ))
 
 def retrain(imagefiles, jsonfiles):
-    batdetector.retrain_object_detector(imagefiles, jsonfiles, epochs=100)
-    now = datetime.datetime.now().strftime('%Y%m%d_%Hh%Mm%Ss')
-    open(f'models/{now}.dill','wb').write(dill.dumps(batdetector))
+    batdetector.retrain_object_detector(imagefiles, jsonfiles, epochs=5)      #XXX: 5 epochs for testing only
+    SETTINGS.active_model = ''
+    #now = datetime.datetime.now().strftime('%Y%m%d_%Hh%Mm%Ss')
+    #open(f'models/{now}.dill','wb').write(dill.dumps(batdetector))
 
 def get_settings():
     modelfiles = glob.glob('models/*.dill')
@@ -70,6 +71,10 @@ def set_settings(newsettings):
     print('New settings: ',newsettings)
     if SETTINGS.active_model!=newsettings['active_model']:
         load_model(newsettings['active_model'])
+
+def save_model(newname):
+    open(f'models/{newname}.dill', 'wb').write(dill.dumps(batdetector))
+    SETTINGS.active_model = newname
 
 
 
