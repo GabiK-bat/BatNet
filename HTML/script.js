@@ -71,18 +71,7 @@ function on_inputfolder_select(input){
 
 //uploads the image file to the flask server and creates the ui element in the accordion
 function upload_file(file){
-  var result = upload_file_to_flask('file_upload', file).done(function (response) {
-    target  = $(`td.content[filename="${file.name}"]`);
-    if(target.html().trim().length>0)
-      //only do this once
-      return;
-
-    target.html('');
-    content = $("#filelist-item-content-template").tmpl([{filename:file.name}]);
-    content.appendTo(target);
-    content.find('.ui.dimmer').dimmer({'closable':false}).dimmer('show');
-  });
-  return result;
+  return upload_file_to_flask('file_upload', file);
 }
 
 
@@ -226,8 +215,9 @@ function set_flag(filename, value){
 
 function set_predictions_for_file(filename, labels, boxes, flag){
   //$(escapeSelector(`#segmented_${filename}`)).attr('src', "/images/segmented_"+filename); //obsolete
-  $(escapeSelector(`#dimmer_${filename}`)).dimmer('hide');
+  //$(escapeSelector(`#dimmer_${filename}`)).dimmer('hide'); //obsolete
 
+  //TODO: clear predictions?
   for(i in labels)
       add_new_prediction(filename, labels[i], boxes[i], i);
   set_flag(filename, flag);
@@ -251,19 +241,30 @@ function delete_image(filename){
 }
 
 
+function load_full_image(filename){
+  var imgelement              = $(`img[id="image_${filename}"]`)[0];
+  var src_already_loaded      = imgelement.src.endsWith(filename);
+  if(src_already_loaded)
+    return;
+  var file                    = global.input_files[filename].file;
+  var result                  = upload_file(file)
+  result.done(function(){
+    imgelement.src = `/images/${filename}`;
+    $(imgelement).on("load", () => delete_image(file.name) )
+  });
+  return result
+}
+
+//sets src of the main image in an accordion content on click to avoid loading all images at once
 function on_accordion_open(x){
   var contentdiv              = this.find('.content');
-  var content_already_created = !!(contentdiv[0].innerHTML.trim())
-  if(content_already_created)
-    return;
-  var filename   = contentdiv.attr('filename');
-  var file       = global.input_files[filename].file;
-  upload_file(file);
+  var filename                = contentdiv.attr('filename');
+  load_full_image(filename);
 }
 
 
 function on_process_image(e){
-  filename = e.target.attributes['filename'].value;
+  var filename = $(e.target).closest('[filename]').attr('filename');
   process_file(filename);
 }
 
@@ -419,7 +420,7 @@ function on_training_json_select(input){
 async function load_json_annotation(jsonfile, jpgfile){
   console.log('Loading JSON file: ',jsonfile.name);
   
-  await upload_file(global.input_files[jpgfile].file);
+  await load_full_image(jpgfile);
   var freader = new FileReader();
   freader.onload = (ev) => { 
     var jsondata = JSON.parse(ev.target.result); 

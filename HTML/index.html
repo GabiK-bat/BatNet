@@ -25,7 +25,6 @@
         <i class="dropdown icon"></i>
         <i class="icons" style="font-style: normal;">
           <i class="image icon"></i>
-          <i class="top left corner violet add icon has-mask-indicator" style="display:none"></i>
           ${filename}
         </i>
       </td>
@@ -35,8 +34,8 @@
       </td>
     </tr>
     <tr style="display:none">
-      <td colspan="5" class="ui content" filename="${filename}">
-
+      <td colspan="5" class="ui content" filename="${filename}" style="padding-bottom:21px">
+        {{tmpl({filename:filename}) "#filelist-item-content-template"}}
       </td>
     </tr>
   </script>
@@ -45,23 +44,16 @@
     <div filename="${filename}">
       <div class="ui big images">
           <div class="ui image">
-            <div class="ui dimmer" id='dimmer_${filename}'>
-                  <div class="content">
-                    <div class="ui primary button" filename="${filename}"
-                          onclick='on_process_image(event)'>
-                         Process Image
-                    </div>
-                  </div>
-            </div>
-
             <div class="image-container">
-            <img class="ui image"       src="/images/${filename}"
+            <!--<img class="ui image"       src="/images/${filename}"-->
+            <img class="ui image"       src=""
                  id="image_${filename}" style="margin:0;">
             </div>
             
             <div class="ui top right attached label icon" style="border-top-right-radius: 0;">
               <i class="zoom-in icon" style="cursor:pointer; display:none;" onclick="on_zoom_button(event)" title="Zoom"></i>
-              <i class="plus icon" style="cursor:pointer" onclick="on_add_custom_box_button(event)"  title="Add Custom Box"></i>
+              <i class="play link blue icon" onclick="on_process_image(event)"  title="Process Image"></i>
+              <i class="plus link icon" onclick="on_add_custom_box_button(event)"  title="Add Custom Box"></i>
             </div>
           </div>
       </div>
@@ -177,7 +169,7 @@
     </div>
   </div>
 
-  <div class="item">
+<div class="item">
   <div class="buttons">
   <label class="ui primary button" onclick="process_all()" id="process-all-button">
       <i class="play icon"></i>
@@ -197,7 +189,7 @@
 
 <div class="ui secondary right menu">
     <div class="item">
-      <div class="ui buttons">
+      <div class="three ui buttons">
         <label class="ui button" onclick="on_metadata()"
             id="metadata-button" data-tooltip="Metadata" data-position="bottom center">
         <i class="list icon"></i>
