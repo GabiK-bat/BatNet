@@ -293,6 +293,8 @@ function process_all(){
   setTimeout(loop_body, 1);  //using timeout to refresh the html between iterations
 }
 
+//called when user clicks on the cancel button
+//can mean cancel processing or cancel retraining
 function cancel_processing(){
   global.cancel_requested = true;
 }
@@ -493,4 +495,24 @@ function on_retrain(){
 
   var filenames = files.map(x => x.name);
   $.post('/start_training', {'filenames':filenames});
+  //TODO: disable buttons, also all processing buttons for individual files!
+  //show cancel button
+  $('#cancel-processing-button').show();
+
+  function progress_polling(){
+    $.get(`/retraining_progress`, function(data) {
+        
+        $retrain_button = $(`#retrain-button`);
+        $retrain_button.html(`<div class="ui active tiny inline loader"></div> Retraining...${Math.round(data*100)}%`);
+        if(data<1 && !global.cancel_requested)
+          setTimeout(progress_polling,1000);
+        else{
+          $.get('/stop_training');
+          $retrain_button.html('<i class="redo alternate icon"></i>Retrain')
+          $('#cancel-processing-button').hide();
+        }
+    });
+  }
+  global.cancel_requested = false;
+  setTimeout(progress_polling,1000);
 }

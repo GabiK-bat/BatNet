@@ -21,6 +21,12 @@ batdetector = None
 class SETTINGS:
     active_model = None
 
+class STATE:
+    current_training_epoch = -1
+
+class CONSTANTS:
+    N_EPOCHS = 100                                           #XXX: 5 epochs for testing only
+
 
 
 def init():
@@ -56,11 +62,21 @@ def write_as_jpeg(path,x):
     x = x*255 if tf.reduce_max(x)<=1 else x
     tf.io.write_file(path, tf.image.encode_jpeg(  tf.cast(x, tf.uint8)  ))
 
+def on_train_epoch(e):
+    STATE.current_training_epoch = e
+
+def training_progress():
+    return (STATE.current_training_epoch+1)/CONSTANTS.N_EPOCHS
+
+def stop_training():
+    batdetector.stop_training()
+
 def retrain(imagefiles, jsonfiles):
-    batdetector.retrain_object_detector(imagefiles, jsonfiles, epochs=5)      #XXX: 5 epochs for testing only
+    STATE.current_training_epoch = 0
+    batdetector.retrain_object_detector(imagefiles, jsonfiles, 
+                                        epochs=CONSTANTS.N_EPOCHS,
+                                        callback=on_train_epoch)
     SETTINGS.active_model = ''
-    #now = datetime.datetime.now().strftime('%Y%m%d_%Hh%Mm%Ss')
-    #open(f'models/{now}.dill','wb').write(dill.dumps(batdetector))
 
 def get_settings():
     modelfiles = glob.glob('models/*.dill')

@@ -115,6 +115,14 @@ def save_model():
     processing.save_model(request.args['newname'])
     return 'OK'
 
+@app.route('/retraining_progress')
+def retraining_progress():
+    return str(processing.training_progress())
+
+@app.route('/stop_training')
+def stop_training():
+    processing.stop_training()
+    return 'OK'
 
 
 @app.after_request
