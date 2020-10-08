@@ -97,6 +97,8 @@ function build_result_details(filename, result, index){
     cbx.removeClass('active');
     cbx.appendTo(resultbox.find(`table`));
   }
+  //set the custom label
+  resultbox.find('input[name="new-label"]')[0].value = result.custom;
   //check the checkbox that is marked as selected in the result
   resultbox.find(`.checkbox[index="${result.selected}"]`).checkbox('set checked');
 
@@ -109,18 +111,14 @@ function build_result_details(filename, result, index){
     console.log(filename + ":"+index + ":" + $(this).parent().attr('index'));
   }});
 
-  //remove the patch image from flask cache after loading to avoid cache issues
-  var $patchimg = resultbox.find('img');
-  $patchimg.on( 'load', ()=>delete_image($patchimg.attr('src').replace('/images/','')) );
-
   add_box_overlay_highlight_callback(resultbox);
   return resultbox;
 }
 
 
 //returns the label (maybe custom) that is has the corresponding checkbox set in the resultdetailsbox
-function get_selected_label(x){
-  return (x.selected>=0)? Object.keys(x.prediction)[x.selected] : x.custom;
+function get_selected_label(result){
+  return (result.selected>=0)? Object.keys(result.prediction)[result.selected] : result.custom;
 }
 
 //returns all selected labels for a file, filtering ''/nonbats
@@ -229,7 +227,7 @@ function set_flag(filename, value){
 
 function set_predictions_for_file(filename, labels, boxes, flag){
   remove_all_predictions_for_file(filename)
-  for(i in labels)
+  for(var i in labels)
       add_new_prediction(filename, labels[i], boxes[i], i);
   set_flag(filename, flag);
   //refresh gui
@@ -395,7 +393,6 @@ async function load_json_annotation(jsonfile, jpgfile){
                    Math.max(shape.points[0][0], shape.points[1][0])/imgelement.naturalWidth ] );
     }
     set_predictions_for_file(jpgfile, labels, boxes, false);
-    delete_image(jpgfile);
   };
   freader.readAsText(jsonfile);
 }
