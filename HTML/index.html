@@ -19,7 +19,7 @@
 
 
   <script id="filetable-item-template" type="text/x-jQuery-tmpl">
-    <tr class="ui title" filename="${filename}">
+    <tr class="ui title table-row" filename="${filename}">
       <!--<td> <i class="dropdown icon"></i>${filename}</td>-->
       <td> 
         <i class="dropdown icon"></i>
@@ -28,9 +28,9 @@
           ${filename}
         </i>
       </td>
-      <td id="detected_${filename}"></td>
+      <td class="table-cell-detected"></td>
       <td onclick="on_flag(event);">
-        <i class="flag icon" id="flag_${filename}" style="display:block;  margin-left:auto; margin-right:auto;"></i>
+        <i class="flag icon" style="display:block;  margin-left:auto; margin-right:auto;"></i>
       </td>
     </tr>
     <tr style="display:none">
@@ -41,13 +41,11 @@
   </script>
 
   <script id="filelist-item-content-template" type="text/x-jQuery-tmpl">
-    <div filename="${filename}">
+    <div class="filelist-item-content" filename="${filename}">
       <div class="ui big images">
           <div class="ui image">
             <div class="image-container">
-            <!--<img class="ui image"       src="/images/${filename}"-->
-            <img class="ui image"       src=""
-                 id="image_${filename}" style="margin:0;">
+            <img class="ui image"  src="" style="margin:0;">
             </div>
             
             <div class="ui top right attached label icon" style="border-top-right-radius: 0;">
@@ -59,7 +57,7 @@
       </div>
 
 
-      <div class="ui two column stackable grid" id="patches_${filename}">
+      <div class="ui two column stackable grid patches">
           <!-- result-details-template -->
       </div>
     </div>

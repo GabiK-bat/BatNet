@@ -132,8 +132,8 @@ function update_per_file_results(filename, main_table_only=false){
   results = global.input_files[filename].results;
 
   if(!main_table_only){
-    contentdiv = $(escapeSelector(`#patches_${filename}`));
-    newcontentdiv = contentdiv.clone();
+    var contentdiv    = $(`.filelist-item-content[filename="${filename}"]`).find('.patches');
+    var newcontentdiv = contentdiv.clone();
     newcontentdiv.html('');
     for(i in results)
       build_result_details(filename, results[i], i).appendTo(newcontentdiv);
@@ -142,7 +142,7 @@ function update_per_file_results(filename, main_table_only=false){
 
   //display only the labels marked as selected in the main table
   selectedlabels = get_selected_labels(filename);
-  $(escapeSelector(`#detected_${filename}`)).html(selectedlabels.join(', '));
+  $(`.table-row[filename="${filename}"]`).find(`.table-cell-detected`).html(selectedlabels.join(', '));
 
   set_flag(filename, global.input_files[filename].flag)
 }
@@ -204,7 +204,7 @@ function set_flag(filename, value){
   global.input_files[filename].flag = value;
 
   //show or hide flag
-  var $flag_icon = $(`[id="flag_${filename}"]`);
+  var $flag_icon = $(`.table-row[filename="${filename}"]`).find('.flag.icon');
   if(value.indexOf('empty')>=0)
     $flag_icon.addClass('outline');
   if(value.indexOf('multiple')>=0)
@@ -243,7 +243,7 @@ function delete_image(filename){
 
 
 function load_full_image(filename){
-  var imgelement              = $(`img[id="image_${filename}"]`)[0];
+  var imgelement              = $(`.filelist-item-content[filename="${filename}"]`).find(`img`)[0];
   var src_already_loaded      = imgelement.src.endsWith(filename);
   if(src_already_loaded)
     return;
@@ -464,13 +464,13 @@ async function load_json_annotation(jsonfile, jpgfile){
   freader.onload = (ev) => { 
     var jsondata = JSON.parse(ev.target.result); 
     var labels = [], boxes = [];
-    var img_element = $(`img[id="image_${jpgfile}"]`)[0];
+    var imgelement         = $(`.filelist-item-content[filename="${filename}"]`).find(`img`)[0];
     for(var shape of jsondata.shapes){
       labels.push( {[shape.label]:1} )
-      boxes.push( [Math.min(shape.points[0][1], shape.points[1][1])/img_element.naturalHeight,
-                   Math.min(shape.points[0][0], shape.points[1][0])/img_element.naturalWidth,
-                   Math.max(shape.points[0][1], shape.points[1][1])/img_element.naturalHeight,
-                   Math.max(shape.points[0][0], shape.points[1][0])/img_element.naturalWidth ] );
+      boxes.push( [Math.min(shape.points[0][1], shape.points[1][1])/imgelement.naturalHeight,
+                   Math.min(shape.points[0][0], shape.points[1][0])/imgelement.naturalWidth,
+                   Math.max(shape.points[0][1], shape.points[1][1])/imgelement.naturalHeight,
+                   Math.max(shape.points[0][0], shape.points[1][0])/imgelement.naturalWidth ] );
     }
     set_predictions_for_file(jpgfile, labels, boxes, false);
     delete_image(jpgfile);
