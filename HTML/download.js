@@ -90,11 +90,13 @@ function create_json_from_predictions(filename){
 }
 
 
-function on_download_labelme(){
+async function on_download_labelme(){
     for(filename of Object.keys(global.input_files)){
         var jsondata     = create_json_from_predictions(filename);
         var jsonfilename = filebasename(filename)+'.json';
         download(jsonfilename, JSON.stringify(jsondata, null, 2));
+        //sleep for a few milliseconds because browsers do not allow more than 10 simulataneous downloads
+        await sleep(250);
     }
 }
 

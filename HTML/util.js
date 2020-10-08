@@ -2,7 +2,8 @@
 
 
 deepcopy = function(x){return JSON.parse(JSON.stringify(x))};
-sleep    = function(ms) { return new Promise(resolve => setTimeout(resolve, ms));  }
+sleep    = function(ms) { return new Promise(resolve => setTimeout(resolve, ms));  } //XXX: await sleep(x)
+
 
 function escapeSelector(s){  return s.replace( /(:|\.|\[|\])/g, "\\$1" ); }
 
