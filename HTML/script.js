@@ -81,13 +81,13 @@ function sortObjectByValue(o) {
 }
 
 function build_result_details(filename, result, index){
-  label_probabilities = result.prediction;
-  resultbox = $("#result-details-template").tmpl([{filename:filename,
+  var label_probabilities = result.prediction;
+  var resultbox = $("#result-details-template").tmpl([{filename:filename,
                                                    label:JSON.stringify(label_probabilities),
                                                    time:new Date().getTime(),
                                                    index:index}]);
   console.log(label_probabilities);
-  keys=Object.keys(label_probabilities);
+  var keys=Object.keys(label_probabilities);
   for(i in keys){
     lbl = keys[i];
     cbx = $("#checkbox-confidence-template").tmpl([{label: lbl? lbl : "Not A Bat",
@@ -108,6 +108,10 @@ function build_result_details(filename, result, index){
     update_per_file_results(filename, true);
     console.log(filename + ":"+index + ":" + $(this).parent().attr('index'));
   }});
+
+  //remove the patch image from flask cache after loading to avoid cache issues
+  var $patchimg = resultbox.find('img');
+  $patchimg.on( 'load', ()=>delete_image($patchimg.attr('src').replace('/images/','')) );
 
   add_box_overlay_highlight_callback(resultbox);
   return resultbox;
@@ -148,10 +152,18 @@ function update_per_file_results(filename, main_table_only=false){
 }
 
 
+function remove_all_predictions_for_file(filename){
+  for(var i in global.input_files[filename].results)
+    remove_prediction(filename, i);
+  global.input_files[filename].processed = false;
+  set_flag(filename, false);
+  //TODO: file icon
+}
+
 function remove_prediction(filename, index){
   //remove prediction from global data
   delete global.input_files[filename].results[index];
-  //remove all result-details boxes (one in the filelist and maybe one in low-confidence list)
+  //remove all result-details boxes (individually and not with update_per_file_results for speed)
   $(`.result-details[filename="${filename}"][index="${index}"]`).detach();
   //update the detected pollen in the filelist table
   update_per_file_results(filename, true);
@@ -214,11 +226,9 @@ function set_flag(filename, value){
   else               $flag_icon.hide();
 }
 
-function set_predictions_for_file(filename, labels, boxes, flag){
-  //$(escapeSelector(`#segmented_${filename}`)).attr('src', "/images/segmented_"+filename); //obsolete
-  //$(escapeSelector(`#dimmer_${filename}`)).dimmer('hide'); //obsolete
 
-  //TODO: clear predictions?
+function set_predictions_for_file(filename, labels, boxes, flag){
+  remove_all_predictions_for_file(filename)
   for(i in labels)
       add_new_prediction(filename, labels[i], boxes[i], i);
   set_flag(filename, flag);
@@ -329,7 +339,7 @@ function on_add_custom_box_button(e){
 }
 
 
-//called after drawing a new box
+//called after drawing a new box; sends request to flask to crop a patch
 function add_custom_box(filename, box){
   console.log('NEW BOX', filename, box);
   upload_file(global.input_files[filename].file);
@@ -343,7 +353,6 @@ function add_custom_box(filename, box){
   });
 }
 
-//
 
 
 
