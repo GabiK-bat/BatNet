@@ -244,16 +244,8 @@ function delete_image(filename){
 
 function load_full_image(filename){
   var imgelement              = $(`.filelist-item-content[filename="${filename}"]`).find(`img`)[0];
-  var src_already_loaded      = imgelement.src.endsWith(filename);
-  if(src_already_loaded)
-    return;
   var file                    = global.input_files[filename].file;
-  var result                  = upload_file(file)
-  result.done(function(){
-    imgelement.src = `/images/${filename}`;
-    $(imgelement).on("load", () => delete_image(file.name) )
-  });
-  return result
+  imgelement.src              = URL.createObjectURL(file);
 }
 
 //sets src of the main image in an accordion content on click to avoid loading all images at once
@@ -464,7 +456,7 @@ async function load_json_annotation(jsonfile, jpgfile){
   freader.onload = (ev) => { 
     var jsondata = JSON.parse(ev.target.result); 
     var labels = [], boxes = [];
-    var imgelement         = $(`.filelist-item-content[filename="${filename}"]`).find(`img`)[0];
+    var imgelement         = $(`.filelist-item-content[filename="${jpgfile}"]`).find(`img`)[0];
     for(var shape of jsondata.shapes){
       labels.push( {[shape.label]:1} )
       boxes.push( [Math.min(shape.points[0][1], shape.points[1][1])/imgelement.naturalHeight,
