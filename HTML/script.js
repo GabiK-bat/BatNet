@@ -282,8 +282,8 @@ function process_all(){
     $('#cancel-processing-button').show();
     $button.html(`Processing ${j}/${Object.values(global.input_files).length}`);
 
-    f = Object.values(global.input_files)[j];
-    if(!f.processed)
+    var f = Object.values(global.input_files)[j];
+    //if(!f.processed)  //re-processing anyway, the model may have been retrained
       await process_file(f.name);
 
     j+=1;
