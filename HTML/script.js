@@ -216,6 +216,7 @@ function set_flag(filename, value){
 
   //show or hide flag
   var $flag_icon = $(`.table-row[filename="${filename}"]`).find('.flag.icon');
+  $flag_icon.attr('class', 'flag icon');
   if(value.indexOf('empty')>=0)
     $flag_icon.addClass('outline');
   if(value.indexOf('multiple')>=0)
@@ -364,12 +365,6 @@ function on_training_json_select(input){
     for(inputfile of Object.values(global.input_files)){
       if(filebasename(inputfile.name) == jsonbasename){
         console.log('Matched json for input file ',inputfile.name);
-
-        //indicate in the file table that a mask is available
-        //var $tablerow = $(`.ui.title[filename="${inputfile.name}"]`)
-        //$tablerow.find('.has-mask-indicator').show();
-        //$tablerow.find('.image.icon').attr('class', 'image violet icon');
-
         load_json_annotation(jsonfile, inputfile.name);
       }
     }

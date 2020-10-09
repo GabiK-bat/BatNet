@@ -83,6 +83,8 @@ function create_json_from_predictions(filename){
     for(r of Object.values(f.results)){
         var jsonshape    = deepcopy(labelme_shape_template);
         jsonshape.label  = get_selected_label(r);
+        if(jsonshape.label=="")
+            continue;
         jsonshape.points = [ [r.box[1]*width, r.box[0]*height], [r.box[3]*width, r.box[2]*height] ];
         jsondata.shapes.push(jsonshape);
     }

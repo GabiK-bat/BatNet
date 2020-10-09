@@ -5,7 +5,6 @@ os.environ["CUDA_VISIBLE_DEVICES"]=""
 import glob, datetime
 import dill
 import numpy as np
-import util
 
 import tensorflow as tf
 import tensorflow.keras as keras

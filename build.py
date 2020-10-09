@@ -19,6 +19,9 @@ if 'linux' in sys.platform:
     os.symlink('/main/main', build_dir+'/batnet')
 else:
     open(build_dir+'/main.bat', 'w').write(r'main\main.exe')
+    #takes up 400MB and is already in main/
+    os.remove(build_dir+'/main/tensorflow/python/_pywrap_tensorflow_internal.pyd')
+
 shutil.rmtree('./build')
 #shutil.copyfile('settings.json', build_dir+'/settings.json')
 os.remove('./main.spec')

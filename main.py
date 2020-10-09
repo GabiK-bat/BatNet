@@ -20,7 +20,6 @@ import sklearn.svm             as sksvm
 import sklearn.model_selection as skms
 import sklearn.utils           as skutils
 import skimage.util            as skimgutil
-import util
 
 
 
