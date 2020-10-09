@@ -4,11 +4,13 @@
 function set_training_mode(x){
     if(x){
       global.active_mode = 'training';
-      //$('#process-all-button').hide();
+      $('#process-all-button').hide();
+      $('.process-single-image').hide();  //the play buttons on the individual images
       $('#retrain-button').show();
     } else {
       global.active_mode = 'inference';
-      //$('#process-all-button').show();
+      $('#process-all-button').show();
+      $('.process-single-image').show();
       $('#retrain-button').hide();
     }
   }

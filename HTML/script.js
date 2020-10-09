@@ -153,7 +153,8 @@ function update_per_file_results(filename, main_table_only=false){
 function remove_all_predictions_for_file(filename){
   for(var i in global.input_files[filename].results)
     remove_prediction(filename, i);
-  global.input_files[filename].processed = false;
+  //global.input_files[filename].processed = false;
+  set_processed(filename, false);
   set_flag(filename, false);
   //TODO: file icon
 }
@@ -232,7 +233,8 @@ function set_predictions_for_file(filename, labels, boxes, flag){
   set_flag(filename, flag);
   //refresh gui
   update_per_file_results(filename);
-  global.input_files[filename].processed=true;
+  //global.input_files[filename].processed=true;
+  set_processed(filename, true);
 }
 
 function process_file(filename){
@@ -338,14 +340,14 @@ function on_add_custom_box_button(e){
 
 
 //called after drawing a new box; sends request to flask to crop a patch
-function add_custom_box(filename, box){
+function add_custom_box(filename, box, labels={}){
   console.log('NEW BOX', filename, box);
   upload_file(global.input_files[filename].file);
   
-  i = 1000+Math.max(0, Math.max(...Object.keys(global.input_files[filename].results)) +1);
+  var i = 1000+Math.max(0, Math.max(...Object.keys(global.input_files[filename].results)) +1);
   $.get(`/custom_patch/${filename}?box=[${box}]&index=${i}`).done(function(){
     console.log('custom_patch done');
-    add_new_prediction(filename, {}, box, i)
+    add_new_prediction(filename, labels, box, i)
     update_per_file_results(filename);
     delete_image(filename);
   });
@@ -364,10 +366,9 @@ function on_training_json_select(input){
         console.log('Matched json for input file ',inputfile.name);
 
         //indicate in the file table that a mask is available
-        var $tablerow = $(`.ui.title[filename="${inputfile.name}"]`)
+        //var $tablerow = $(`.ui.title[filename="${inputfile.name}"]`)
         //$tablerow.find('.has-mask-indicator').show();
-        //$tablerow.find('.image.icon').addClass('outline');
-        $tablerow.find('.image.icon').addClass('violet');
+        //$tablerow.find('.image.icon').attr('class', 'image violet icon');
 
         load_json_annotation(jsonfile, inputfile.name);
       }
@@ -379,20 +380,23 @@ function on_training_json_select(input){
 async function load_json_annotation(jsonfile, jpgfile){
   console.log('Loading JSON file: ',jsonfile.name);
   
-  await load_full_image(jpgfile);
+  await load_full_image(jpgfile);  //needed for naturalHeight/Width
   var freader = new FileReader();
   freader.onload = (ev) => { 
     var jsondata = JSON.parse(ev.target.result); 
     var labels = [], boxes = [];
     var imgelement         = $(`.filelist-item-content[filename="${jpgfile}"]`).find(`img`)[0];
+    remove_all_predictions_for_file(jpgfile);
     for(var shape of jsondata.shapes){
       labels.push( {[shape.label]:1} )
       boxes.push( [Math.min(shape.points[0][1], shape.points[1][1])/imgelement.naturalHeight,
                    Math.min(shape.points[0][0], shape.points[1][0])/imgelement.naturalWidth,
                    Math.max(shape.points[0][1], shape.points[1][1])/imgelement.naturalHeight,
                    Math.max(shape.points[0][0], shape.points[1][0])/imgelement.naturalWidth ] );
+      add_custom_box(jpgfile, boxes[boxes.length-1], labels[labels.length-1]);
     }
-    set_predictions_for_file(jpgfile, labels, boxes, false);
+    set_processed(jpgfile, 'json');
+    //set_predictions_for_file(jpgfile, labels, boxes, false);
   };
   freader.readAsText(jsonfile);
 }
@@ -403,7 +407,7 @@ function on_retrain(){
   //collect files with predictions
   var files = Object.values(global.input_files).filter(x => x.processed);
   if(files.length==0)
-    return;
+    return;  //TODO: show message that no files for training are available
 
   //upload images and json files (generated from predictions)
   for(var f of files){
@@ -414,7 +418,6 @@ function on_retrain(){
 
   var filenames = files.map(x => x.name);
   $.post('/start_training', {'filenames':filenames});
-  //TODO: disable buttons, also all processing buttons for individual files!
   //show cancel button
   $('#cancel-processing-button').show();
 
@@ -434,4 +437,23 @@ function on_retrain(){
   }
   global.cancel_requested = false;
   setTimeout(progress_polling,1000);
+}
+
+
+function set_processed(filename, value){
+  var $tablerow = $(`.ui.title[filename="${filename}"]`);
+  var $icon     = $tablerow.find('.image.icon');
+  if(!value){
+    $icon.attr('class', 'image outline icon');
+    $icon.attr('title', 'File not yet processed');
+  }
+  else if(value=='json'){
+    $icon.attr('class', 'image violet icon');
+    $icon.attr('title', 'Labels loaded from JSON file');
+  }
+  else if(!!value){
+    $icon.attr('class', 'image icon');
+    $icon.attr('title', 'File processed');
+  }
+  global.input_files[filename].processed = !!value;
 }
