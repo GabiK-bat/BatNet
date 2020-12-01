@@ -15,6 +15,7 @@ const FILE = {name: '',
               flag: [],           //['lowconf', 'multiple', 'empty']
               results: {},
               processed: false,
+              magnifier: undefined, //inactive if undefined
 };
 
 const RESULT = { prediction: {},      //{label:score}
@@ -451,4 +452,29 @@ function set_processed(filename, value){
     $icon.attr('title', 'File processed');
   }
   global.input_files[filename].processed = !!value;
+}
+
+
+
+//called when user clicks the zoom icon in the top right corner of an image
+function on_zoom_button(ev){
+  var containerdiv = $(ev.target).closest(`[filename]`);
+  var filename     = containerdiv.attr("filename");
+
+  if(global.input_files[filename].magnifier == undefined){
+    //magnifier is not yet active
+    var img          = containerdiv.find('img.ui.image');
+    img.attr("data-magnify-src", img.attr("src"));
+    var magnifier = img.magnify();
+    global.input_files[filename].magnifier = magnifier;
+    //add blue color to the icon to indicate that magnifier is active
+    $(ev.target).addClass("blue");
+  }
+  else{
+    //magnifier is already active, remove
+    global.input_files[filename].magnifier.destroy();
+    global.input_files[filename].magnifier = undefined;
+    //remove blue color to the icon to indicate that magnifier is inactive
+    $(ev.target).removeClass("blue");
+  }
 }

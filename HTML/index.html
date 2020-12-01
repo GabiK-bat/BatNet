@@ -18,6 +18,9 @@
   <!--<script src="/static/magnifier.js"></script>
   <link rel="stylesheet" href="/static/styles.css">-->
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/magnify/2.3.3/js/jquery.magnify.min.js" integrity="sha512-YKxHqn7D0M5knQJO2xKHZpCfZ+/Ta7qpEHgADN+AkY2U2Y4JJtlCEHzKWV5ZE87vZR3ipdzNJ4U/sfjIaoHMfw==" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnify/2.3.3/css/magnify.css" integrity="sha512-JxBFHHd+xyHl++SdVJYCCgxGPJKCTTaqndOl/n12qI73hgj7PuGuYDUcCgtdSHTeXSHCtW4us4Qmv+xwPqKVjQ==" crossorigin="anonymous" />
+
 
   <script id="filetable-item-template" type="text/x-jQuery-tmpl">
     <tr class="ui title table-row" filename="${filename}">
@@ -50,8 +53,8 @@
             </div>
             
             <div class="ui top right attached label icon" style="border-top-right-radius: 0;">
-              <i class="zoom-in icon" style="cursor:pointer; display:none;" onclick="on_zoom_button(event)" title="Zoom"></i>
               <i class="play link blue icon process-single-image" onclick="on_process_image(event)"  title="Process Image"></i>
+              <i class="zoom-in link icon" onclick="on_zoom_button(event)" title="Magnifier"></i>
               <i class="plus link icon" onclick="on_add_custom_box_button(event)"  title="Add Custom Box"></i>
             </div>
           </div>
