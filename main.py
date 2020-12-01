@@ -39,9 +39,9 @@ print('Temporary Directory: %s'%TEMPFOLDER.name)
 def root():
     return app.send_static_file('index.html')
 
-@app.route('/static/<x>')
-def staticfiles(x):
-    return app.send_static_file(x)
+@app.route('/static/<path:path>')
+def staticfiles(path):
+    return app.send_static_file(path)
 
 @app.route('/file_upload', methods=['POST'])
 def file_upload():

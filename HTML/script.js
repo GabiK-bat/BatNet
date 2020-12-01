@@ -462,8 +462,8 @@ function on_zoom_button(ev){
   var filename     = containerdiv.attr("filename");
 
   if(global.input_files[filename].magnifier == undefined){
-    //magnifier is not yet active
-    var img          = containerdiv.find('img.ui.image');
+    //magnifier is not yet active, activate
+    var img          = containerdiv.find('.image-container').find('img');
     img.attr("data-magnify-src", img.attr("src"));
     var magnifier = img.magnify();
     global.input_files[filename].magnifier = magnifier;
