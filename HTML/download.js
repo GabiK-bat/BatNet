@@ -35,15 +35,14 @@ function on_download_csv(){
     }
     for(filename of Object.keys(global.input_files)){
         var selectedlabels = get_selected_labels(filename);
-        //var flagged  = global.input_files[filename].flag.length>0? 'flagged' : '       ';
-        var flagged  = global.input_files[filename].flag.join('/');
-        flagged      = flagged.replace('lowconf', 'unsure');
-        flagged      = (flagged.length)? flagged : '      ';
+        var flags    = compute_flags(filename);
+        var unsure   = flags.indexOf('unsure')!=-1? 'unsure' : '      ';
+        var multiple = flags.indexOf('multiple')!=-1? 'multiple' : flags.indexOf('empty')!=-1? 'empty   ' : '        ';
         var datetime = global.input_files[filename].datetime;
         datetime     = datetime? datetime : "                   ";
         var date     = datetime.substring(0,10).replace(':','.').replace(':','.');
         var time     = datetime.substring(11);
-        csvtxt       += [filename, date, time, flagged].concat(selectedlabels).join(', ')+';\n'
+        csvtxt       += [filename, date, time, unsure, multiple].concat(selectedlabels).join(', ')+';\n'
         }
 
     if(!!csvtxt)

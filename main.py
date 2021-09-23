@@ -6,20 +6,9 @@ from flask import Flask, escape, request
 import processing
 
 #need to import all the packages here in the main file because of dill-ed ipython model
-import tensorflow as tf
-import tensorflow.keras as keras
-
+import torch, torchvision
+import onnxruntime as ort
 import numpy as np
-arange = np.arange
-import skimage.io              as skio
-import skimage.draw            as skdraw
-import skimage.transform       as sktransform
-import skimage.measure         as skmeasure
-import skimage.morphology      as skmorph
-import sklearn.svm             as sksvm
-import sklearn.model_selection as skms
-import sklearn.utils           as skutils
-import skimage.util            as skimgutil
 
 
 
@@ -63,9 +52,14 @@ def process_image(imgname):
     image        = processing.load_image(fullpath)
     result       = processing.process_image(image)
 
-    for i,patch in enumerate(result.blended_patches):
-        processing.write_as_jpeg(os.path.join(TEMPFOLDER.name, 'patch_%i_%s'%(i,imgname)), patch)
-    return flask.jsonify({'labels':result.labels, 'flag':result.flag, 'boxes':np.array(result.boxes).tolist() })
+    results = result
+    for i,crop in enumerate(results.crops):
+        processing.write_as_jpeg(os.path.join(TEMPFOLDER.name, f'patch_{i}_{imgname}'), np.array(crop).transpose(1,2,0) )
+    return flask.jsonify({
+        'labels':results.labels, 
+        'flag':  results.flags(), 
+        'boxes': np.array([ b[ [1,0,3,2] ] for b in results.boxes ]).tolist()
+        })
 
 
 @app.route('/delete_image/<imgname>')
@@ -116,7 +110,7 @@ def save_model():
 
 @app.route('/retraining_progress')
 def retraining_progress():
-    return str(processing.training_progress())
+    return flask.Response(json.dumps(processing.training_progress()),  mimetype='application/json')
 
 @app.route('/stop_training')
 def stop_training():

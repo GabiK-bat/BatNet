@@ -19,6 +19,7 @@
   <script src="/static/boxes.js"></script>
   <script src="/static/download.js"></script>
   <script src="/static/settings.js"></script>
+  <script src="/static/training.js"></script>
   
 
 
@@ -36,7 +37,10 @@
       </td>
       <td class="table-cell-detected"></td>
       <td onclick="on_flag(event);">
-        <i class="flag icon" style="display:block;  margin-left:auto; margin-right:auto;"></i>
+        <div style="display:grid; grid-template-columns: 1fr 1fr">
+          <i class="flag icon lowconf-flag" title="Low confidence"></i>
+          <i class="flag icon amounts-flag"></i>
+        </div>
       </td>
     </tr>
     <tr style="display:none">
@@ -108,7 +112,9 @@
     <td class="six wide ">${label}</td>
     <td class="ten wide">
         <div class="ui small progress" style="margin-bottom: 0px;">
-          <div class="bar"></div>
+          <div class="bar">
+            <div class="progress" style="right:.1em;"></div>
+          </div>
         </div>
     </td>
   </tr>
@@ -177,7 +183,7 @@
   </label>
   <label class="ui violet button" onclick="on_retrain()" id="retrain-button" style="display:none;">
     <i class="redo alternate icon"></i>
-    Retrain
+    Retrain Detector
   </label>
   <label class="ui red button" onclick="cancel_processing()" id="cancel-processing-button" style="display:none;">
       <i class="x icon"></i>
@@ -260,14 +266,6 @@
     </div>
     </div>
 
-    <div class="field">
-      <label>Retraining</label>
-      <div class="ui toggle checkbox" id="settings-enable-retraining">
-        <input type="checkbox">
-        <label>Enable retraining</label>
-      </div>
-    </div>
-
     <div class="field" id="settings-new-modelname-field">
       <label>Save retrained model</label>
       <div class="ui action input">
@@ -279,12 +277,33 @@
       </div>
     </div>
 
+    <div class="ui divider"></div>
+
+    <div class="field">
+      <label>Retraining</label>
+      <div class="ui toggle checkbox" id="settings-enable-retraining">
+        <input type="checkbox">
+        <label>Enable retraining</label>
+      </div>
+    </div>
+
+    <div class="ui divider"></div>
+
+    <div class="field">
+      <label>Confidence Threshold</label>
+      <div class="ui right labeled input" id="settings-confidence-threshold">
+        <input type="number" step="1" min="0" max="100" style="width: 5ch;" value="75" id='settings-confidence-threshold-input'>
+        <div class="ui basic label"> % </div>
+        <label style="padding:10px">Flag predictions with confidence below this value</label>
+      </div>
+    </div>
+
   <div class="actions">
     <div class="ui negative button">
       Cancel
     </div>
     <div class="ui positive right labeled icon button" id="settings-ok-button">
-      Save
+      Save Settings
       <i class="checkmark icon"></i>
     </div>
   </div>
@@ -343,12 +362,41 @@
         Cancel
       </div>
       <div class="ui positive right labeled icon button">
-        Save
+        Save Metadata
         <i class="checkmark icon"></i>
       </div>
     </div>
 </div>
 
+
+<div class="ui tiny modal" id="training-modal">
+  <div class="header"> Training </div>
+
+  <div class="ui form content">
+    <div class="ui progress">
+      <div class="bar">
+        <div class="progress"></div>
+      </div>
+      <div class="label">Training Progress</div>
+    </div>
+  </div>
+
+  
+  <div class="actions">
+    <div class="ui negative button" id="cancel-training-button">
+      Cancel Training
+    </div>
+  </div>
+</div>
+
+
+<div class="ui tiny modal" id="loading-json-modal">
+  <div class="ui content", style="height:200px">
+    <div class="ui active inverted dimmer">
+      <div class="ui text loader">Loading JSON Files</div>
+    </div>
+  </div>
+</div>
 
 
 </body>

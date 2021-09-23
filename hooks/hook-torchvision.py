@@ -1,0 +1,1 @@
+hiddenimports = ['torchvision._C']

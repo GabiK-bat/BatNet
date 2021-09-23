@@ -1,10 +1,17 @@
-dill==0.3.1.1
+--find-links https://download.pytorch.org/whl/torch_stable.html
+#--find-links https://dl.fbaipublicfiles.com/detectron2/wheels/cpu/torch1.6/index.html
+
+torch==1.8.1+cpu
+torchvision==0.9.1+cpu
+pytorch_lightning==1.4.4
+
+cloudpickle==2.0.0
 Flask==1.1.2
-numpy==1.16.4
+numpy==1.20.2
 Pillow==7.1.2
-scikit_learn==0.22
-scikit-image==0.16.2
-tensorflow-cpu==2.2.0
+
 setuptools<45.0.0
 pyinstaller==3.5
 scipy==1.4.1
+
+onnxruntime==1.7.0

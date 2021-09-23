@@ -10,7 +10,8 @@ function escapeSelector(s){  return s.replace( /(:|\.|\[|\])/g, "\\$1" ); }
 
 //returns the name of a file without its ending
 filebasename = (filename) => filename.split('.').slice(0, -1).join('.');
-
+//returns the file ending
+file_ending  = (filename) => '.'+filename.split('.').slice(-1).join('.');
 
 
 function upload_file_to_flask(url, file){
@@ -32,4 +33,7 @@ function upload_textfile(url, filename, text){
 }
 
 
-  
+function rename_file(file, newname){
+    return new File([file], newname, {type: file.type});
+}
+ 

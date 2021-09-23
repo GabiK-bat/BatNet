@@ -1,21 +1,20 @@
 
 global = {
   input_files : {},      //{"banana.JPG": FILE}
-  //per_file_results : {}, //{0:{prediction:['Mnat':1.0], custom:'', selected:0},...}
   metadata    : {},
 
   cancel_requested : false,
-  settings         : {},
+  settings         : {},              //SETTINGS
   active_mode      : 'inference',     //'inference' or 'training'
 };
 
 
 const FILE = {name: '',
               file: undefined,    //javascript file object
-              flag: [],           //['lowconf', 'multiple', 'empty']
               results: {},
               processed: false,
               magnifier: undefined, //inactive if undefined
+              manual_flags: false,  //set by user click
 };
 
 const RESULT = { prediction: {},      //{label:score}
@@ -27,12 +26,18 @@ const RESULT = { prediction: {},      //{label:score}
 
 
 
+const SETTINGS = {
+  models               : [],
+  active_model         : '',
+  confidence_threshold : 75,
+};
+global.settings = deepcopy(SETTINGS);
 
 
 
 
 
-
+//rebuilds the list of files, called when new files are selected
 function update_inputfiles_list(){
   $filestable = $('#filetable');
   $filestable.find('tbody').html('');
@@ -72,8 +77,8 @@ function on_inputfolder_select(input){
 
 
 //uploads the image file to the flask server and creates the ui element in the accordion
-function upload_file(file){
-  return upload_file_to_flask('file_upload', file);
+async function upload_file(file){
+  await upload_file_to_flask('file_upload', file);
 }
 
 
@@ -87,7 +92,6 @@ function build_result_details(filename, result, index){
                                                    label:JSON.stringify(label_probabilities),
                                                    time:new Date().getTime(),
                                                    index:index}]);
-  console.log(label_probabilities);
   var keys=Object.keys(label_probabilities);
   for(i in keys){
     lbl = keys[i];
@@ -109,7 +113,7 @@ function build_result_details(filename, result, index){
     $(this).parent().checkbox('set checked');
     global.input_files[filename].results[index].selected = $(this).parent().attr('index');
     update_per_file_results(filename, true);
-    console.log(filename + ":"+index + ":" + $(this).parent().attr('index'));
+    //console.log(filename + ":"+index + ":" + $(this).parent().attr('index'));
   }});
 
   add_box_overlay_highlight_callback(resultbox);
@@ -123,15 +127,24 @@ function get_selected_label(result){
 }
 
 //returns all selected labels for a file, filtering ''/nonbats
-function get_selected_labels(filename){
-  results = global.input_files[filename].results;
-  selectedlabels = Object.values(results).map(get_selected_label);
-  selectedlabels = selectedlabels.filter(Boolean);
+function get_selected_labels(filename, append_confidence=true){
+  var results = global.input_files[filename].results;
+  //var selectedlabels = Object.values(results).map(get_selected_label);
+  //selectedlabels = selectedlabels.filter(Boolean);
+  var selectedlabels = [];
+  for(var r of Object.values(results)) {
+    var label = get_selected_label(r);
+    if(label!='' && append_confidence){
+      var score = (r.selected>=0)? Math.round(100*r.prediction[label]) : 100;
+      label = label + ` (${score}%)`;
+      selectedlabels.push(label);
+    }
+  }
   return selectedlabels;
 }
 
+//refresh the gui for one file
 function update_per_file_results(filename, main_table_only=false){
-  //refresh the gui for one file
   results = global.input_files[filename].results;
 
   if(!main_table_only){
@@ -147,17 +160,73 @@ function update_per_file_results(filename, main_table_only=false){
   selectedlabels = get_selected_labels(filename);
   $(`.table-row[filename="${filename}"]`).find(`.table-cell-detected`).html(selectedlabels.join(', '));
 
-  set_flag(filename, global.input_files[filename].flag)
+  update_flags(filename);
+}
+
+
+function compute_flags(filename){
+  var flags   = []
+  var results = global.input_files[filename].results;
+  var lowconf = false;
+  var amount   = 0;
+  for(var r of Object.values(results) ){
+    var _lowconf = (Object.values(sortObjectByValue(r.prediction))[0] <= global.settings.confidence_threshold/100);
+    if( _lowconf ){
+      lowconf = true;
+    }
+    if(! (r.prediction[''] > global.settings.confidence_threshold/100) ){
+      amount += 1;
+    }
+  }
+  lowconf = lowconf ^ global.input_files[filename].manual_flags;
+  if(lowconf)
+    flags.push('unsure');
+
+  //var amount = Object.keys(results).length;
+  if(amount==0 && global.input_files[filename].processed)
+    flags.push('empty');
+  else if(amount>1 && global.input_files[filename].processed)
+    flags.push('multiple');
+  
+  return flags;
+}
+
+function update_flags(filename){
+  var flags = compute_flags(filename);
+  var $flag_icon = $(`.table-row[filename="${filename}"]`).find('.lowconf-flag');
+  $flag_icon.css('visibility', flags.indexOf('unsure')!=-1? 'visible' : 'hidden')  //hide()/show() changes layout
+
+  var empty      = flags.indexOf('empty')!=-1;
+  var multiple   = flags.indexOf('multiple')!=-1;
+  var $flag_icon = $(`.table-row[filename="${filename}"]`).find('.amounts-flag');
+  $flag_icon.css('visibility', (empty||multiple)? 'visible' : 'hidden')
+  if(empty){
+    $flag_icon.addClass('outline');         //empty
+    $flag_icon.removeClass('checkered');
+    $flag_icon.attr('title', 'No detections');
+  } else if(multiple) {
+    $flag_icon.addClass('checkered');      //multiple
+    $flag_icon.removeClass('outline');
+    $flag_icon.attr('title', 'Multiple detections');
+  }
+}
+
+
+//called when user clicks on a flag icons to remove them
+function on_flag(e){
+  e.stopPropagation();
+  var filename = $(e.target).closest('[filename]').attr('filename');
+  //toggle
+  var flags_before = global.input_files[filename].manual_flags;
+  global.input_files[filename].manual_flags = !flags_before;
+  update_per_file_results(filename, true);
 }
 
 
 function remove_all_predictions_for_file(filename){
   for(var i in global.input_files[filename].results)
     remove_prediction(filename, i);
-  //global.input_files[filename].processed = false;
   set_processed(filename, false);
-  set_flag(filename, false);
-  //TODO: file icon
 }
 
 function remove_prediction(filename, index){
@@ -210,55 +279,50 @@ function add_new_prediction(filename, prediction, box, i){
   add_box_overlay(filename, box, i);
 }
 
-function set_flag(filename, value){
-  if(value==true)  value=['lowconf'];  //legacy
-  if(value==false) value=[];
-  global.input_files[filename].flag = value;
 
-  //show or hide flag
-  var $flag_icon = $(`.table-row[filename="${filename}"]`).find('.flag.icon');
-  $flag_icon.attr('class', 'flag icon');
-  if(value.indexOf('empty')>=0)
-    $flag_icon.addClass('outline');
-  if(value.indexOf('multiple')>=0)
-    $flag_icon.addClass('checkered');
-  
-  if(value.length>0) $flag_icon.show();
-  else               $flag_icon.hide();
-}
-
-
-function set_predictions_for_file(filename, labels, boxes, flag){
+function set_predictions_for_file(filename, labels, boxes){
   remove_all_predictions_for_file(filename)
   for(var i in labels)
       add_new_prediction(filename, labels[i], boxes[i], i);
-  set_flag(filename, flag);
+  set_processed(filename, true);
   //refresh gui
   update_per_file_results(filename);
-  //global.input_files[filename].processed=true;
-  set_processed(filename, true);
 }
 
 function process_file(filename){
   upload_file(global.input_files[filename].file);
+  set_processed(filename, false);
   //send a processing request to python, callback updates gui with the results
   return $.get(`/process_image/${filename}`).done(function(data){
-      set_predictions_for_file(filename, data.labels, data.boxes, data.flag);
+      set_predictions_for_file(filename, data.labels, data.boxes);
       delete_image(filename);
     });
 }
 
 //sends request to the flask server to remove the image file from temporary folder
 function delete_image(filename){
-  $.get(`/delete_image/${filename}`);
+  return $.get(`/delete_image/${filename}`);
 }
 
 
-function load_full_image(filename){
+function _load_full_image(filename){
   var imgelement              = $(`.filelist-item-content[filename="${filename}"]`).find(`img`)[0];
   var file                    = global.input_files[filename].file;
   imgelement.src              = URL.createObjectURL(file);
 }
+
+function load_full_image(filename){
+  const promise = new Promise((resolve, reject) => {
+    var imgelement              = $(`.filelist-item-content[filename="${filename}"]`).find(`img`)[0];
+    var file                    = global.input_files[filename].file;
+    imgelement.onload           = (ev) => {
+      resolve();
+    }
+    imgelement.src              = URL.createObjectURL(file);
+  });
+  return promise;
+}
+
 
 //sets src of the main image in an accordion content on click to avoid loading all images at once
 function on_accordion_open(x){
@@ -305,21 +369,6 @@ function cancel_processing(){
 
 
 
-
-
-
-
-function on_flag(e){
-  e.stopPropagation();
-  filename = $(e.target).closest('[filename]').attr('filename');
-  //toggle
-  if(global.input_files[filename].flag.length==0) set_flag(filename, ['lowconf']);
-  else                                            set_flag(filename, []);
-  update_per_file_results(filename, true);
-}
-
-
-
 //callback from the plus-icon in the upper right corner of an image
 function on_add_custom_box_button(e){
   $etarget = $(e.target)
@@ -342,98 +391,24 @@ function on_add_custom_box_button(e){
 
 
 //called after drawing a new box; sends request to flask to crop a patch
-function add_custom_box(filename, box, labels={}){
+function add_custom_box(filename, box, labels={}, i=undefined){
   console.log('NEW BOX', filename, box);
-  upload_file(global.input_files[filename].file);
+  //var file = rename_file(global.input_files[filename].file, filename)
+  var file = global.input_files[filename].file;
+  upload_file(file);
   
-  var i = 1000+Math.max(0, Math.max(...Object.keys(global.input_files[filename].results)) +1);
-  $.get(`/custom_patch/${filename}?box=[${box}]&index=${i}`).done(function(){
-    console.log('custom_patch done');
+  if(i==undefined)
+      i = 1000+Math.max(0, Math.max(...Object.keys(global.input_files[filename].results)) +1);
+  console.log('CUSTOM PATCH REQUEST', filename)
+  return $.get(`/custom_patch/${filename}?box=[${box}]&index=${i}`).then(async function(){
     add_new_prediction(filename, labels, box, i)
     update_per_file_results(filename);
-    delete_image(filename);
+    console.log('DELETE FILE REQUEST', filename)
+    await delete_image(filename);
   });
 }
 
 
-
-
-//called when user selected JSON files (in the 'File' menu)
-function on_training_json_select(input){
-  console.log(input.target.files);
-  for(jsonfile of input.target.files){
-    var jsonbasename = filebasename(jsonfile.name);
-    for(inputfile of Object.values(global.input_files)){
-      if(filebasename(inputfile.name) == jsonbasename){
-        console.log('Matched json for input file ',inputfile.name);
-        load_json_annotation(jsonfile, inputfile.name);
-      }
-    }
-  }
-}
-
-
-async function load_json_annotation(jsonfile, jpgfile){
-  console.log('Loading JSON file: ',jsonfile.name);
-  
-  await load_full_image(jpgfile);  //needed for naturalHeight/Width
-  var freader = new FileReader();
-  freader.onload = (ev) => { 
-    var jsondata = JSON.parse(ev.target.result); 
-    var labels = [], boxes = [];
-    var imgelement         = $(`.filelist-item-content[filename="${jpgfile}"]`).find(`img`)[0];
-    remove_all_predictions_for_file(jpgfile);
-    for(var shape of jsondata.shapes){
-      labels.push( {[shape.label]:1} )
-      boxes.push( [Math.min(shape.points[0][1], shape.points[1][1])/imgelement.naturalHeight,
-                   Math.min(shape.points[0][0], shape.points[1][0])/imgelement.naturalWidth,
-                   Math.max(shape.points[0][1], shape.points[1][1])/imgelement.naturalHeight,
-                   Math.max(shape.points[0][0], shape.points[1][0])/imgelement.naturalWidth ] );
-      add_custom_box(jpgfile, boxes[boxes.length-1], labels[labels.length-1]);
-    }
-    set_processed(jpgfile, 'json');
-    //set_predictions_for_file(jpgfile, labels, boxes, false);
-  };
-  freader.readAsText(jsonfile);
-}
-
-
-//called when user pressed the "Retrain" button
-function on_retrain(){
-  //collect files with predictions
-  var files = Object.values(global.input_files).filter(x => x.processed);
-  if(files.length==0)
-    return;  //TODO: show message that no files for training are available
-
-  //upload images and json files (generated from predictions)
-  for(var f of files){
-    var json = create_json_from_predictions(f.name);
-    upload_textfile('/file_upload', filebasename(f.name)+'.json', JSON.stringify(json));
-    upload_file(f.file);
-  }
-
-  var filenames = files.map(x => x.name);
-  $.post('/start_training', {'filenames':filenames});
-  //show cancel button
-  $('#cancel-processing-button').show();
-
-  function progress_polling(){
-    $.get(`/retraining_progress`, function(data) {
-        
-        $retrain_button = $(`#retrain-button`);
-        $retrain_button.html(`<div class="ui active tiny inline loader"></div> Retraining...${Math.round(data*100)}%`);
-        if(data<1 && !global.cancel_requested)
-          setTimeout(progress_polling,1000);
-        else{
-          $.get('/stop_training');
-          $retrain_button.html('<i class="redo alternate icon"></i>Retrain')
-          $('#cancel-processing-button').hide();
-        }
-    });
-  }
-  global.cancel_requested = false;
-  setTimeout(progress_polling,1000);
-}
 
 
 function set_processed(filename, value){
