@@ -62,7 +62,6 @@ function register_box_draw($container, on_box_callback) {
             var bbox        = [topleft.top/parent_box.height,    topleft.left/parent_box.width,
                                bottomright[0]/parent_box.height, bottomright[1]/parent_box.width];
             
-            console.log('>>>', bbox, e.target);
             $selection.remove();
             on_box_callback(bbox);
         });

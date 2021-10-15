@@ -35,6 +35,8 @@ function on_download_csv(){
     }
     for(filename of Object.keys(global.input_files)){
         var selectedlabels = get_selected_labels(filename);
+        if(selectedlabels.length==0)
+            selectedlabels.push(' ');   //space if empty, requested by gabi
         var flags    = compute_flags(filename);
         var unsure   = flags.indexOf('unsure')!=-1? 'unsure' : '      ';
         var multiple = flags.indexOf('multiple')!=-1? 'multiple' : flags.indexOf('empty')!=-1? 'empty   ' : '        ';
@@ -79,8 +81,8 @@ function create_json_from_predictions(filename){
     var f        = global.input_files[filename];
     var jsondata = deepcopy(labelme_template);
     jsondata.imagePath = filename;
-    var height   = EXIF.getTag(f.file, "PixelYDimension");
-    var width    = EXIF.getTag(f.file, "PixelXDimension");
+    var width  = global.input_files[filename].size[0];
+    var height = global.input_files[filename].size[1];
     jsondata.imageHeight = height;
     jsondata.imageWidth  = width;
 

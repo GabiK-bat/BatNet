@@ -58,7 +58,8 @@ def process_image(imgname):
     return flask.jsonify({
         'labels':results.labels, 
         'flag':  results.flags(), 
-        'boxes': np.array([ b[ [1,0,3,2] ] for b in results.boxes ]).tolist()
+        'boxes': np.array([ b[ [1,0,3,2] ] for b in results.boxes ]).tolist(),
+        'datetime': processing.load_exif_datetime(fullpath),
         })
 
 

@@ -15,6 +15,8 @@ const FILE = {name: '',
               processed: false,
               magnifier: undefined, //inactive if undefined
               manual_flags: false,  //set by user click
+              datetime: undefined,  //string, from exif, loaded during processing in python because exif-js is unreliable
+              size:     [0,0],      //width, height, loaded in load_full_image()
 };
 
 const RESULT = { prediction: {},      //{label:score}
@@ -51,16 +53,11 @@ function update_inputfiles_list(){
 function set_input_files(files){
   global.input_files = {};
   global.metadata    = {};
-  //global.per_file_results = {};
-  for(f of files)
+  
+  for(var f of files)
     global.input_files[f.name] = Object.assign({}, deepcopy(FILE), {name: f.name, file: f});
   update_inputfiles_list();
 
-  for(f of files){
-      EXIF.getData(f, function() {
-        global.input_files[this.name].datetime = EXIF.getTag(this, "DateTime");
-    });
-  }
 }
 
 function on_inputfiles_select(input){
@@ -86,12 +83,19 @@ function sortObjectByValue(o) {
     return Object.keys(o).sort(function(a,b){return o[b]-o[a]}).reduce((r, k) => (r[k] = o[k], r), {});
 }
 
-function build_result_details(filename, result, index){
+async function build_result_details(filename, result, index){
+  await load_full_image(filename);
+  var $image = $(`[filename="${filename}"]`).find('.image-container').find('img');
+  var crop   = await crop_image($image[0], result.box, true);
+
   var label_probabilities = result.prediction;
-  var resultbox = $("#result-details-template").tmpl([{filename:filename,
-                                                   label:JSON.stringify(label_probabilities),
-                                                   time:new Date().getTime(),
-                                                   index:index}]);
+  var resultbox = $("#result-details-template").tmpl([{
+    filename:  filename, 
+    label:     JSON.stringify(label_probabilities),
+    time:      new Date().getTime(), 
+    index:     index,
+    url:       crop.src,
+  }]);
   var keys=Object.keys(label_probabilities);
   for(i in keys){
     lbl = keys[i];
@@ -117,7 +121,21 @@ function build_result_details(filename, result, index){
   }});
 
   add_box_overlay_highlight_callback(resultbox);
+  add_crop_zoom_callback(resultbox, crop.src);
   return resultbox;
+}
+
+
+//adds a callback to a result-details-box to show the image crop in the zoom image
+function add_crop_zoom_callback($resultdetailsbox, imgsrc){
+  var filename = $resultdetailsbox.attr('filename');
+  var $zoombox = $(`div[filename="${filename}"]`).find(`.image-zoom`)
+  $resultdetailsbox.hover(
+    function(){
+       $zoombox.attr('src', imgsrc);
+       $zoombox.show();    },
+    function(){ 
+       $zoombox.hide();    });
 }
 
 
@@ -129,8 +147,6 @@ function get_selected_label(result){
 //returns all selected labels for a file, filtering ''/nonbats
 function get_selected_labels(filename, append_confidence=true){
   var results = global.input_files[filename].results;
-  //var selectedlabels = Object.values(results).map(get_selected_label);
-  //selectedlabels = selectedlabels.filter(Boolean);
   var selectedlabels = [];
   for(var r of Object.values(results)) {
     var label = get_selected_label(r);
@@ -144,20 +160,20 @@ function get_selected_labels(filename, append_confidence=true){
 }
 
 //refresh the gui for one file
-function update_per_file_results(filename, main_table_only=false){
-  results = global.input_files[filename].results;
+async function update_per_file_results(filename, main_table_only=false){
+  var results = global.input_files[filename].results;
 
   if(!main_table_only){
     var contentdiv    = $(`.filelist-item-content[filename="${filename}"]`).find('.patches');
     var newcontentdiv = contentdiv.clone();
     newcontentdiv.html('');
     for(i in results)
-      build_result_details(filename, results[i], i).appendTo(newcontentdiv);
+      (await build_result_details(filename, results[i], i)).appendTo(newcontentdiv);
     contentdiv.replaceWith(newcontentdiv);
   }
 
   //display only the labels marked as selected in the main table
-  selectedlabels = get_selected_labels(filename);
+  var selectedlabels = get_selected_labels(filename);
   $(`.table-row[filename="${filename}"]`).find(`.table-cell-detected`).html(selectedlabels.join(', '));
 
   update_flags(filename);
@@ -237,6 +253,8 @@ function remove_prediction(filename, index){
   //update the detected pollen in the filelist table
   update_per_file_results(filename, true);
   remove_box_overlay(filename, index);
+  //hide the zoomed image (might stay active otherwise)
+  $(`div[filename="${filename}"]`).find(`.image-zoom`).hide();
 }
 
 //callback when the user clicks on the remove button in a result box
@@ -295,6 +313,7 @@ function process_file(filename){
   //send a processing request to python, callback updates gui with the results
   return $.get(`/process_image/${filename}`).done(function(data){
       set_predictions_for_file(filename, data.labels, data.boxes);
+      global.input_files[filename].datetime = data.datetime;
       delete_image(filename);
     });
 }
@@ -305,17 +324,17 @@ function delete_image(filename){
 }
 
 
-function _load_full_image(filename){
-  var imgelement              = $(`.filelist-item-content[filename="${filename}"]`).find(`img`)[0];
-  var file                    = global.input_files[filename].file;
-  imgelement.src              = URL.createObjectURL(file);
-}
 
 function load_full_image(filename){
+  var imgelement              = $(`.filelist-item-content[filename="${filename}"]`).find(`img`)[0];
+  if(imgelement.src != "")
+    //already loaded
+    return;
+  
   const promise = new Promise((resolve, reject) => {
-    var imgelement              = $(`.filelist-item-content[filename="${filename}"]`).find(`img`)[0];
     var file                    = global.input_files[filename].file;
     imgelement.onload           = (ev) => {
+      global.input_files[filename].size = [imgelement.naturalWidth, imgelement.naturalHeight];
       resolve();
     }
     imgelement.src              = URL.createObjectURL(file);
@@ -329,6 +348,7 @@ function on_accordion_open(x){
   var contentdiv              = this.find('.content');
   var filename                = contentdiv.attr('filename');
   load_full_image(filename);
+  update_per_file_results(filename);
 }
 
 
@@ -371,14 +391,14 @@ function cancel_processing(){
 
 //callback from the plus-icon in the upper right corner of an image
 function on_add_custom_box_button(e){
-  $etarget = $(e.target)
+  var $etarget = $(e.target)
   var $image_container = $etarget.closest('.filelist-item-content').find('.image-container')
   var filename         = $etarget.closest('[filename]').attr('filename');
 
   $etarget.toggleClass('active');
   if($etarget.hasClass('active')){
     $etarget.addClass('blue');
-    register_box_draw($image_container, function(box){add_custom_box(filename, box)});
+    register_box_draw($image_container, function(box){add_custom_box(filename, box); update_per_file_results(filename, false);});
     $image_container.find('img').css({'cursor':'crosshair'})
   }else{
     $etarget.removeClass('blue');
@@ -391,21 +411,15 @@ function on_add_custom_box_button(e){
 
 
 //called after drawing a new box; sends request to flask to crop a patch
-function add_custom_box(filename, box, labels={}, i=undefined){
+async function add_custom_box(filename, box, labels={}, i=undefined){
   console.log('NEW BOX', filename, box);
-  //var file = rename_file(global.input_files[filename].file, filename)
-  var file = global.input_files[filename].file;
-  upload_file(file);
   
   if(i==undefined)
       i = 1000+Math.max(0, Math.max(...Object.keys(global.input_files[filename].results)) +1);
-  console.log('CUSTOM PATCH REQUEST', filename)
-  return $.get(`/custom_patch/${filename}?box=[${box}]&index=${i}`).then(async function(){
-    add_new_prediction(filename, labels, box, i)
-    update_per_file_results(filename);
-    console.log('DELETE FILE REQUEST', filename)
-    await delete_image(filename);
-  });
+  
+  add_new_prediction(filename, labels, box, i)
+  await update_per_file_results(filename, true);
+  return;
 }
 
 

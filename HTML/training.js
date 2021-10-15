@@ -28,6 +28,8 @@ async function on_training_json_select(input){
     console.log('Loading JSON file: ',jsonfile.name);
     
     await load_full_image(jpgfile);  //needed for naturalHeight/Width
+    var width  = global.input_files[jpgfile].size[0];
+    var height = global.input_files[jpgfile].size[1];
     const promise = new Promise((resolve, reject) => {
       var freader = new FileReader();
       freader.onload = async (ev) => { 
@@ -38,10 +40,11 @@ async function on_training_json_select(input){
         for(var i in jsondata.shapes){
           var shape = jsondata.shapes[i];
           labels.push( {[shape.label]:1} )
-          boxes.push( [Math.min(shape.points[0][1], shape.points[1][1])/imgelement.naturalHeight,
-                      Math.min(shape.points[0][0], shape.points[1][0])/imgelement.naturalWidth,
-                      Math.max(shape.points[0][1], shape.points[1][1])/imgelement.naturalHeight,
-                      Math.max(shape.points[0][0], shape.points[1][0])/imgelement.naturalWidth ] );
+          boxes.push( [Math.min(shape.points[0][1], shape.points[1][1])/height,
+                      Math.min(shape.points[0][0], shape.points[1][0])/width,
+                      Math.max(shape.points[0][1], shape.points[1][1])/height,
+                      Math.max(shape.points[0][0], shape.points[1][0])/width ] );
+          
           await add_custom_box(jpgfile, boxes[boxes.length-1], labels[labels.length-1], Number(i)+1000);
         }
         set_processed(jpgfile, 'json');

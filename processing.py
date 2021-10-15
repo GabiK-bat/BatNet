@@ -4,11 +4,11 @@ os.environ["CUDA_VISIBLE_DEVICES"]=""
 
 import glob, datetime, json
 import numpy as np
-#import dill,
-#dill._dill._reverse_typemap['ClassType'] = type  #a bugfix
+
 import cloudpickle
 
 import PIL.Image
+import exif
 import torch, torchvision
 import torchvision.models.detection.anchor_utils
 import onnxruntime as ort
@@ -29,8 +29,6 @@ class STATE:
 
 class CONSTANTS:
     N_EPOCHS = 10
-    #N_EPOCHS = 3
-    #print('\n***\nFIXME: using a reduced number of epochs for retraining\n****\n')
 
 
 
@@ -62,7 +60,6 @@ def extract_patch(image, box):
     #image = PIL.Image.fromarray( (image*255).astype('uint8') )
     box   = np.array(box)[[1,0,3,2]]
     box   = box * np.concatenate([image.size]*2)
-    print('>>>', image.size, box)
     crop  = image.crop(box)
     return np.array(crop) / np.float32(255)
 
@@ -143,7 +140,11 @@ def save_model(newname):
     SETTINGS.active_model = newname
 
 
-
+def load_exif_datetime(filename):
+    with open(filename, 'rb') as f:
+        exif_f = exif.Image(f)
+        if exif_f.has_exif and 'datetime' in exif_f.list_all():
+            return exif_f.datetime
 
 
 

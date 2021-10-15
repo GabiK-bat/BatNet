@@ -52,10 +52,11 @@
 
   <script id="filelist-item-content-template" type="text/x-jQuery-tmpl">
     <div class="filelist-item-content" filename="${filename}">
-      <div class="ui big images">
-          <div class="ui image">
+      <div class="ui images">  <!--helps with layout-->
+          <div class="ui big image">
             <div class="image-container">
-            <img class="ui image"  src="" style="margin:0;">
+            <img class="ui big image"   style="margin:0;">
+              <!-- box overlays -->
             </div>
             
             <div class="ui top right attached label icon" style="border-top-right-radius: 0;">
@@ -64,6 +65,8 @@
               <i class="plus link icon" onclick="on_add_custom_box_button(event)"  title="Add Custom Box"></i>
             </div>
           </div>
+
+          <img class="ui medium image image-zoom"  src="" style="left:100px; margin:0; display:none;">
       </div>
 
 
@@ -81,7 +84,8 @@
           <i class="close icon" style="cursor:pointer"></i>
       </a>
       <div class="ui grid">
-            <img class="ui small image six wide column" style="padding-right:0" src="/images/patch_${i}_${filename}?_=${time}">
+            <!--<img class="ui small image six wide column" style="padding-right:0" src="/images/patch_${i}_${filename}?_=${time}">-->
+            <img class="ui small image six wide column" style="padding-right:0" src="${url}">
             <table class="ui compact table ten wide column" style="border:0; padding:0;">
                 <!--checkbox-confidence-template-->
               <tfoot class="full-width">
