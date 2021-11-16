@@ -153,8 +153,8 @@ function get_selected_labels(filename, append_confidence=true){
     if(label!='' && append_confidence){
       var score = (r.selected>=0)? Math.round(100*r.prediction[label]) : 100;
       label = label + ` (${score}%)`;
-      selectedlabels.push(label);
     }
+    selectedlabels.push(label);
   }
   return selectedlabels;
 }
@@ -180,25 +180,31 @@ async function update_per_file_results(filename, main_table_only=false){
 }
 
 
-function compute_flags(filename){
-  var flags   = []
-  var results = global.input_files[filename].results;
-  var lowconf = false;
+function compute_flags(filename, return_per_result=false){
+  var results  = global.input_files[filename].results;
+  var lowconfs = [];
   var amount   = 0;
+  var flags    = []
+
   for(var r of Object.values(results) ){
     var _lowconf = (Object.values(sortObjectByValue(r.prediction))[0] <= global.settings.confidence_threshold/100);
-    if( _lowconf ){
-      lowconf = true;
-    }
+    lowconfs.push(_lowconf)
     if(! (r.prediction[''] > global.settings.confidence_threshold/100) ){
       amount += 1;
     }
   }
-  lowconf = lowconf ^ global.input_files[filename].manual_flags;
+  
+  var manual_flags = global.input_files[filename].manual_flags;
+  var lowconf = lowconfs.includes(true) ^ manual_flags;
   if(lowconf)
     flags.push('unsure');
 
-  //var amount = Object.keys(results).length;
+  if(return_per_result)
+    if(manual_flags)
+      return lowconfs.map(x => {return lowconf? 'unsure' : '      '});
+    else
+      return lowconfs.map(x => {return x? 'unsure' : '      '});
+
   if(amount==0 && global.input_files[filename].processed)
     flags.push('empty');
   else if(amount>1 && global.input_files[filename].processed)
@@ -206,6 +212,7 @@ function compute_flags(filename){
   
   return flags;
 }
+
 
 function update_flags(filename){
   var flags = compute_flags(filename);

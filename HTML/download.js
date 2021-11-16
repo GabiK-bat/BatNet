@@ -30,22 +30,32 @@ function on_download_csv(){
 
 
     var csvtxt = '';
-    for(key of Object.keys(global.metadata)){
+    csvtxt += 'File_name, Date, Time, Flag, Multiple, Species, Confidence_level;\n\n'
+    for(var key of Object.keys(global.metadata)){
         csvtxt += '#'+key+':'+global.metadata[key].replace(/\n/g,'\n#')+'\n';
     }
-    for(filename of Object.keys(global.input_files)){
+    for(var filename of Object.keys(global.input_files)){
         var selectedlabels = get_selected_labels(filename);
-        if(selectedlabels.length==0)
-            selectedlabels.push(' ');   //space if empty, requested by gabi
+
         var flags    = compute_flags(filename);
-        var unsure   = flags.indexOf('unsure')!=-1? 'unsure' : '      ';
+        //var unsure   = flags.indexOf('unsure')!=-1? 'unsure' : '      ';
         var multiple = flags.indexOf('multiple')!=-1? 'multiple' : flags.indexOf('empty')!=-1? 'empty   ' : '        ';
+        var unsures  = compute_flags(filename, true);
         var datetime = global.input_files[filename].datetime;
         datetime     = datetime? datetime : "                   ";
         var date     = datetime.substring(0,10).replace(':','.').replace(':','.');
         var time     = datetime.substring(11);
-        csvtxt       += [filename, date, time, unsure, multiple].concat(selectedlabels).join(', ')+';\n'
+
+        if(selectedlabels.length==0){
+            csvtxt       += [filename, date, time, '      ', multiple, ' '].join(', ')+';\n'
+            continue;
         }
+        for(var i in selectedlabels){
+            //ugly
+            var label     = selectedlabels[i].replace(' (',', ').replace(')','');
+            csvtxt       += [filename, date, time, unsures[i], multiple, label].join(', ')+';\n'
+        }
+    }
 
     if(!!csvtxt)
         download('detected_bats.csv', csvtxt)
