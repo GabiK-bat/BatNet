@@ -5,13 +5,27 @@ deepcopy = function(x){return JSON.parse(JSON.stringify(x))};
 sleep    = function(ms) { return new Promise(resolve => setTimeout(resolve, ms));  } //XXX: await sleep(x)
 
 
-function escapeSelector(s){  return s.replace( /(:|\.|\[|\])/g, "\\$1" ); }
+
+function sortObjectByValue(o) {
+    return Object.keys(o).sort(function(a,b){return o[b]-o[a]}).reduce((r, k) => (r[k] = o[k], r), {});
+}
+
+function sortObject(o, sorted_keys){
+    return sorted_keys.reduce( (new_o, k) => (new_o[k] = o[k], new_o), {} );
+}
 
 
 //returns the name of a file without its ending
 filebasename = (filename) => filename.split('.').slice(0, -1).join('.');
 //returns the file ending
 file_ending  = (filename) => '.'+filename.split('.').slice(-1).join('.');
+
+//generate an array of numbers
+function arange(x0,x1=undefined){
+    var start = (x1==undefined)?  0 : x0;
+    var stop  = (x1==undefined)? x0 : x1-start;
+    return [...Array(stop).keys()].map(x=>x+start)
+}
 
 
 function upload_file_to_flask(url, file){

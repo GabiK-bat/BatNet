@@ -21,7 +21,8 @@ batdetector = None
 
 class SETTINGS:
     active_model:str         = None
-    confidence_threshold:str = 75   #percent
+    confidence_threshold:str = 75    #percent (gui-only)
+    export_boxes:bool        = False #(gui-only)
 
 class STATE:
     training_progress:float   = None   #percentage or None (=no training)
@@ -32,9 +33,10 @@ class CONSTANTS:
 
 
 
-def init():
+def init(model=None):
     load_settings()
-    load_model(SETTINGS.active_model)
+    model = model or SETTINGS.active_model
+    load_model(model)
 
 def load_model(name):
     global batdetector
@@ -51,7 +53,9 @@ def process_image(image):
     prediction = batdetector.process_image(image)
     for i in range(len(prediction.boxes)):
         probs      =  prediction.probabilities[i]
-        labels     = dict((batdetector.LABELS_LIST[i], float(probs[i]) ) for i in np.argsort(probs)[::-1] if probs[i]>0.1)
+        labels     = dict(
+            (batdetector.LABELS_LIST[i].replace('_','/'), float(probs[i]) ) for i in np.argsort(probs)[::-1] if probs[i]>0.1
+        )
         prediction.labels[i] = labels
         prediction.boxes[i] /= (image.size+image.size)  #normalization
     return prediction
@@ -119,6 +123,7 @@ def get_settings():
         'models':                modelnames,
         'active_model':          SETTINGS.active_model, 
         'confidence_threshold':  SETTINGS.confidence_threshold,
+        'export_boxes':          SETTINGS.export_boxes,
     }
 
 def set_settings(newsettings):
@@ -126,6 +131,7 @@ def set_settings(newsettings):
     if SETTINGS.active_model != newsettings['active_model']:
         load_model(newsettings['active_model'])
     SETTINGS.confidence_threshold = newsettings.get('confidence_threshold', 75)
+    SETTINGS.export_boxes         = bool(newsettings.get('export_boxes', False))
     
     active_model = SETTINGS.active_model
     if active_model == '':
@@ -133,6 +139,7 @@ def set_settings(newsettings):
     json.dump({
         'active_model':          active_model, 
         'confidence_threshold':  SETTINGS.confidence_threshold,
+        'export_boxes':          SETTINGS.export_boxes,
     }, open('settings.json','w'), indent=4)
 
 def save_model(newname):

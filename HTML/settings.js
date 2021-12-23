@@ -21,9 +21,11 @@ function save_settings(_){
     var data = {
       active_model:         global.settings.active_model,
       confidence_threshold: $('#settings-confidence-threshold-input')[0].value,
+      export_boxes:         $('#settings-export-boxes').checkbox('is checked'),
     };
+
     $('#settings-ok-button').addClass('loading');
-    $.post(`/settings`, data).done( (x)=>{
+    $.post(`/settings`, JSON.stringify(data)).done( (x)=>{
       $('#settings-dialog').modal('hide');
       $('#settings-ok-button').removeClass('loading');
       console.log('Settings:',x)
@@ -34,16 +36,18 @@ function save_settings(_){
   }
   
 function on_settings(){
-    load_settings();
-    $('#settings-dialog').modal({onApprove: save_settings}).modal('show');
+    load_settings().then( () =>{
+      $('#settings-dialog').modal({onApprove: save_settings, duration:50}).modal('show');
+    } );
   }
   
 function load_settings(){
-    $.get('/settings').done( function(settings){
+    return $.get('/settings').done( function(settings){
       console.log(settings)
       global.settings.models       = settings.models;
       global.settings.active_model = settings.active_model;
       global.settings.confidence_threshold = Number(settings.confidence_threshold);
+      global.settings.export_boxes         = settings.export_boxes;
       
       var models_list = []
       for(var modelname of global.settings.models)
@@ -53,6 +57,7 @@ function load_settings(){
       $('.ui.dropdown#settings-active-model').dropdown({values: models_list, showOnFocus:false });
   
       $('#settings-confidence-threshold-input')[0].value = global.settings.confidence_threshold;
+      $('#settings-export-boxes').checkbox(global.settings.export_boxes? 'set checked' : 'set unchecked');
 
       var $new_name_elements = $("#settings-new-modelname-field");
       (settings.active_model=='')? $new_name_elements.show(): $new_name_elements.hide();
@@ -61,7 +66,6 @@ function load_settings(){
       for(var fname of Object.keys(global.input_files))
           update_per_file_results(fname);
     } );
-
   }
   
   //called when user clicks on the save button in settings to save a retrained model

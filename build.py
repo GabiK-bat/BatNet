@@ -22,7 +22,7 @@ shutil.copytree('models', build_dir+'/models')
 if 'linux' in sys.platform:
     os.symlink('/main/main', build_dir+'/batnet')
 else:
-    open(build_dir+'/main.bat', 'w').write(r'main\main.exe'+'\npause')
+    open(build_dir+'/main.bat', 'w').write(r'main\main.exe %*'+'\npause')
 
 shutil.rmtree('./build')
 shutil.copyfile('settings.json', build_dir+'/settings.json')

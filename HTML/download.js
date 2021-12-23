@@ -29,31 +29,46 @@ function on_download_csv(){
     }
 
 
+    var export_boxes = global.settings.export_boxes;
     var csvtxt = '';
-    csvtxt += 'File_name, Date, Time, Flag, Multiple, Species, Confidence_level;\n\n'
+    csvtxt += 'File_name;Date;Time;Flag;Multiple;Species;Code;Confidence_level;'
+    if(export_boxes)
+        csvtxt += 'Box;'
+    csvtxt += '\n'
+
     for(var key of Object.keys(global.metadata)){
         csvtxt += '#'+key+':'+global.metadata[key].replace(/\n/g,'\n#')+'\n';
     }
+
     for(var filename of Object.keys(global.input_files)){
-        var selectedlabels = get_selected_labels(filename);
+        var selectedlabels = get_selected_labels(filename, 'separate');
 
         var flags    = compute_flags(filename);
-        //var unsure   = flags.indexOf('unsure')!=-1? 'unsure' : '      ';
-        var multiple = flags.indexOf('multiple')!=-1? 'multiple' : flags.indexOf('empty')!=-1? 'empty   ' : '        ';
+        var multiple = flags.indexOf('multiple')!=-1? 'multiple' : flags.indexOf('empty')!=-1? 'empty' : '';
         var unsures  = compute_flags(filename, true);
         var datetime = global.input_files[filename].datetime;
-        datetime     = datetime? datetime : "                   ";
+        datetime     = datetime? datetime : "";
         var date     = datetime.substring(0,10).replace(':','.').replace(':','.');
         var time     = datetime.substring(11);
 
         if(selectedlabels.length==0){
-            csvtxt       += [filename, date, time, '      ', multiple, ' '].join(', ')+';\n'
+                             //fname, date,time,unsure,multi,species,code
+            csvtxt       += [filename, date, time, '', multiple, '', ''].join(';')+';'
+            if(export_boxes)
+                csvtxt   += ';'
+            csvtxt       += '\n'
             continue;
         }
         for(var i in selectedlabels){
-            //ugly
-            var label     = selectedlabels[i].replace(' (',', ').replace(')','');
-            csvtxt       += [filename, date, time, unsures[i], multiple, label].join(', ')+';\n'
+            var label     = selectedlabels[i][0];
+            var conf      = (selectedlabels[i][1]/100).toFixed(2);
+            var code      = (label in SPECIES_CODES)? SPECIES_CODES[label] : '';
+            csvtxt       += [filename, date, time, unsures[i], multiple, label, code, conf].join(';')+';'
+            if(export_boxes){
+                var box  = Object.values(global.input_files[filename].results)[i].box;  //ugly
+                csvtxt   += `${box[1].toFixed(5)} ${box[0].toFixed(5)} ${box[3].toFixed(5)} ${box[2].toFixed(5)};`
+            }
+            csvtxt       += '\n';
         }
     }
 
@@ -61,6 +76,22 @@ function on_download_csv(){
         download('detected_bats.csv', csvtxt)
 }
 
+const SPECIES_CODES = {
+    'Barbastella barbastellus' :            'Bbar',
+    'Eptesicus serotinus':                  'Eser',
+    'Myotis mystacinus/Myotis brandtii/Myotis alcathoe' : 'Mbart',
+    'Myotis bechsteinii':                   'Mbec',
+    'Myotis dasycneme':                     'Mdas',
+    'Myotis daubentonii':                   'Mdau',
+    'Myotis emarginatus':                   'Mema',
+    'Myotis myotis/Myotis blythii':         'Mmyo',
+    'Myotis nattereri':                     'Mnat',
+    'Nyctalus noctula':                     'Nnoc',
+    'Plecotus auritus/Plecotus austriacus': 'Paur',
+    'Pipistrellus sp.':                     'Pip',
+    'Rhinolophus ferrumequinum':            'Rfer',
+    'Rhinolophus sp.':                      'Rsp',
+}
 
 
 

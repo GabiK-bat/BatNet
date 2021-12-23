@@ -20,6 +20,7 @@
   <script src="/static/download.js"></script>
   <script src="/static/settings.js"></script>
   <script src="/static/training.js"></script>
+  <script src="/static/sorting.js"></script>
   
 
 
@@ -43,7 +44,7 @@
         </div>
       </td>
     </tr>
-    <tr style="display:none">
+    <tr style="display:none"  filename="${filename}">
       <td colspan="5" class="ui content" filename="${filename}" style="padding-bottom:21px">
         {{tmpl({filename:filename}) "#filelist-item-content-template"}}
       </td>
@@ -226,11 +227,11 @@
 
 
 <div class="ui container">
-<table class="ui basic celled table accordion" id="filetable">
+<table class="ui basic celled sortable table accordion " id="filetable">
       <thead><tr>
-    <th class="six wide">Filename</th>
-    <th class="nine wide">Detected Bats</th>
-    <th class="one wide"></th>
+    <th class="six wide"  onclick="on_sort_by_filename(event)"   title="Sort by filename">Filename</th>
+    <th class="nine wide" onclick="on_sort_by_number(event)"     title="Sort by number of bats">Detected Bats</th>
+    <th class="one wide"  onclick="on_sort_by_confidence(event)" title="Sort by confidence">Flags</th>
     </tr></thead>
   <tbody>
     <tr class="ui">
@@ -301,6 +302,17 @@
         <label style="padding:10px">Flag predictions with confidence below this value</label>
       </div>
     </div>
+
+    <div class="ui divider"></div>
+    <div class="field">
+      <label>CSV Export</label>
+      <div class="ui toggle checkbox" id="settings-export-boxes">
+        <input type="checkbox">
+        <label>Include box coordinates</label>
+      </div>
+    </div>
+
+    <div class="ui divider"></div>
 
   <div class="actions">
     <div class="ui negative button">

@@ -32,6 +32,7 @@ const SETTINGS = {
   models               : [],
   active_model         : '',
   confidence_threshold : 75,
+  export_boxes         : false,
 };
 global.settings = deepcopy(SETTINGS);
 
@@ -57,10 +58,13 @@ function set_input_files(files){
   for(var f of files)
     global.input_files[f.name] = Object.assign({}, deepcopy(FILE), {name: f.name, file: f});
   update_inputfiles_list();
-
+  _clear_sorted()
 }
 
 function on_inputfiles_select(input){
+  if(input.target.files.length==0)
+    return;
+  
   set_input_files(input.target.files);
 }
 
@@ -79,9 +83,7 @@ async function upload_file(file){
 }
 
 
-function sortObjectByValue(o) {
-    return Object.keys(o).sort(function(a,b){return o[b]-o[a]}).reduce((r, k) => (r[k] = o[k], r), {});
-}
+
 
 async function build_result_details(filename, result, index){
   await load_full_image(filename);
@@ -145,19 +147,26 @@ function get_selected_label(result){
 }
 
 //returns all selected labels for a file, filtering ''/nonbats
-function get_selected_labels(filename, append_confidence=true){
+function get_selected_labels(filename, confidence="append"){
   var results = global.input_files[filename].results;
   var selectedlabels = [];
   for(var r of Object.values(results)) {
     var label = get_selected_label(r);
-    if(label!='' && append_confidence){
+    if(label!='' && confidence=='append'){
       var score = (r.selected>=0)? Math.round(100*r.prediction[label]) : 100;
       label = label + ` (${score}%)`;
+    }
+    if(confidence=='separate'){
+      var score = (r.selected>=0)? Math.round(100*r.prediction[label]) : 100;
+      label = [label, score];
     }
     selectedlabels.push(label);
   }
   return selectedlabels;
 }
+
+
+
 
 //refresh the gui for one file
 async function update_per_file_results(filename, main_table_only=false){
@@ -201,9 +210,9 @@ function compute_flags(filename, return_per_result=false){
 
   if(return_per_result)
     if(manual_flags)
-      return lowconfs.map(x => {return lowconf? 'unsure' : '      '});
+      return lowconfs.map(x => {return lowconf? 'unsure' : ''});
     else
-      return lowconfs.map(x => {return x? 'unsure' : '      '});
+      return lowconfs.map(x => {return x? 'unsure' : ''});
 
   if(amount==0 && global.input_files[filename].processed)
     flags.push('empty');
@@ -365,19 +374,19 @@ function on_process_image(e){
 }
 
 function process_all(){
-  $button = $('#process-all-button')
-
-  j=0;
+  var $button   = $('#process-all-button')
+  var filenames = Object.keys(global.input_files)
+  let j = 0;
   async function loop_body(){
-    if(j>=Object.values(global.input_files).length || global.cancel_requested ){
+    if(j >= filenames.length || global.cancel_requested ){
       $button.html('<i class="play icon"></i>Process All Images');
       $('#cancel-processing-button').hide();
       return;
     }
     $('#cancel-processing-button').show();
-    $button.html(`Processing ${j}/${Object.values(global.input_files).length}`);
+    $button.html(`Processing ${j}/${filenames.length}`);
 
-    var f = Object.values(global.input_files)[j];
+    var f = global.input_files[filenames[j]];
     //if(!f.processed)  //re-processing anyway, the model may have been retrained
       await process_file(f.name);
 

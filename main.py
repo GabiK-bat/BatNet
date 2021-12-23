@@ -1,5 +1,5 @@
-import webbrowser, os, tempfile, io, sys
-import json
+import webbrowser, os, tempfile, io, sys, glob
+import json, shutil
 import flask
 from flask import Flask, escape, request
 
@@ -12,13 +12,45 @@ import numpy as np
 
 
 
+import argparse, pathlib
+
+parser = argparse.ArgumentParser(
+    description = '''🦇 DigIT! Bat Detector 🦇''',
+    epilog = 'If used without arguments, the user interface is started.'
+)
+parser.add_argument('--input', type=pathlib.Path,
+                    help='Path to input images (e.g. --input=path/to/*.jpg)')
+parser.add_argument('--output', type=pathlib.Path, default='detected_bats.csv',
+                    help='Path to output file (e.g. --output=detected_bats.csv)')
+parser.add_argument('--model',  type=argparse.FileType('rb'),
+                    help='Path to model file (default: last used)')
+parser.add_argument('--saveboxes',  action='store_const', const=True, default=False,
+                    help='Include boxes of detected bats in the output')
+
+args = parser.parse_args()
+if args.input is not None:
+    import cmdline
+    cmdline.process_from_args(args)
+
+    sys.exit(0)
+
+print('Starting user interface')
+#sys.exit(1)
 
 
 app        = Flask('Bat Detector', static_folder=os.path.abspath('./HTML'))
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-TEMPFOLDER = tempfile.TemporaryDirectory(prefix='bat_detector_')
-print('Temporary Directory: %s'%TEMPFOLDER.name)
+is_debug = sys.argv[0].endswith('.py')
+if os.environ.get('WERKZEUG_RUN_MAIN')=='true' or not is_debug:
+    TEMPPREFIX = 'bat_detector_'
+    TEMPFOLDER = tempfile.TemporaryDirectory(prefix=TEMPPREFIX)
+    print('Temporary Directory: %s'%TEMPFOLDER.name)
+    #delete all previous temporary folders if not cleaned up properly
+    for tmpdir in glob.glob( os.path.join(os.path.dirname(TEMPFOLDER.name), TEMPPREFIX+'*') ):
+        if tmpdir != TEMPFOLDER.name:
+            #print('Removing ',tmpdir)
+            shutil.rmtree(tmpdir)
 
 
 
@@ -99,7 +131,8 @@ def start_training():
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
     if request.method=='POST':
-        processing.set_settings(dict(request.form))
+        #processing.set_settings(dict(request.form))
+        processing.set_settings(request.get_json(force=True))
         return 'OK'
     elif request.method=='GET':
         return flask.jsonify(processing.get_settings())
