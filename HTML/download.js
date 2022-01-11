@@ -48,12 +48,12 @@ function on_download_csv(){
         var unsures  = compute_flags(filename, true);
         var datetime = global.input_files[filename].datetime;
         datetime     = datetime? datetime : "";
-        var date     = datetime.substring(0,10).replace(':','.').replace(':','.');
+        var date     = datetime.substring(0,10).replace(/:/g,'.');
         var time     = datetime.substring(11);
 
         if(selectedlabels.length==0){
-                             //fname, date,time,unsure,multi,species,code
-            csvtxt       += [filename, date, time, '', multiple, '', ''].join(';')+';'
+                             //fname, date,time,unsure,multi,species,code,conf
+            csvtxt       += [filename, date, time, '', multiple, '', '', ''].join(';')+';'
             if(export_boxes)
                 csvtxt   += ';'
             csvtxt       += '\n'

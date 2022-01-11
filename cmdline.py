@@ -41,9 +41,12 @@ def results_to_csv(results, boxes=False):
         fname    = os.path.basename(r['filename'])
         datetime = processing.load_exif_datetime(r['filename'])
         date,time = datetime.split(' ')[:2] if datetime is not None and ' ' in datetime else ['',''] 
+        date      = date.replace(':','.')
 
         n        = len(r['result'].labels)
-        multiple = 'multiple' if n>1 else 'empty' if n=='0' else ''
+        multiple = 'multiple' if n>1 else 'empty' if n==0 else ''
+        if n==0:
+            csvlines   += [f'{fname};{date};{time};;{multiple};;;;']
         for i,label_conf in enumerate(r['result'].labels):
             label_conf  = list(label_conf.items())
             argmax      = np.argmax([c for l,c in label_conf])
