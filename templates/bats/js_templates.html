@@ -1,0 +1,39 @@
+{% import   'base/js_templates.html'  as base_js_templates %}
+{% import   'base/content_menu.html'  as base_content_menu %}
+{% import   'base/boxes.html'         as base_boxes %}
+
+
+
+
+{% macro bats_filetable_content(app)%}
+<div class="filetable-content" style="display:none">
+    {{ base_content_menu.content_menu(
+            callback_on_process        = app+".Detection.on_process_image",
+            callback_apply_corrections = None,
+            callback_new_box           = app+".Boxes.on_draw_new_box_button",
+            callback_download          = None,
+            edit_segmentation_item     = None,
+            view_menu_kwargs           = {
+                'show_results_layout': False,
+                'brightness_max':      30
+            },
+    ) | indent }}
+
+    <div class="image-container">
+        {{ base_js_templates.content_image(
+            name           = "input",  
+            overlay        = base_boxes.boxes_overlay(),
+            viewcontrols   = None
+        ) | indent(8) }}
+        {{ base_js_templates.progress_dimmer() }}
+    </div>
+</div>
+{% endmacro %}
+
+
+{% macro filetable_row_template(app) %}
+    {{ base_js_templates.filetable_row_template(app, content=bats_filetable_content, extra_columns=2) }}
+    {{ base_boxes.boxes_overlay_template(app) }}
+{% endmacro %}
+
+

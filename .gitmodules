@@ -1,0 +1,3 @@
+[submodule "base"]
+	path = base
+	url = git@github.com:alexander-g/DigIT-Base-UI.git

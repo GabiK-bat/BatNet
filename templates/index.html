@@ -1,0 +1,32 @@
+<!--{{warning}}-->
+
+{% from   'base/top_menu.html'          import top_menu %}
+{% import 'base/modals.html'            as     base_modals %}
+{% from   'bats/js_templates.html'      import filetable_row_template %}
+{% from   'bats/main_container.html'    import main_container %}
+
+{% set app = "BatApp" %}
+
+<html>
+    <title>🦇 Bat Detector</title>
+<head>
+    {% include 'base/scripts.html'   %}
+    {% include 'bats/scripts.html'  %}
+
+    {{ filetable_row_template(app)  | indent }}
+</head>
+
+
+<body onload="{{app}}.init()">
+
+    {{ top_menu(app)                              | indent }}
+
+    {{ main_container(app)                        | indent }}
+
+    {{ base_modals.modal_settings()               | indent }}
+    {{ base_modals.modal_training_progress()      | indent }}
+    {{ base_modals.modal_loading_files_progress() | indent }}
+
+</body>
+</html>
+

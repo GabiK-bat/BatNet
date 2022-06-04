@@ -1,0 +1,27 @@
+{% from   'base/main_container.html'    import main_container as base_main_container%}
+{% from   'base/detection_tab.html'     import detection_tab as base_detection_tab, base_main_table %}
+{% from   'base/training_tab.html'      import training_tab as bats_training_tab %}
+
+
+{% macro download_menu(app) %}
+<div class="ui simple dropdown download-all item" onclick="">
+    <i class="download icon"></i>
+    Download All
+    <div class="menu">
+        <div class="item" onclick="{{app}}.Download.on_download_csv(event)" >Download CSV</div>
+        <div class="item" onclick="{{app}}.Download.on_download_json(event)">Download Annotations</div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro main_container(app) %}
+    {{ base_main_container(
+        app, 
+        detection_tab = base_detection_tab(
+            app, 
+            main_table              = base_main_table(app, sortable=True, extra_columns=['Detected Bats', 'Flags']),
+            filetable_download_menu = download_menu(app)
+        ),
+        training_tab  = bats_training_tab(app))
+    | indent }}
+{% endmacro %}
