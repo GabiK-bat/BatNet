@@ -83,7 +83,7 @@ BatDetection = class extends BaseDetection {
         else if(amount>1 && batresults)
           flags.push('multiple');
         
-        return flags;
+        return flags.join(', ');
       }
 }
 
