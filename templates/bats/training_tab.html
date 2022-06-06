@@ -1,0 +1,49 @@
+{% import 'base/training_tab.html' as base_training_tab %}
+
+
+
+
+{% macro training_controls(trainingmodule) %}
+<div class="ui segment form" style="margin-top:0px;">
+    <div class="field" id="training-model-type-field">
+        <h4 class="ui dividing header">Training options</h4>
+
+        {{ base_training_tab.train_detector_checkbox("Bats", "Non-Bats") }}
+
+        <div class="ui divider"></div>
+
+        {{ base_training_tab.train_classifier_checkbox() }}
+
+        <div class="ui divider"></div>
+
+        {{ base_training_tab.lr_epochs_fields() }}
+        
+        <div class="ui divider"></div>
+
+        {{ base_training_tab.starting_point_model_infobox() }}
+    </div>
+
+
+    <div class="ui divider"></div>
+
+    {{ base_training_tab.start_training_button(trainingmodule) }}
+</div>
+<script>
+    $('#training-model-type-field .checkbox')
+         .checkbox({onChange: _ => {{trainingmodule}}.refresh_table() } )
+         .checkbox('set checked')
+</script>
+{{ base_training_tab.save_model_field(trainingmodule) | indent }}
+
+{% endmacro %}
+
+
+
+{% macro training_tab(app) %}
+<div id="training-tab">
+    
+    {{ base_training_tab.class_selection_controls() }}
+    {{ training_controls(trainingmodule = app+".Training") }}
+
+</div>
+{% endmacro %}

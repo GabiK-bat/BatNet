@@ -5,6 +5,7 @@ BatApp = class extends BaseApp {
    static Boxes         = BatBoxes;
    static Sorting       = BatSorting;
    static Download      = BatDownload;
+   static Training      = BatTraining;
 }
 
 
