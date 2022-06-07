@@ -23,7 +23,7 @@
         {{ base_js_templates.content_image(
             name           = "input",  
             overlay        = base_boxes.boxes_overlay(),
-            viewcontrols   = None
+            viewcontrols   = app+".ViewControls",
         ) | indent(8) }}
         {{ base_js_templates.progress_dimmer() }}
     </div>

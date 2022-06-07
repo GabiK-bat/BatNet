@@ -1,6 +1,6 @@
 from base.backend.app import App as BaseApp, get_models_path
 #import backend.processing
-#import backend.training
+import backend.training
 
 import os
 import flask
@@ -29,3 +29,18 @@ class App(BaseApp):
             'boxes':     np.array(result.boxes).tolist()
             #'datetime':  processing.load_exif_datetime(fullpath),                                #TODO
         })
+
+    #TODO: unify
+    #override
+    def training(self):
+        requestform  = flask.request.get_json(force=True)
+        options      = requestform['options']
+        imagefiles   = requestform['filenames']
+        imagefiles   = [os.path.join(self.cache_path, f) for f in imagefiles]
+        targetfiles  = backend.training.find_targetfiles(imagefiles)
+        if not all(targetfiles):
+            flask.abort(404)
+        
+        ok = backend.training.start_training(imagefiles, targetfiles, options, self.settings)
+        return ok
+

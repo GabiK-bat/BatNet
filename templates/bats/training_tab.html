@@ -30,7 +30,7 @@
 </div>
 <script>
     $('#training-model-type-field .checkbox')
-         .checkbox({onChange: _ => {{trainingmodule}}.refresh_table() } )
+         .checkbox({onChange: _ => {{trainingmodule}}.refresh_tab() } )
          .checkbox('set checked')
 </script>
 {{ base_training_tab.save_model_field(trainingmodule) | indent }}
