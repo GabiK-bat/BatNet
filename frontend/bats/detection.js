@@ -15,7 +15,7 @@ BatDetection = class extends BaseDetection {
             GLOBAL.App.Boxes.refresh_boxes(filename)
             
             $(`.table-row[filename="${filename}"] td:nth-of-type(2)`).html( this.format_results_for_table(batresults) )
-            $(`.table-row[filename="${filename}"] td:nth-of-type(3)`).html( this.compute_flags(batresults) )
+            this.update_flags(filename)
         }
 
         this.set_processed(filename, clear)
@@ -45,14 +45,18 @@ BatDetection = class extends BaseDetection {
         return full_text
     }
 
-    static compute_flags(batresults, return_per_result=false){
+    //TODO: move to BatResults class
+    static compute_flags(filename, return_per_result=false){
         const hiconf_threshold = 0.75                                                                                                //FIXME hardcoded threshold
         let lowconfs = [];
         let amount   = 0;
         let flags    = []
       
+        const batresults = GLOBAL.files[filename]?.results;
+        if(!batresults)
+          return [];
+
         const n     = batresults.labels.length;
-        //for(var r of Object.values(batresults) ){
         for (let i = 0; i < n; i++) {
             const confidence = Object.values(sort_object_by_value(batresults.predictions)[i])[0]
             const _lowconf   = (confidence <= hiconf_threshold);
@@ -64,8 +68,7 @@ BatDetection = class extends BaseDetection {
             }
         }
         
-        //const manual_flags = global.input_files[filename].manual_flags;
-        const manual_flags = false;                                                                                                   //FIXME
+        const manual_flags = $(`[filename="${filename}"] td.flags-cell`).hasClass('manual-flag')
         const lowconf = lowconfs.includes(true) ^ manual_flags;
         if(lowconf)
           flags.push('unsure');
@@ -76,14 +79,45 @@ BatDetection = class extends BaseDetection {
           else
             return lowconfs.map(x => {return x? 'unsure' : ''});
       
-        //if(amount==0 && global.input_files[filename].processed)
         if(amount==0 && batresults)
           flags.push('empty');
-        //else if(amount>1 && global.input_files[filename].processed)
         else if(amount>1 && batresults)
           flags.push('multiple');
         
-        return flags.join(', ');
+        return flags
+    }
+
+    static update_flags(filename){
+      const flags      = this.compute_flags(filename)
+
+      let   $flag_icon = $(`.table-row[filename="${filename}"]`).find('.lowconf-flag');
+      $flag_icon.css('visibility', flags.includes('unsure')? 'visible' : 'hidden')  //hide()/show() changes layout
+
+      const empty      = flags.includes('empty');
+      const multiple   = flags.includes('multiple');
+            $flag_icon = $(`.table-row[filename="${filename}"]`).find('.amounts-flag');
+      $flag_icon.css('visibility', (empty||multiple)? 'visible' : 'hidden')
+      if(empty){
+        $flag_icon.addClass('outline');         //empty
+        $flag_icon.removeClass('checkered');
+        $flag_icon.attr('title', 'No detections');
+      } else if(multiple) {
+        $flag_icon.addClass('checkered');      //multiple
+        $flag_icon.removeClass('outline');
+        $flag_icon.attr('title', 'Multiple detections');
       }
+    }
+
+    static on_flag(event){
+      event.stopPropagation();
+      const $cell   = $(event.target).closest('td')
+      //const flagged = $cell.attr('manual-flag')
+      //console.warn($cell[0], flagged)
+      //$cell.attr('manual-flag', !flagged)
+      $cell.toggleClass('manual-flag')
+
+      const filename = $cell.closest('[filename]').attr('filename')
+      this.update_flags(filename)
+    }
 }
 

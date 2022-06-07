@@ -14,12 +14,33 @@
 </div>
 {% endmacro %}
 
+{% macro main_table_head(app) %}
+<thead>
+    <tr>
+        <th class="six wide"  onclick="{{ app }}.Sorting.on_table_header(event)" title="Sort by filename" id="files-loaded-column-header">
+            No Files Loaded
+        </th>
+        <th class="nine wide" onclick="{{ app }}.Sorting.on_table_header(event)" title="Sort by number of bats">
+            Detected Bats
+        </th>
+        <th class="one wide" onclick="{{ app }}.Sorting.on_table_header(event)"  title="Sort by confidence">
+            Flags
+        </th>
+    </tr>
+</thead>
+{% endmacro %}
+
+
 {% macro main_container(app) %}
     {{ base_main_container(
         app, 
-        detection_tab = base_detection_tab(
+        detection_tab  = base_detection_tab(
             app, 
-            main_table              = base_main_table(app, sortable=True, extra_columns=['Detected Bats', 'Flags']),
+            main_table = base_main_table(
+                app, 
+                sortable   = True, 
+                table_head = main_table_head(app)
+            ),
             filetable_download_menu = download_menu(app)
         ),
         training_tab  = bats_training_tab(app))

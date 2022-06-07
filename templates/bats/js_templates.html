@@ -30,9 +30,19 @@
 </div>
 {% endmacro %}
 
+{% macro extra_columns(app) %}
+<td></td>
+<td class="flags-cell" onclick="{{ app }}.Detection.on_flag(event);">
+    <div style="display:grid; grid-template-columns: 1fr 1fr">
+        <i class="flag icon lowconf-flag" style="visibility: hidden;" title="Low confidence"></i>
+        <i class="flag icon amounts-flag" style="visibility: hidden;"></i>
+    </div>
+</td>
+{% endmacro %}
+
 
 {% macro filetable_row_template(app) %}
-    {{ base_js_templates.filetable_row_template(app, content=bats_filetable_content, extra_columns=2) }}
+    {{ base_js_templates.filetable_row_template(app, content=bats_filetable_content, extra_columns=extra_columns(app)) }}
     {{ base_boxes.boxes_overlay_template(app) }}
 {% endmacro %}
 
