@@ -108,7 +108,7 @@ BatDownload = class extends ObjectDetectionDownload{
             
             let csv_item     = [filename, date, time, unsures[i], multiple, label, code, confidence]
             if(export_boxes){
-                const box  = results.boxes[i].map( x => x.toFixed(1) );
+                const box  = results.boxes[i].map( x => x.toFixed(1) ).join(' ');
                 csv_item.push(box)
             }
             csv_data.push(csv_item)
