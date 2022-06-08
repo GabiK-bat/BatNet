@@ -1,3 +1,65 @@
+{% import 'base/modals.html' as base_modals %}
+
+
+{% macro modal_settings() %}
+<!-- Settings -->
+<div class="ui tiny modal" id="settings-dialog">
+    <i class="close icon"></i>
+    <div class="header"> Settings </div>
+  
+    <div class="ui form content">
+
+        <div class="field">
+            <label>Active Model</label>
+            <div class="ui dropdown selection" id="settings-active-model">
+              <input type="hidden" name="active-model">
+              <i class="dropdown icon"></i>
+              <div class="default text">model</div>
+              <div class="menu">
+                <!--<div class="item" data-value="1">model_1</div>
+                <div class="item" data-value="0">model_2</div>-->
+              </div>
+            </div>
+
+            {{ base_modals.known_classes_properties() }}
+        </div>
+
+    
+        <div class="ui divider"></div>
+
+        <div class="field">
+          <label>Confidence Threshold</label>
+          <div class="ui right labeled input" id="settings-confidence-threshold">
+            <input type="number" step="1" min="0" max="100" style="width: 5ch;" value="75" id='settings-confidence-threshold-input'>
+            <div class="ui basic label"> % </div>
+            <label style="padding:10px">Flag predictions with confidence below this value</label>
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+        <div class="field">
+          <label>CSV Export</label>
+          <div class="ui toggle checkbox" id="settings-export-boxes">
+            <input type="checkbox">
+            <label>Include box coordinates</label>
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="actions">
+            <div class="ui negative button">
+            Cancel
+            </div>
+            <div class="ui positive right labeled icon button" id="settings-ok-button">
+            Save
+            <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
 
 
 {% macro metadata_dialog() %}

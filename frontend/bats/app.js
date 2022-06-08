@@ -6,6 +6,7 @@ BatApp = class extends BaseApp {
    static Sorting       = BatSorting;
    static Download      = BatDownload;
    static Training      = BatTraining;
+   static Settings      = BatSettings;
 
 
     //called on click on "Metadata" button
@@ -46,7 +47,7 @@ BatResults = class {
     }
 
     compute_flags(filename, return_per_result=false){
-        const hiconf_threshold = 0.75                                                                                                //FIXME hardcoded threshold
+        const hiconf_threshold = GLOBAL.settings.confidence_threshold/100 ?? 0.75
         let lowconfs = [];
         let amount   = 0;
         let flags    = []

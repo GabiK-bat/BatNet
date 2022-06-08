@@ -44,8 +44,7 @@ BatDownload = class extends ObjectDetectionDownload{
     }
 
     static csv_data_for_files(filenames){
-        //var export_boxes = global.settings.export_boxes;                                                                                                      //TODO
-        const export_boxes = true;
+        const export_boxes = GLOBAL.settings.export_boxes;
         let header = [
             'Filename', 'Date', 'Time', 'Flag', 'Multiple', 'Species', 'Code', 'Confidence level'
         ]
@@ -87,7 +86,7 @@ BatDownload = class extends ObjectDetectionDownload{
         const flags    = results.compute_flags(filename);
         const multiple = flags.includes('multiple') ? 'multiple' : flags.includes('empty')? 'empty' : '';
         const unsures  = results.compute_flags(filename, true);       //per-result
-        const datetime = results.datetime ?? "";                                                                           //TODO: exif
+        const datetime = results.datetime ?? "";
         const date     = datetime.substring(0,10).replace(/:/g,'.');
         const time     = datetime.substring(11);
 
@@ -103,7 +102,7 @@ BatDownload = class extends ObjectDetectionDownload{
         let csv_data = []
         for(const i in selectedlabels){
             const label      = selectedlabels[i];
-            const confidence = (results.predictions[label] ?? 1.0).toFixed(2);
+            const confidence = (results.predictions[i][label] ?? 1.0).toFixed(2);
             const code       = (label in SPECIES_CODES)? SPECIES_CODES[label] : '';
             
             let csv_item     = [filename, date, time, unsures[i], multiple, label, code, confidence]
