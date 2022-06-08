@@ -4,6 +4,12 @@
 BatFileInput = class extends BaseFileInput{
 
     //override
+    static set_input_files(files){
+        GLOBAL.metadata = undefined;
+        super.set_input_files(files)
+    }
+
+    //override
     static match_resultfile_to_inputfile(inputfilename, resultfilename){
         var basename          = file_basename(resultfilename)
         const no_ext_filename = remove_file_extension(inputfilename)

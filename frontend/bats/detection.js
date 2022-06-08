@@ -45,50 +45,12 @@ BatDetection = class extends BaseDetection {
         return full_text
     }
 
-    //TODO: move to BatResults class
-    static compute_flags(filename, return_per_result=false){
-        const hiconf_threshold = 0.75                                                                                                //FIXME hardcoded threshold
-        let lowconfs = [];
-        let amount   = 0;
-        let flags    = []
-      
-        const batresults = GLOBAL.files[filename]?.results;
-        if(!batresults)
-          return [];
-
-        const n     = batresults.labels.length;
-        for (let i = 0; i < n; i++) {
-            const confidence = Object.values(sort_object_by_value(batresults.predictions)[i])[0]
-            const _lowconf   = (confidence <= hiconf_threshold);
-            lowconfs.push(_lowconf)
-            const label      = batresults.labels[i];
-            //if(! (r.prediction[''] > hiconf_threshold) ){
-            if( !(!label || (label.toLowerCase()=='not-a-bat')) ){                                                                    //TODO: plus confidence high ????
-                amount += 1;
-            }
-        }
-        
-        const manual_flags = $(`[filename="${filename}"] td.flags-cell`).hasClass('manual-flag')
-        const lowconf = lowconfs.includes(true) ^ manual_flags;
-        if(lowconf)
-          flags.push('unsure');
-      
-        if(return_per_result)
-          if(manual_flags)
-            return lowconfs.map(x => {return lowconf? 'unsure' : ''});
-          else
-            return lowconfs.map(x => {return x? 'unsure' : ''});
-      
-        if(amount==0 && batresults)
-          flags.push('empty');
-        else if(amount>1 && batresults)
-          flags.push('multiple');
-        
-        return flags
-    }
 
     static update_flags(filename){
-      const flags      = this.compute_flags(filename)
+      const results    = GLOBAL.files[filename]?.results;
+      if(!results)
+        return
+      const flags      = results.compute_flags(filename)
 
       let   $flag_icon = $(`.table-row[filename="${filename}"]`).find('.lowconf-flag');
       $flag_icon.css('visibility', flags.includes('unsure')? 'visible' : 'hidden')  //hide()/show() changes layout

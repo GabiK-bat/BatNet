@@ -6,11 +6,31 @@ BatApp = class extends BaseApp {
    static Sorting       = BatSorting;
    static Download      = BatDownload;
    static Training      = BatTraining;
+
+
+    //called on click on "Metadata" button
+    static on_metadata(){
+        $('#metadata-dialog').modal({onApprove: function(){
+            const meta = {
+                'Site Name':            $('#input_site_name').val(),
+                'Site Location':        $('#input_site_location').val(),
+                'Site Responsible':     $('#input_site_responsible').val(),
+                'Country':              $('#input_country').val(),
+                'Latitude':             $('#input_latitude').val(),
+                'Longitude':            $('#input_longitude').val(),
+                'Camera ID':            $('#input_camera_id').val(),
+                'Other':                $('#input_other').val(),
+            };
+            console.log("Metadata: "+JSON.stringify(meta));
+            GLOBAL.metadata = meta;
+        }}).modal('show')
+    }
 }
 
 
 //override
-GLOBAL.App = BatApp
+GLOBAL.App      = BatApp;
+GLOBAL.metadata = undefined;
 
 BatResults = class {
     predictions = []                 // [{'species' : confidence}, ...]
@@ -21,5 +41,42 @@ BatResults = class {
         this.boxes       = boxes
         this.predictions = predictions.map(sort_object_by_value)
         this.labels      = this.predictions.map(p => Object.keys(p)[0])
+    }
+
+    compute_flags(filename, return_per_result=false){
+        const hiconf_threshold = 0.75                                                                                                //FIXME hardcoded threshold
+        let lowconfs = [];
+        let amount   = 0;
+        let flags    = []
+
+        const n     = this.labels.length;
+        for (let i = 0; i < n; i++) {
+            const confidence = Object.values(sort_object_by_value(this.predictions)[i])[0]
+            const _lowconf   = (confidence <= hiconf_threshold);
+            lowconfs.push(_lowconf)
+            const label      = this.labels[i];
+            //if(! (r.prediction[''] > hiconf_threshold) ){
+            if( !(!label || (label.toLowerCase()=='not-a-bat')) ){                                                                    //TODO: plus confidence high ????
+                amount += 1;
+            }
+        }
+        
+        const manual_flags = $(`[filename="${filename}"] td.flags-cell`).hasClass('manual-flag')
+        const lowconf = lowconfs.includes(true) ^ manual_flags;
+        if(lowconf)
+          flags.push('unsure');
+      
+        if(return_per_result)
+          if(manual_flags)
+            return lowconfs.map(x => {return lowconf? 'unsure' : ''});
+          else
+            return lowconfs.map(x => {return x? 'unsure' : ''});
+      
+        if(amount==0)
+          flags.push('empty');
+        else if(amount>1)
+          flags.push('multiple');
+        
+        return flags
     }
 }

@@ -1,0 +1,59 @@
+
+
+{% macro metadata_dialog() %}
+<div class="ui small modal" id="metadata-dialog">
+    <i class="close icon"></i>
+    <div class="header"> Metadata </div>
+      
+      <div class="ui form content">
+        <div class="fields">
+          <div class="six wide field">
+            <label>Site Name</label>
+            <input type="text" id="input_site_name">
+          </div>
+          <div class="six wide field">
+            <label>Site Location</label>
+            <input type="text" id="input_site_location">
+          </div>
+          <div class="six wide field">
+            <label>Site Responsible</label>
+            <input type="text" id="input_site_responsible">
+          </div>
+        </div>
+        <div class="fields">
+          <div class="six wide field">
+            <label>Country</label>
+            <input type="text" id="input_country">
+          </div>
+          <div class="six wide field">
+            <label>Latitude</label>
+            <input type="text" id="input_latitude">
+          </div>
+          <div class="six wide field">
+            <label>Longitude</label>
+            <input type="text" id="input_longitude">
+          </div>
+        </div>
+        <div class="fields">
+          <div class="eight wide field">
+            <label>Camera ID</label>
+            <input type="text" id="input_camera_id">
+          </div>
+        </div>
+        <div class="field">
+          <label>Other</label>
+          <textarea rows="4" id="input_other"></textarea>
+        </div>
+      </div>
+      
+      <div class="actions">
+        <div class="ui negative button">
+          Cancel
+        </div>
+        <div class="ui positive right labeled icon button">
+          Save Metadata
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+</div>
+{% endmacro %}

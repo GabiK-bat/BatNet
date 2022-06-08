@@ -4,9 +4,13 @@
 
 
 {% macro download_menu(app) %}
+<a class="metadata item" id="metadata-button" onclick="{{ app }}.on_metadata()">
+    <i class="list icon"></i>
+    Metadata
+</a>
 <div class="ui simple dropdown download-all item" onclick="">
     <i class="download icon"></i>
-    Download All
+    Download
     <div class="menu">
         <div class="item" onclick="{{app}}.Download.on_download_csv(event)" >Download CSV</div>
         <div class="item" onclick="{{app}}.Download.on_download_json(event)">Download Annotations</div>

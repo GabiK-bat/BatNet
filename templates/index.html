@@ -4,6 +4,7 @@
 {% import 'base/modals.html'            as     base_modals %}
 {% from   'bats/js_templates.html'      import filetable_row_template %}
 {% from   'bats/main_container.html'    import main_container %}
+{% from   'bats/modals.html'            import metadata_dialog %}
 
 {% set app = "BatApp" %}
 
@@ -26,6 +27,7 @@
     {{ base_modals.modal_settings()               | indent }}
     {{ base_modals.modal_training_progress()      | indent }}
     {{ base_modals.modal_loading_files_progress() | indent }}
+    {{ metadata_dialog()                          | indent }}
 
 </body>
 </html>
