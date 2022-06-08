@@ -36,11 +36,13 @@ BatResults = class {
     predictions = []                 // [{'species' : confidence}, ...]
     boxes       = []                 // [[y0,x0,y1,x1], ...]
     labels      = [];                // ['selected species', ...]
+    datetime    = null;              // string
 
-    constructor(predictions, boxes){
-        this.boxes       = boxes
-        this.predictions = predictions.map(sort_object_by_value)
+    constructor(raw_results){
+        this.boxes       = raw_results['boxes']
+        this.predictions = raw_results['labels'].map(sort_object_by_value)
         this.labels      = this.predictions.map(p => Object.keys(p)[0])
+        this.datetime    = raw_results['datetime']
     }
 
     compute_flags(filename, return_per_result=false){

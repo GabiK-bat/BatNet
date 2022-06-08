@@ -87,7 +87,7 @@ BatDownload = class extends ObjectDetectionDownload{
         const flags    = results.compute_flags(filename);
         const multiple = flags.includes('multiple') ? 'multiple' : flags.includes('empty')? 'empty' : '';
         const unsures  = results.compute_flags(filename, true);       //per-result
-        const datetime = GLOBAL.files[filename].datetime ?? "";                                                                           //TODO: exif
+        const datetime = results.datetime ?? "";                                                                           //TODO: exif
         const date     = datetime.substring(0,10).replace(/:/g,'.');
         const time     = datetime.substring(11);
 

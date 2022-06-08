@@ -10,7 +10,7 @@ BatDetection = class extends BaseDetection {
         
         if(!clear){
             console.log(`Setting results for ${filename}:`, results)
-            const batresults            = new BatResults(results['labels'], results['boxes'])
+            const batresults = new BatResults(results)
             GLOBAL.files[filename].results = batresults
             GLOBAL.App.Boxes.refresh_boxes(filename)
             

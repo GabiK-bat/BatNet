@@ -1,5 +1,5 @@
 from base.backend.app import App as BaseApp, get_models_path
-#import backend.processing
+import backend.processing
 import backend.training
 
 import os
@@ -23,11 +23,10 @@ class App(BaseApp):
         model  = self.settings.models['detection']
         result = model.process_image(full_path)
 
-        labels = [ dict(zip( model.class_list, p )) for p in result.probabilities.tolist() ]      #TODO: move into models src
         return flask.jsonify({
-            'labels':    labels,
-            'boxes':     np.array(result.boxes).tolist()
-            #'datetime':  processing.load_exif_datetime(fullpath),                                #TODO
+            'labels':    result['per_class_scores'],
+            'boxes':     np.array(result['boxes']).tolist(),
+            'datetime':  backend.processing.load_exif_datetime(full_path),
         })
 
     #TODO: unify
