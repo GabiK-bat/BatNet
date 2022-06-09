@@ -103,7 +103,7 @@ BatDownload = class extends ObjectDetectionDownload{
         for(const i in selectedlabels){
             const label      = selectedlabels[i];
             const confidence = (results.predictions[i][label] ?? 1.0).toFixed(2);
-            const code       = (label in SPECIES_CODES)? SPECIES_CODES[label] : '';
+            const code       = GLOBAL.species_codes[label] ?? '';
             
             let csv_item     = [filename, date, time, unsures[i], multiple, label, code, confidence]
             if(export_boxes){
@@ -117,19 +117,3 @@ BatDownload = class extends ObjectDetectionDownload{
 }
 
 
-const SPECIES_CODES = {
-    'Barbastella barbastellus' :            'Bbar',
-    'Eptesicus serotinus':                  'Eser',
-    'Myotis mystacinus/Myotis brandtii/Myotis alcathoe' : 'Mbart',
-    'Myotis bechsteinii':                   'Mbec',
-    'Myotis dasycneme':                     'Mdas',
-    'Myotis daubentonii':                   'Mdau',
-    'Myotis emarginatus':                   'Mema',
-    'Myotis myotis/Myotis blythii':         'Mmyo',
-    'Myotis nattereri':                     'Mnat',
-    'Nyctalus noctula':                     'Nnoc',
-    'Plecotus auritus/Plecotus austriacus': 'Paur',
-    'Pipistrellus sp.':                     'Pip',
-    'Rhinolophus ferrumequinum':            'Rfer',
-    'Rhinolophus sp.':                      'Rsp',
-}

@@ -17,5 +17,12 @@ BatSettings = class extends BaseSettings{
         $("#settings-confidence-threshold-input")[0].value = settings.confidence_threshold
         $("#settings-export-boxes").checkbox(settings.export_boxes? 'check' : 'uncheck');
     }
+
+    //override
+    static async load_settings(){
+        const data           = await super.load_settings()
+        GLOBAL.species_codes = data.species_codes;
+        return data
+    }
 }
 

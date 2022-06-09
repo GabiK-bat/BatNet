@@ -32,6 +32,7 @@ BatApp = class extends BaseApp {
 //override
 GLOBAL.App      = BatApp;
 GLOBAL.metadata = undefined;
+GLOBAL.species_codes = {};    //'species': 'code';   loaded via settings
 
 BatResults = class {
     predictions = []                 // [{'species' : confidence}, ...]

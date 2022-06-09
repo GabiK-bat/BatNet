@@ -2,6 +2,7 @@ import base.backend.cli as base_cli
 
 import os, datetime
 from . import processing
+from . import settings
 
 
 class CLI(base_cli.CLI):
@@ -33,7 +34,8 @@ def results_to_csv(results, export_boxes=False):
     if export_boxes:
         header.append('Box')
 
-    csv_data       = []
+    species_codes = settings.parse_species_codes_file()
+    csv_data      = []
     for r in results:
         filename       = os.path.basename(r['filename'])
         result         = r['result']
@@ -53,7 +55,7 @@ def results_to_csv(results, export_boxes=False):
         for i in range(len(selectedlabels)):
             label      = selectedlabels[i]
             confidence = result['per_class_scores'][i][label]
-            code       = SPECIES_CODES.get(label, '')
+            code       = species_codes.get(label, '')
             unsure     = 'unsure' if confidence < 0.70 else ''                                                                  #TODO: custom threshold
             
             confidence_str = f'{confidence*100:.1f}'
@@ -75,22 +77,4 @@ def results_to_csv(results, export_boxes=False):
     return csv_txt
 
 
-
-#TODO: put in a json file
-SPECIES_CODES = {
-    'Barbastella barbastellus' :            'Bbar',
-    'Eptesicus serotinus':                  'Eser',
-    'Myotis mystacinus/Myotis brandtii/Myotis alcathoe' : 'Mbart',
-    'Myotis bechsteinii':                   'Mbec',
-    'Myotis dasycneme':                     'Mdas',
-    'Myotis daubentonii':                   'Mdau',
-    'Myotis emarginatus':                   'Mema',
-    'Myotis myotis/Myotis blythii':         'Mmyo',
-    'Myotis nattereri':                     'Mnat',
-    'Nyctalus noctula':                     'Nnoc',
-    'Plecotus auritus/Plecotus austriacus': 'Paur',
-    'Pipistrellus sp.':                     'Pip',
-    'Rhinolophus ferrumequinum':            'Rfer',
-    'Rhinolophus sp.':                      'Rsp',
-}
 
