@@ -1,0 +1,53 @@
+{
+  "flags": {},
+  "shapes": [
+    {
+      "label": "Rhinolophus sp.",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          2178.739990234375,
+          1344.4595947265625
+        ],
+        [
+          2908.868896484375,
+          1780.183349609375
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    },
+    {
+      "label": "Myotis nattereri",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          2072.60009765625,
+          1346.66552734375
+        ],
+        [
+          2474.297607421875,
+          1750.0419921875
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "lineColor": [
+    0,
+    255,
+    0,
+    128
+  ],
+  "fillColor": [
+    255,
+    0,
+    0,
+    128
+  ],
+  "imagePath": "P1490510.JPG",
+  "imageData": null
+}

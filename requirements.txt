@@ -14,3 +14,4 @@ scipy==1.4.1
 onnxruntime==1.7.0
 
 exif==1.3.2
+plum-py==0.7.0

@@ -1,0 +1,36 @@
+{
+  "flags": {},
+  "shapes": [
+    {
+      "label": "Rhinolophus sp.",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          2077.33447265625,
+          1702.155517578125
+        ],
+        [
+          2481.4501953125,
+          1950.572998046875
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "lineColor": [
+    0,
+    255,
+    0,
+    128
+  ],
+  "fillColor": [
+    255,
+    0,
+    0,
+    128
+  ],
+  "imagePath": "P1310955.JPG",
+  "imageData": null
+}

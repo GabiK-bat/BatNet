@@ -4,3 +4,4 @@ TESTDATA
 static
 cache
 models
+tests/logs

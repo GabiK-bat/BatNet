@@ -1,0 +1,53 @@
+{
+  "flags": {},
+  "shapes": [
+    {
+      "label": "Rhinolophus sp.",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          764.1480102539062,
+          438.7921142578125
+        ],
+        [
+          1638.0240478515625,
+          968.2572631835938
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    },
+    {
+      "label": "Nyctalus noctula",
+      "line_color": null,
+      "fill_color": null,
+      "points": [
+        [
+          1545.738525390625,
+          1168.528076171875
+        ],
+        [
+          1994.22705078125,
+          1444.435302734375
+        ]
+      ],
+      "shape_type": "rectangle",
+      "flags": {}
+    }
+  ],
+  "lineColor": [
+    0,
+    255,
+    0,
+    128
+  ],
+  "fillColor": [
+    255,
+    0,
+    0,
+    128
+  ],
+  "imagePath": "P2340385.JPG",
+  "imageData": null
+}
