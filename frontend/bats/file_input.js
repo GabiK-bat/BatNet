@@ -6,7 +6,7 @@ BatFileInput = class extends BaseFileInput{
     //override
     static set_input_files(files){
         GLOBAL.metadata = undefined;
-        super.set_input_files(files)
+        return super.set_input_files(files)
     }
 
     //override

@@ -8,6 +8,7 @@ BatApp = class extends BaseApp {
    static Training      = BatTraining;
    static Settings      = BatSettings;
 
+   static NEGATIVE_CLASS = 'Not-A-Bat'
 
     //called on click on "Metadata" button
     static on_metadata(){
