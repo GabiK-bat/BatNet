@@ -33,6 +33,8 @@ class TrainingTask(torch.nn.Module):
     
     def train_one_epoch(self, loader, optimizer, scheduler=None):
         for i,batch in enumerate(loader):
+            if self.__class__.stop_requested:
+                break
             loss,logs  = self.training_step(batch)
             
             optimizer.zero_grad()

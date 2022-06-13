@@ -1,9 +1,7 @@
 import torch, torchvision
 from torchvision.models._utils import IntermediateLayerGetter
 import PIL.Image
-import onnxruntime
 import numpy as np
-import scipy.optimize
 
 import typing as tp
 import io, warnings, sys, time, importlib
