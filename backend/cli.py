@@ -1,6 +1,6 @@
 import base.backend.cli as base_cli
 
-import os, datetime
+import os, datetime, sys
 from . import processing
 from . import settings
 
@@ -50,7 +50,8 @@ def results_to_csv(results, export_boxes=False):
     
 
         if n==0:
-            csv_data  += [filename, date, time, '', multiple, '', '', ''] + ([''] if export_boxes else [])
+            csv_item   = [filename, date, time, '', multiple, '', '', ''] + ([''] if export_boxes else [])
+            csv_data.append( csv_item )
         
         for i in range(len(selectedlabels)):
             label      = selectedlabels[i]

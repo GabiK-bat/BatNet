@@ -1,4 +1,4 @@
-from base.backend.app import App as BaseApp, get_models_path
+from base.backend.app import App as BaseApp
 import backend.processing
 import backend.training
 
@@ -8,9 +8,6 @@ import numpy as np
 
 
 class App(BaseApp):
-    def __init__(self, *args, **kw):
-        super().__init__(*args, **kw)
-
 
     #TODO: unify
     #override
