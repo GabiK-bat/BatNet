@@ -22,7 +22,7 @@ BatDetection = class extends BaseDetection {
     }
 
     static format_results_for_table(batresults){
-        const hiconf_threshold = GLOBAL.settings.confidence_threshold/100 ?? 0.75
+        const hiconf_threshold = GLOBAL.settings.confidence_threshold/100 ?? 0.70
         const n     = batresults.labels.length;
         let   texts = []
         for (let i = 0; i < n; i++) {

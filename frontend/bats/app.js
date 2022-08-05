@@ -49,7 +49,7 @@ BatResults = class {
     }
 
     compute_flags(filename, return_per_result=false){
-        const hiconf_threshold = GLOBAL.settings.confidence_threshold/100 ?? 0.75
+        const hiconf_threshold = GLOBAL.settings.confidence_threshold/100 ?? 0.70
         let lowconfs = [];
         let amount   = 0;
         let flags    = []
