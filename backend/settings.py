@@ -1,4 +1,6 @@
 from base.backend.settings import Settings as BaseSettings
+from base.backend.app import path_to_main_module
+import os
 
 class Settings(BaseSettings):
     
@@ -19,7 +21,9 @@ class Settings(BaseSettings):
         return s
 
 
-def parse_species_codes_file(path='./species_codes.txt'):
+DEFAULT_SPECIES_FILE = os.path.join(path_to_main_module(), 'species_codes.txt')
+
+def parse_species_codes_file(path=DEFAULT_SPECIES_FILE):
     lines         = open(path).read().strip().split('\n')
     species2codes = dict([ map(str.strip, line.split(':')) for line in lines])
     return species2codes
