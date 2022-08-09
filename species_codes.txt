@@ -1,14 +1,14 @@
 Barbastella barbastellus                             :   Bbar
 Eptesicus serotinus                                  :   Eser
-Myotis mystacinus/Myotis brandtii/Myotis alcathoe    :   Mbart
+Myotis mystacinus_Myotis brandtii_Myotis alcathoe    :   Mbra
 Myotis bechsteinii                                   :   Mbec
 Myotis dasycneme                                     :   Mdas
 Myotis daubentonii                                   :   Mdau
 Myotis emarginatus                                   :   Mema
-Myotis myotis/Myotis blythii                         :   Mmyo
+Myotis myotis_Myotis blythii                         :   Mmyo
 Myotis nattereri                                     :   Mnat
 Nyctalus noctula                                     :   Nnoc
-Plecotus auritus/Plecotus austriacus                 :   Paur
-Pipistrellus sp.                                     :   Pip
-Rhinolophus ferrumequinum                            :   Rfer
-Rhinolophus sp.                                      :   Rsp
+Plecotus auritus_Plecotus austriacus                 :   Paur
+Pipistrellus sp.                                     :   Ppip
+Rhinolophus ferrumequinum                            :   Rhin
+Rhinolophus sp.                                      :   Rhin
