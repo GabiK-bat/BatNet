@@ -7,6 +7,11 @@ BatDetection = class extends BaseDetection {
 
         GLOBAL.files[filename].results = undefined;
         GLOBAL.App.Boxes.clear_box_overlays(filename)
+
+        const $root = $(`#filetable [filename="${filename}"]`)
+        $root.find('.show-results-checkbox')
+            .checkbox({onChange: () => GLOBAL.App.ViewControls.toggle_results(filename)})
+            .checkbox('check')
         
         if(!clear){
             console.log(`Setting results for ${filename}:`, results)
@@ -14,7 +19,7 @@ BatDetection = class extends BaseDetection {
             GLOBAL.files[filename].results = batresults
             GLOBAL.App.Boxes.refresh_boxes(filename)
             
-            $(`.table-row[filename="${filename}"] td:nth-of-type(2)`).html( this.format_results_for_table(batresults) )
+            $root.find(`td:nth-of-type(2)`).html( this.format_results_for_table(batresults) )
             this.update_flags(filename)
         }
 
