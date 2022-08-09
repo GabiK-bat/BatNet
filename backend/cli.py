@@ -1,4 +1,5 @@
 import base.backend.cli as base_cli
+from base.backend.app import path_to_main_module
 
 import os, datetime, sys
 from . import processing
@@ -34,7 +35,8 @@ def results_to_csv(results, export_boxes=False):
     if export_boxes:
         header.append('Box')
 
-    species_codes = settings.parse_species_codes_file()
+    species_codes_file = os.path.join(path_to_main_module(), 'species_codes.txt')
+    species_codes = settings.parse_species_codes_file(path=species_codes_file)
     csv_data      = []
     for r in results:
         filename       = os.path.basename(r['filename'])
