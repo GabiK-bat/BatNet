@@ -1,32 +1,47 @@
 import torch, torchvision
 import numpy as np
-import PIL.Image
+import PIL.Image, PIL.ImageOps
 import glob, json, os
+
+
+def load_image(path:str) -> PIL.Image:
+    '''Load image, rotate according to EXIF orientation'''
+    image = PIL.Image.open(path).convert('RGB')
+    image = PIL.ImageOps.exif_transpose(image)
+    return image
+
 
 try:
     #tensorflow for faster jpeg loading
+    #CAUTION: can cause issues with image orientation
     import tensorflow as tf
     assert [] == tf.config.list_physical_devices('GPU')
 except ImportError:
     #print('Could not import TensorFlow. Classifier training might be slow.')
     tf = None
 
+def guess_encoding(x:bytes) -> str:
+    try:
+        return x.decode('utf8')
+    except UnicodeDecodeError:
+        return x.decode('cp1250')
+
 def read_json_until_imagedata(jsonfile):
     '''LabelMe JSON are rather large because they contain the whole image additionally to the labels.
        This function reads a jsonfile only up to the imagedata attribute (ignoring everything afterwards) to reduce the loading time.
        Returns a valid JSON string'''
-    f = open(jsonfile)
+    f = open(jsonfile, 'rb')
     f.seek(0,2); n=f.tell(); f.seek(0,0)
-    buffer = ''
-    while 'imageData' not in buffer and len(buffer)<n:
+    buffer = b''
+    while b'imageData' not in buffer and len(buffer)<n:
         data      = f.read(1024*16)
         buffer   += data
         if len(data)==0:
             return buffer
-    buffer   = buffer[:buffer.index('imageData')]
-    buffer   = buffer[:buffer.rindex(',')]
-    buffer   = buffer+'}'
-    return buffer
+    buffer   = buffer[:buffer.index(b'imageData')]
+    buffer   = buffer[:buffer.rindex(b',')]
+    buffer   = buffer+b'}'
+    return guess_encoding(buffer)
 
 def get_boxes_from_jsonfile(jsonfile, flip_axes=False, normalize=False):
     '''Reads bounding boxes from a LabeLMe json file and returns them as a (Nx4) array'''
@@ -105,7 +120,7 @@ class DetectionDataset(Dataset):
         jsonfile = self.jsonfiles[i]
         jpgfile  = self.jpgfiles[i]
     
-        image    = PIL.Image.open(jpgfile)
+        image    = load_image(jpgfile)
         #load normalized boxes: 0...1
         boxes    = get_boxes_from_jsonfile(jsonfile, flip_axes=0, normalize=0)
         #bat species labels
@@ -174,7 +189,7 @@ class OOD_DetectionDataset(DetectionDataset):
         if i < super().__len__():
             return super().get_item(i)
         i      = np.random.randint(len(self.ood_files))
-        image  = PIL.Image.open(self.ood_files[i]).convert('RGB').resize([self.SIZE]*2)
+        image  = load_image(self.ood_files[i]).resize([self.SIZE]*2)
         return image, {'boxes':torch.as_tensor([]).reshape(-1,4), 'labels':torch.as_tensor([]).long()}
 
 
@@ -182,8 +197,12 @@ def should_ignore_file(json_file='', ignore_list=[]):
     labels = get_labels_from_jsonfile(json_file) if os.path.exists(json_file) else []
     return any([(l in ignore_list) for l in labels])
 
-def augment_box(box, scale=25):
-    return box + np.random.normal(scale=scale, size=4)
+def augment_box(box, scale=25, min_size=8):
+    new_box  = box + np.random.normal(scale=scale, size=4)
+    box_size = new_box[2:] - new_box[:2]
+    if any(box_size < min_size):
+        new_box = box
+    return new_box
 
 class SegmentationDataset(Dataset):
     SIZE = 256
@@ -195,7 +214,7 @@ class SegmentationDataset(Dataset):
         polygon  = polygons[np.random.randint(len(polygons))]
         
         jpgfile  = self.jpgfiles[i]
-        image    = PIL.Image.open(jpgfile)
+        image    = load_image(jpgfile)
         
         box      = np.r_[polygon.min(0), polygon.max(0)]
         if self.augment:
@@ -250,11 +269,13 @@ class ClassificationDataset(Dataset):
             classes_lowconf:list      = ['Bat_unknown'], #try to reduce confidence
             augment:bool              = False, 
             image_size:int            = 256,
+            use_tf_loading:bool       = False,  #faster, but make sure that there are no EXIF-rotated images
     ):
         super().__init__(jpgfiles, jsonfiles, augment)
         self.class_list       = list(classes_of_interest) #[l.lower() for l in classes_of_interest]
         self.classes_negative = list(classes_negative)    #[l.lower() for l in classes_negative]
         self.classes_lowconf  = list(classes_lowconf)     #[l.lower() for l in classes_lowconf]
+        self.use_tf_loading   = use_tf_loading
         
         detected_boxes = detected_boxes or [ np.zeros([0,4]) ]*len(self.jpgfiles)
         self.jpgfiles, self.labels, self.boxes = [],[],[]
@@ -269,8 +290,6 @@ class ClassificationDataset(Dataset):
                 idx = self.label2idx(l)
                 if idx is None:
                     raise RuntimeError('Encountered unspecified class:', l)
-                    #self.class_list.append(l)
-                    #idx = self.label2idx(l)
                 self.jpgfiles.append(jpgfile)
                 self.labels.append(idx)
                 self.boxes.append(b)
@@ -281,7 +300,11 @@ class ClassificationDataset(Dataset):
         imagefile, label, box = self.jpgfiles[i], self.labels[i], self.boxes[i]
         if self.augment:
             box  = augment_box(box)
-        image = self.load_and_crop_jpeg(imagefile, box) / np.float32(255)
+        try:
+            image = self.load_and_crop_jpeg(imagefile, box) / np.float32(255)
+        except:
+            print('Failed to load image:', imagefile, box)
+            raise
         if self.augment and np.random.random()<0.5:
             image = np.fliplr(image).copy()
         return image, label
@@ -312,13 +335,12 @@ class ClassificationDataset(Dataset):
                 labels += [gt_labels[j]]
         return np.array(boxes), np.array(labels)
     
-    @staticmethod
-    def load_and_crop_jpeg(jpegfile, box):
-        if tf is None:
+    def load_and_crop_jpeg(self, jpegfile, box):
+        if tf is None or not self.use_tf_loading:
             #slow failback
-            return np.array(PIL.Image.open(jpegfile).convert('RGB').crop(box))
+            return np.array(load_image(jpegfile).crop(box))
         else:
-            #fast
+            #fast (but causes issues with EXIF-rotated images)
             jpgdata = open(jpegfile, 'rb').read()
             shape   = tf.io.extract_jpeg_shape(jpgdata)
             #box sanity checks
@@ -329,7 +351,7 @@ class ClassificationDataset(Dataset):
             try:
                 return tf.io.decode_and_crop_jpeg(jpgdata, window).numpy()
             except:
-                print('Cropping failed! shape:',shape, 'box:',box, box_y, box_x, window, window.shape)
+                print(f'Cropping failed! {jpegfile} Shape:{shape}, Box:',box, box_y, box_x, window, window.shape)
 
 
 def random_wrong_box(imagesize, true_boxes, n=15, max_iou=0.1):
@@ -359,14 +381,13 @@ class OOD_ClassificationDataset(ClassificationDataset):
             return super().get_item(i)
         if np.random.random()<0.5:
             i      = np.random.randint(len(self.ood_files))
-            image  = PIL.Image.open(self.ood_files[i]).convert('RGB').resize([self.SIZE]*2)
+            image  = load_image(self.ood_files[i]).resize([self.SIZE]*2)
             image  = np.asarray(image) / np.float32(255)
         else:
             i         = np.random.randint(len(self.jpgfiles))
             imagefile, box = self.jpgfiles[i], self.boxes[i]
-            image     = PIL.Image.open(imagefile)
+            image     = load_image(imagefile)
             #XXX: might be incorrect if there are multiple boxes in the file
             wrong_box = random_wrong_box(image.size, [box])
             image     = self.load_and_crop_jpeg(imagefile, wrong_box) / np.float32(255)
         return image, 0
-

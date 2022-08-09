@@ -1,6 +1,6 @@
 import torch, torchvision
 from torchvision.models._utils import IntermediateLayerGetter
-import PIL.Image
+#import PIL.Image  #use datasets.load_image() instead
 import numpy as np
 
 import typing as tp
@@ -68,7 +68,8 @@ class BatDetector(torch.nn.Module):
     
     @staticmethod
     def load_image(filename, to_tensor=False):
-        image =  PIL.Image.open(filename)
+        #image =  PIL.Image.open(filename) #do not use, exif-unaware
+        image = datasets.load_image(filename) #exif-aware
         if to_tensor:
             image = torchvision.transforms.functional.to_tensor(image)
         return image
