@@ -42,7 +42,7 @@
 {% macro training_tab(app) %}
 <div id="training-tab">
     
-    {{ base_training_tab.class_selection_controls() }}
+    {{ base_training_tab.class_selection_controls(others=False) }}
     {{ training_controls(trainingmodule = app+".Training") }}
 
 </div>
