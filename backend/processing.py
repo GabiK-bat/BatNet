@@ -14,5 +14,8 @@ def process_image(imagepath, settings):
 def load_exif_datetime(filename):
     with open(filename, 'rb') as f:
         exif_f = exif.Image(f)
-        if exif_f.has_exif and 'datetime' in exif_f.list_all():
-            return exif_f.datetime
+        if exif_f.has_exif :
+            if 'datetime_original' in exif_f.list_all():
+                return exif_f.datetime_original
+            elif 'datetime' in exif_f.list_all():
+                return exif_f.datetime
