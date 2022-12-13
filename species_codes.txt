@@ -10,5 +10,4 @@ Myotis nattereri                                     :   Mnat
 Nyctalus noctula                                     :   Nnoc
 Plecotus auritus_Plecotus austriacus                 :   Paur
 Pipistrellus sp.                                     :   Ppip
-Rhinolophus ferrumequinum                            :   Rhin
 Rhinolophus sp.                                      :   Rhin
