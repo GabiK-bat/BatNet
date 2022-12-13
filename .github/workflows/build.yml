@@ -1,0 +1,34 @@
+name: Build Windows Binaries
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7'
+          #cache: 'pip' # caching pip dependencies
+      
+      - name: Install requirements
+        run: pip install -r requirements.txt
+        
+      - name: Fetch pretrained models
+        run: python fetch_pretrained_models.py
+        
+      - name: Build
+        run: python build.py --zip
+      
+      - name: Archive binaries
+        uses: actions/upload-artifact@v3
+        with:
+          name: binaries
+          path: builds/*.zip
+
