@@ -4,7 +4,7 @@
 
 **Download**: [BatNet](https://github.com/GabiK-bat/BatNet/releases/download/v2022-12-13/2022-12-13_16h02m33s_BatDetector.zip)
 
-**View**: [BatNet ReadMe](https://github.com/GabiK-bat/BatNet/tree/main/ReadMe/ReadMe.md)
+**View**: [BatNet User's manual](https://github.com/GabiK-bat/BatNet/tree/main/ReadMe/ReadMe.md)
 
 
 **Citation**:
@@ -16,6 +16,7 @@ Corresponding author: Gabriella Krivek, krivek.g@gmail.com
 
 
 Download data and R scripts used for creating the figures and tables in publication: [BatNet scripts](https://github.com/GabiK-bat/BatNet/tree/main/BatNet_scripts)
+
 The R Markdown files should be opened via the R project file ("BatNet_scripts.R") in RStudio for setting up the correct working directory.
 
 
