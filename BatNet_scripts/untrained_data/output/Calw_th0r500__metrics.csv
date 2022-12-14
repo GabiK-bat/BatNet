@@ -1,0 +1,8 @@
+,Precision,Recall,F1,sample_size
+Class: Eptesicus serotinus,0.9333,0.8235,0.875,17
+Class: Myotis brandtii,1,1,1,1
+Class: Myotis myotis,0.9844,0.875,0.9265,72
+Class: Myotis nattereri,0.9808,0.9358,0.9577,218
+Class: Pipistrellus sp.,0.9455,0.9369,0.9412,111
+Class: Plecotus sp.,0.9927,0.9837,0.9882,553
+Class: Empty,0.3556,0.8421,0.5,19

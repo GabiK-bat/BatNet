@@ -1,0 +1,2174 @@
+filename_path,species,species2
+./test_data//Bbarb/P1010647.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1010747.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1020052.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1020105.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1020441.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1040069.JSON,Barbastella barbastellus,Barbastella barbastellus
+./test_data//Bbarb/P1050031.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1050166.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1050584.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1050810.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1050820.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1060268.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1060551.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1060945.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070023.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070058.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070060.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070083.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070157.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070198.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070324.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070453.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070456.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070513.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070628.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070652.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070660.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070814.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070873.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070910.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1070997.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1080012.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1080024.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1080294.JSON,Barbastella barbastellus,Myotis emarginatus
+./test_data//Bbarb/P1080530.JSON,Barbastella barbastellus,Bat_unknown
+./test_data//Bbarb/P1080585.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1080614.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1080631.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1090017.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1090120.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1090665.JSON,Barbastella barbastellus,Bat_hanging
+./test_data//Bbarb/P1100205.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1100406.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1100424.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1110576.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1110802.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1120452.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1120605.JSON,Barbastella barbastellus,Barbastella barbastellus
+./test_data//Bbarb/P1120607.JSON,Barbastella barbastellus,Bat_unknown
+./test_data//Bbarb/P1120806.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1120822.JSON,Barbastella barbastellus,Barbastella barbastellus
+./test_data//Bbarb/P1130140.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1140784.JSON,Barbastella barbastellus,Bat_unknown
+./test_data//Bbarb/P1170476.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1180232.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1190732.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1190914.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1200147.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1200194.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1200209.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1200253_002.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1200364.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1200447.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1200566.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1210099.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1210487.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1210709.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1210903.JSON,Barbastella barbastellus,Bat_unknown
+./test_data//Bbarb/P1210992.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1220256.JSON,Barbastella barbastellus,Bat_unknown
+./test_data//Bbarb/P1220692.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1220763.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1220773.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1220935.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1230252.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1230344.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1240009.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1240240.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1240826.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1290021.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1310187.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1310722.JSON,Barbastella barbastellus,NA
+./test_data//Bbarb/P1340005.JSON,Barbastella barbastellus,NA
+./test_data//Eser/P1010652.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1020743.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1020839.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1030540.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1040232.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1040346.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1040349.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1040352.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1040463.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1040499.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1050162.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1050241.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1060049.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1060587.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1060992.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1070059.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1070116.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1070290.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1080103.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1080139.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1090455.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1090725.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1100513.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1100553.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1110591.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1110610.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1120177.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1180301.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1180310.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1180315.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1180330.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1180380.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1180774.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1190112.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1200354.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1200945.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1220501.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1380243.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1380441.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1380781.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1430126.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1550056.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1550853.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1550866.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1680396.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1680403.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1700164.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1730510.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1730538.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1740871.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1780807.JSON,Eptesicus serotinus,Bat_hanging
+./test_data//Eser/P1780817.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1800965.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1820474.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1850272.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1850948.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1860967.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1880689.JSON,Eptesicus serotinus,Bat_hanging
+./test_data//Eser/P1900108.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1900119.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P1900122.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2100586.JSON,Eptesicus serotinus,Bat_unknown
+./test_data//Eser/P2100669.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2170715.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2190852.JSON,Eptesicus serotinus,Bat_hanging
+./test_data//Eser/P2210130.JSON,Eptesicus serotinus,Bat_hanging
+./test_data//Eser/P2230060.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2310885.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2400431.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2400593.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2400600.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2400601.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2400809.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2400810.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2410361.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2410364.JSON,Eptesicus serotinus,NA
+./test_data//Eser/P2480328.JSON,Eptesicus serotinus,NA
+./test_data//Mbec/DATA_2017-04-16_137_PANA_P1370496.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-04-16_138_PANA_P1380110.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-04-22_138_PANA_P1380250.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-04-22_138_PANA_P1380390.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-04-30_P1380468.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-04-30_P1380635.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-05-14_138_PANA_P1380754.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-05-14_139_PANA_P1390147.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-05-14_139_PANA_P1390211.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-05-14_139_PANA_P1390221.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-05-14_139_PANA_P1390299.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-05-14_139_PANA_P1390312.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-05-29_P1390471.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-05-29_P1390699.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-05-29_P1390755.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-11_139_PANA_P1390836.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-11_139_PANA_P1390974.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-11_140_PANA_P1400328.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-11_140_PANA_P1400386.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-11_140_PANA_P1400391.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_128_PANA_P1280584.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_128_PANA_P1280616.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_128_PANA_P1280624.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_128_PANA_P1280628.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_128_PANA_P1280803.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_128_PANA_P1280876.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_140_PANA_P1400596.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_140_PANA_P1400616.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_140_PANA_P1400628.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_140_PANA_P1400635.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_140_PANA_P1400675.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_140_PANA_P1400678.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_140_PANA_P1400681.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_140_PANA_P1400726.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_140_PANA_P1400860.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_140_PANA_P1400964.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_141_PANA_P1410065.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-06-23_141_PANA_P1410077.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-02_P1410246.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-02_P1410424.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-18_P1290540.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-18_P1290618.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-22_130_PANA_P1300042.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-22_141_PANA_P1410691.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-22_142_PANA_P1420018.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-22_142_PANA_P1420021.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-22_142_PANA_P1420027.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-22_142_PANA_P1420041.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-22_142_PANA_P1420047.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-22_142_PANA_P1420053.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-07-22_142_PANA_P1420077.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-02_P1300133.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-02_P1300234.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-02_P1300269.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-02_P1300271.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-02_P1300274.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-02_P1300283.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-02_P1300361.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-02_P1300394.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-02_P1300484.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-02_P1300501.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-05_P1300547.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-05_P1300565.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-05_P1300576.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-05_P1300579.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-05_P1300610.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-05_P1300623.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-13_130_PANA_P1300761.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-13_130_PANA_P1300786.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-13_130_PANA_P1300856.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-13_130_PANA_P1300858.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-13_130_PANA_P1300862.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-13_130_PANA_P1300883.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-18_112_PANA_P1120467.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-18_112_PANA_P1120567.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-18_112_PANA_P1120609.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-18_112_PANA_P1120632.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-18_112_PANA_P1120652.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-18_112_PANA_P1120667.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-18_112_PANA_P1120737.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-18_112_PANA_P1120799.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-18_112_PANA_P1120898.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-18_112_PANA_P1120936.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-21_P1130205.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-21_P1130223.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-21_P1130273.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-21_P1130299.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-21_P1130313.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-21_P1130359.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-27_113_PANA_P1130815.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-27_113_PANA_P1130857.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-27_113_PANA_P1130885.JSON,Myotis nattereri,Myotis bechsteinii
+./test_data//Mbec/DATA_2017-08-27_113_PANA_P1130896.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-27_114_PANA_P1140074.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-27_114_PANA_P1140134.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-27_114_PANA_P1140170.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-27_114_PANA_P1140266.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-08-27_114_PANA_P1140325.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-09-03_114_PANA_P1140842.JSON,NA,NA
+./test_data//Mbec/DATA_2017-09-09_P1150444.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-09-09_P1150522.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-09-23_113_PANA_P1130415.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-09-23_113_PANA_P1130790.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-09-24_113_PANA_P1130831.JSON,Myotis bechsteinii,Myotis nattereri
+./test_data//Mbec/DATA_2017-10-16_115_PANA_P1150579.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2017-10-16_115_PANA_P1150585.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-04-06_113_PANA_P1130667.JSON,NA,NA
+./test_data//Mbec/DATA_2018-04-06_114_PANA_P1140215.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-04-06_114_PANA_P1140279.JSON,NA,NA
+./test_data//Mbec/DATA_2018-04-12_P1140725.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-04-15_115_PANA_P1150140.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-04-21_P1150324.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-04-21_P1150342.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-04-21_P1150430.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-04-21_P1150489.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-05-01_113_PANA_P1130104.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-05-13_134_PANA_P1340869.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-05-13_135_PANA_P1350060.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-05-13_P1130349.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-05-13_P1130350.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-05-13_P1130391.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-05-13_P1130424.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-05-13_P1130426.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-05-13_P1130592.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-05-25_113_PANA_P1130719.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-06-03_114_PANA_P1140113.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-06-03_114_PANA_P1140274.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-06-18_136_PANA_P1360479.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-06-18_136_PANA_P1360724.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-07-14_136_PANA_P1360891.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-07-14_P1150633.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-07-25_115_PANA_P1150858.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-07-25_115_PANA_P1150878.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-07-25_115_PANA_P1150962.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-07-25_116_PANA_P1160106.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-07-25_116_PANA_P1160188.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_116_PANA_P1160207.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_116_PANA_P1160418.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_116_PANA_P1160444.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_116_PANA_P1160496.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_116_PANA_P1160795.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_116_PANA_P1160834.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_117_PANA_P1170048.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_117_PANA_P1170697.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_117_PANA_P1170758.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_117_PANA_P1170861.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_118_PANA_P1180317.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_118_PANA_P1180320.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_118_PANA_P1180328.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_118_PANA_P1180837.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_118_PANA_P1180930.JSON,Myotis bechsteinii,Myotis nattereri
+./test_data//Mbec/DATA_2018-08-24_119_PANA_P1190077.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_119_PANA_P1190174.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_119_PANA_P1190330.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_119_PANA_P1190680.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-08-24_119_PANA_P1190715.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-09-09_114_PANA_P1140593.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-09-09_114_PANA_P1140658.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-09-09_114_PANA_P1140758.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-09-09_114_PANA_P1140823.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-09-09_114_PANA_P1140831.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-09-09_134_PANA_P1340994.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-09-09_135_PANA_P1350161.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-09-23_116_PANA_P1160056.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2018-09-23_116_PANA_P1160057.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2019-04-22_118_PANA_P1180117.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2019-04-22_118_PANA_P1180165.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2019-05-05_118_PANA_P1180217.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2019-05-05_118_PANA_P1180236.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2019-05-05_118_PANA_P1180259.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2019-05-05_118_PANA_P1180315.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/DATA_2019-07-01_118_PANA_P1180397.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1180511.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1190658.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1190665.JSON,Myotis bechsteinii,Bat_unknown
+./test_data//Mbec/P1190681.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1190773.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1190912.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1190996.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200037.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200091.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200215.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200279.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200288.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200308.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200351.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200411.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200438.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200464.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200598.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200693.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200715.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200770.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200800.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1200830.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210040.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210045.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210047.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210163.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210168.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210173.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210175.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210208.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210211.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210226.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210265.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210296.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210386.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1210411.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1260001.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1260176.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1260793.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1260795.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1270183.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1270509.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1320596.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1320600.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1320629.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1320635.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1320756.JSON,Myotis bechsteinii,Bat_unknown
+./test_data//Mbec/P1700457.JSON,Myotis bechsteinii,NA
+./test_data//Mbec/P1700701.JSON,Myotis bechsteinii,NA
+./test_data//Mbra/DATA_2017-08-05_P1420674.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/DATA_2017-08-05_P1420679.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/DATA_2017-08-21_142_PANA_P1420769.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/DATA_2017-08-21_142_PANA_P1420835.JSON,NA,NA
+./test_data//Mbra/P1010098.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1010387.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1010455.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1010733.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Rhinolophus sp.
+./test_data//Mbra/P1010762.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1050621.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Rhinolophus sp.
+./test_data//Mbra/P1100142.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1100171.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1100508.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1100529.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Bat_unknown
+./test_data//Mbra/P1100532.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Bat_unknown
+./test_data//Mbra/P1100581.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Myotis nattereri
+./test_data//Mbra/P1100614.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1100643.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1100696.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Myotis mystacinus_Myotis brandtii_Myotis alcathoe
+./test_data//Mbra/P1100705.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1100762.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1100767.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1100846.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Bat_unknown
+./test_data//Mbra/P1100883.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1100907.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1100990.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Myotis mystacinus_Myotis brandtii_Myotis alcathoe
+./test_data//Mbra/P1150682.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1160737.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1170074.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1180075.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1180183.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1180579.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1180956.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1190030.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1190046.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1190161.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1190181.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1190368.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1190382.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1190601.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1190755.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1190862.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1190926.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1200296.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1200336.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1200378.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1200530.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1210181.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1210886.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1210908.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Bat_hanging
+./test_data//Mbra/P1210926.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1210977.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Bat_hanging
+./test_data//Mbra/P1210990.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1220052.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1220153.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1220193.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1220508.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1220625.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1220746.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1220754.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Bat_hanging
+./test_data//Mbra/P1220791.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1220828.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1220850.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1220942.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1230744.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1230815.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1230816.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1230876.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1240036.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1240127.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1240339.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1240535.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,NA
+./test_data//Mbra/P1390236.JSON,Myotis mystacinus_Myotis brandtii_Myotis alcathoe,Bat_unknown
+./test_data//Mdas/P1020148.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1030582.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1030627.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1090056.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1090057.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1190731.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1200422.JSON,Myotis dasycneme,Bat_unknown
+./test_data//Mdas/P1210923.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1210955.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1220072.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1220214.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1220251.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1220296.JSON,Myotis dasycneme,Bat_hanging
+./test_data//Mdas/P1220805.JSON,Myotis dasycneme,Bat_hanging
+./test_data//Mdas/P1220991.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1240013.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340116.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340118.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340228.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340327.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340438.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340463.JSON,Myotis dasycneme,Bat_unknown
+./test_data//Mdas/P1340515.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340523.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340541.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340545.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340558.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1340577.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1350248.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1380041.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1380222.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1380224.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1380366.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1380367.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1380515.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1380604.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1390497.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1390515.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1390581.JSON,Myotis dasycneme,Myotis daubentonii
+./test_data//Mdas/P1390657.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1410323.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1410461.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1440001.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1450003.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1460045.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1530003.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1640476.JSON,Myotis dasycneme,Myotis myotis_Myotis blythii
+./test_data//Mdas/P1950027.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1950038.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P1950043.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P2130376.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P2130628.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P2140609.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P2520156.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P2550917.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P2660099.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P2980815.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P2990327.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P3000057.JSON,Myotis dasycneme,NA
+./test_data//Mdas/P3000104.JSON,Myotis dasycneme,NA
+./test_data//Mdau/DATA_2016-08-15_LS_Appelshoehle_P1140148.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2016-08-15_LS_Appelshoehle_P1140183.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2016-08-21_LS_Appelshoehle_P1140259.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2016-08-21_LS_Appelshoehle_P1140303.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2016-08-21_LS_Appelshoehle_P1140589.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2016-08-21_LS_Appelshoehle_P1140668.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2016-08-21_LS_Appelshoehle_P1140688.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2016-08-25_LS_Appelshoehle_114_PANA_P1140759.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2016-08-25_LS_Appelshoehle_114_PANA_P1140783.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2016-08-25_LS_Appelshoehle_114_PANA_P1140788.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-03-26_P1350571.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-03-26_P1350725.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-04-02_136_PANA_P1360492.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-04-02_136_PANA_P1360550.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-04-02_136_PANA_P1360671.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-04-16_137_PANA_P1370523.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-04-16_138_PANA_P1380015.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-04-30_P1380513.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-04-30_P1380571.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-04-30_P1380599.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-04-30_P1380625.JSON,NA,NA
+./test_data//Mdau/DATA_2017-05-29_P1390561.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-05-29_P1390636.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-05-29_P1390729.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-06-11_140_PANA_P1400095.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-06-11_140_PANA_P1400111.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-06-11_140_PANA_P1400210.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-06-11_140_PANA_P1400334.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-06-11_140_PANA_P1400352.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-06-11_140_PANA_P1400424.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-06-11_140_PANA_P1400449.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-06-23_141_PANA_P1410055.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-07-22_141_PANA_P1410857.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-07-22_141_PANA_P1410872.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-07-22_141_PANA_P1410882.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-07-22_141_PANA_P1410941.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-07-22_141_PANA_P1410956.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-07-22_142_PANA_P1420026.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-07-22_142_PANA_P1420072.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420373.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420376.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420378.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420412.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420456.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420460.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420542.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420586.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420688.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420689.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420741.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-05_P1420745.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-21_142_PANA_P1420816.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-21_P1130118.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-21_P1130131.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-21_P1130176.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-21_P1130207.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-21_P1130343.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2017-08-21_P1130353.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2018-05-13_135_PANA_P1350136.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2018-07-14_137_PANA_P1370196.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2018-07-14_137_PANA_P1370215.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2018-07-14_P1150597.JSON,Myotis daubentonii,NA
+./test_data//Mdau/DATA_2018-07-14_P1150721.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000022.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000024.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000062.JSON,Myotis daubentonii,Myotis daubentonii
+./test_data//Mdau/P1000192.JSON,Myotis daubentonii,Bat_unknown
+./test_data//Mdau/P1000209.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000241.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000278.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000307.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000340.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000342.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000356.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000396.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000414.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000640.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000676.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000890.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000892.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000933.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1000938.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1010041.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1010688.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1010770.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1010826.JSON,Myotis daubentonii,Bat_unknown
+./test_data//Mdau/P1010919.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1020282.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1020332.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1020478.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1020512.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1020757.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1020925.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1030541.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1050701.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1050745.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1050905.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1050954.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1060846.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1070111.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1070419.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1070752.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1100185.JSON,NA,NA
+./test_data//Mdau/P1100799.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1110654.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1110790.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1130028.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1160224.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1160282.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1160284.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1360034.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1360113.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1360114.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1360141.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1360162.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1360255.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1360287.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1360288.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1360292.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1360303.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1390020.JSON,Myotis daubentonii,Bat_hanging
+./test_data//Mdau/P1400220.JSON,Myotis daubentonii,Bat_hanging
+./test_data//Mdau/P1400366.JSON,Myotis daubentonii,Bat_hanging
+./test_data//Mdau/P1400405.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1410478.JSON,Myotis daubentonii,Bat_unknown
+./test_data//Mdau/P1410504.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1410691.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1410866.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1410909.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420024.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420119.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420134.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420148.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420186.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420255.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420277.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420326.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420342.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420429.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420456.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420464.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420517.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420529.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420555.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420578.JSON,Myotis daubentonii,Bat_hanging
+./test_data//Mdau/P1420580.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420595.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420675.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420749.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420809.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420856.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1420884.JSON,Myotis daubentonii,Bat_hanging
+./test_data//Mdau/P1420932.JSON,Myotis daubentonii,Bat_hanging
+./test_data//Mdau/P1420943.JSON,Myotis daubentonii,Bat_hanging
+./test_data//Mdau/P1690168.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1690173.JSON,Myotis daubentonii,NA
+./test_data//Mdau/P1710113.JSON,Myotis daubentonii,NA
+./test_data//Mema/P1940287.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940387.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940401.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940409.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940461.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940478.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940479.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940501.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940504.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940506.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940518.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940534.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940562.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940589.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940615.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940628.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940630.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940641.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940658.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940746.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940860.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940895.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940902.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940911.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940927.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940928.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940971.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1940975.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950004.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950049.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950050.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950055.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950158.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950165.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950191.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950197.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950236.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950237.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950287.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950332.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950373.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950378.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950416.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950427.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950450.JSON,Myotis emarginatus,Myotis emarginatus
+./test_data//Mema/P1950465.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950472.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950476.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950490.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950501.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950518.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950522.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950530.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950536.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950567.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950570.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950592.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950628.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950641.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950675.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950688.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950707.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950812.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950844.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950899.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950901.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950914.JSON,Myotis emarginatus,NA
+./test_data//Mema/P1950928.JSON,Myotis emarginatus,NA
+./test_data//Mmyo/DATA_2017-04-02_135_PANA_P1350838.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-02_135_PANA_P1350843.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-02_135_PANA_P1350985.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-02_136_PANA_P1360099.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-02_136_PANA_P1360470.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-02_136_PANA_P1360496.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-02_136_PANA_P1360573.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-02_136_PANA_P1360612.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-02_136_PANA_P1360634.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_136_PANA_P1360756.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_136_PANA_P1360819.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_137_PANA_P1370169.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_137_PANA_P1370347.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_137_PANA_P1370413.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_137_PANA_P1370417.JSON,NA,NA
+./test_data//Mmyo/DATA_2017-04-16_137_PANA_P1370431.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_137_PANA_P1370581.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_137_PANA_P1370596.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_137_PANA_P1370619.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_137_PANA_P1370686.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-16_137_PANA_P1370858.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-04-30_P1380474.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-05-29_P1390651.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-06-11_140_PANA_P1400375.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-06-11_140_PANA_P1400379.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-07-22_141_PANA_P1410768.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-08-05_P1420736.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-09-09_136_PANA_P1360745.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-09-09_137_PANA_P1370318.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-09-09_137_PANA_P1370353.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2017-09-09_137_PANA_P1370381.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2018-04-07_P1350427.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2018-04-22_P1350660.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2018-05-13_134_PANA_P1340978.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2018-06-09_136_PANA_P1360354.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2018-07-14_136_PANA_P1360788.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2019-07-01_118_PANA_P1180422.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/DATA_2019-07-01_118_PANA_P1180540.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1040954.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1040955.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1040982.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1040992.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050024.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050095.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050096.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050098.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050156.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050292.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050362.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050363.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050366.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050368.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050542.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050642.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050654.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050668.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1050669.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1710248.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1710820.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1710831.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1720126.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1720398.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1720451.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1720466.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1720520.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1720526.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P1720578.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2090351.JSON,Myotis myotis_Myotis blythii,Bat_hanging
+./test_data//Mmyo/P2100152.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2100335.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2100341.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2100350.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2100370.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2100391.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2100393.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2100459.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2100472.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2110075.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2110078.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2110086.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2110091.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2110100.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2260011.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2260306.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2270648.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2270743.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2280883.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2280947.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2290091.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2290399.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2290541.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2300239.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2300285.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2300349.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2300978.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2310699.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2310739.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2880367.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2880939.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2880957.JSON,Myotis myotis_Myotis blythii,Bat_hanging
+./test_data//Mmyo/P2910240.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2910297.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2910360.JSON,Myotis myotis_Myotis blythii,Bat_hanging
+./test_data//Mmyo/P2910363.JSON,Myotis myotis_Myotis blythii,Bat_hanging
+./test_data//Mmyo/P2910368.JSON,Myotis myotis_Myotis blythii,Bat_hanging
+./test_data//Mmyo/P2910447.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2910448.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2910467.JSON,Myotis myotis_Myotis blythii,Bat_hanging
+./test_data//Mmyo/P2910499.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2910639.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2910672.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2910964.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2910997.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2940046.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2940102.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2940114.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2940129.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2940132.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2940194.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2940221.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2940548.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2940607.JSON,Myotis myotis_Myotis blythii,Bat_hanging
+./test_data//Mmyo/P2940663.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mmyo/P2940987.JSON,Myotis myotis_Myotis blythii,NA
+./test_data//Mnat/DATA_2016-08-15_LS_Appelshoehle_P1130883.JSON,NA,NA
+./test_data//Mnat/DATA_2017-03-19_135_PANA_P1350085.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-19_135_PANA_P1350252.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-19_135_PANA_P1350276.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350390.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350409.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350424.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350451.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350478.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350498.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350572.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350576.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350590.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350623.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-03-26_P1350687.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_135_PANA_P1350755.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_135_PANA_P1350865.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_135_PANA_P1350921.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/DATA_2017-04-02_135_PANA_P1350976.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360070.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360114.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360126.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360159.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360170.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360193.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360198.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360273.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360274.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360282.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360290.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-04-02_136_PANA_P1360314.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-08-21_P1130022.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-08-21_P1130163.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-08-21_P1130192.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-08-21_P1130257.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-09-03_114_PANA_P1140613.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380513.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380550.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380556.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380592.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380598.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380658.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380679.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380708.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380759.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380802.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380803.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380812.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380870.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380897.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380907.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380918.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380929.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_138_PANA_P1380983.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2017-10-29_139_PANA_P1390008.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-05-13_134_PANA_P1340911.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-05-13_134_PANA_P1340941.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-05-13_134_PANA_P1340965.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-05-13_135_PANA_P1350019.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-05-13_135_PANA_P1350023.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-05-13_135_PANA_P1350064.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-05-13_135_PANA_P1350102.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-05-13_135_PANA_P1350200.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-06-18_136_PANA_P1360465.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-06-18_136_PANA_P1360535.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-06-18_136_PANA_P1360549.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-06-18_136_PANA_P1360556.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-06-18_136_PANA_P1360613.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-06-18_136_PANA_P1360620.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-06-18_136_PANA_P1360643.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-06-18_136_PANA_P1360706.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-06-18_136_PANA_P1360708.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-06-18_136_PANA_P1360741.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_136_PANA_P1360775.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_136_PANA_P1360784.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_136_PANA_P1360827.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_136_PANA_P1360828.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_136_PANA_P1360847.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_136_PANA_P1360874.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_136_PANA_P1360877.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_136_PANA_P1360889.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_136_PANA_P1360914.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_137_PANA_P1370026.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_137_PANA_P1370062.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_137_PANA_P1370072.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_137_PANA_P1370073.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_137_PANA_P1370147.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_137_PANA_P1370214.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_P1150552.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_P1150569.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_P1150590.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_P1150600.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-07-14_P1150612.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_134_PANA_P1340833.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_134_PANA_P1340913.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_134_PANA_P1340914.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_134_PANA_P1340922.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_134_PANA_P1340972.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_134_PANA_P1340982.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_135_PANA_P1350015.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_135_PANA_P1350241.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_135_PANA_P1350267.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_135_PANA_P1350463.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_135_PANA_P1350465.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_135_PANA_P1350467.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_135_PANA_P1350495.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_135_PANA_P1350523.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2018-09-09_135_PANA_P1350559.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-07-01_118_PANA_P1180398.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-07-01_118_PANA_P1180406.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-07-01_118_PANA_P1180410.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-07-01_118_PANA_P1180427.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-07-01_118_PANA_P1180443.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-07-01_118_PANA_P1180468.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-07-01_118_PANA_P1180519.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-07-01_118_PANA_P1180524.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-09-26_124_PANA_P1240782.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-09-26_124_PANA_P1240798.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-09-26_124_PANA_P1240837.JSON,Myotis nattereri,NA
+./test_data//Mnat/DATA_2019-09-26_124_PANA_P1240847.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000026.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000108.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000140.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000141.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000143.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000189.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000203.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000244.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000257.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000330.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000346.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000349.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000366.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000371.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000390.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000394.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000431.JSON,Nyctalus noctula,NA
+./test_data//Mnat/P1000514.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000528.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000534.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000537.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000549.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000551.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000554.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000561.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000567.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1000579.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000580.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000591.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000596.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000612.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000634.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000659.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000663.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000679.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000681.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000691.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000748.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000751.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000789.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000791.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000924.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000963.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000968.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1000982.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010085.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010096.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010120.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010124.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010128.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010134.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010135.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1010159.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010177.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010181.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010194.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010200.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010201.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010210.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010228.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010231.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010237.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010238.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010245.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010247.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010273.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010283.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010347.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010348.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010360.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1010398.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010433.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1010434.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010448.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010450.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010451.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010469.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010476.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010481.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010493.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010527.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010538.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1010543.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010571.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010573.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010586.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010615.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010626.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010636.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010637.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010685.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010695.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010706.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010746.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010772.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010776.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010788.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010793.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010813.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010831.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010841.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010857.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010907.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010942.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010958.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010963.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010967.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010974.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1010987.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020031.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020036.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020042.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020048.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020114.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020135.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020147.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020160.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020161.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020192.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020193.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020199.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020264.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020284.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020287.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020291.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020314.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020338.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020351.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1020361.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1020371.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030001.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030572.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030612.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030618.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1030620.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030623.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030629.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030633.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1030634.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030643.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1030645.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030681.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1030695.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030698.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030699.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030747.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030756.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030797.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030827.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030838.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030843.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030863.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030870.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1030876.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030906.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030922.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030929.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030932.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030933.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030946.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030965.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030968.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030978.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1030980.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040022.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040024.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040041.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040051.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040132.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040140.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040158.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040160.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1040165.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040220.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040226.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040229.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040230.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040259.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040286.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040297.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040351.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040370.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040376.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040388.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040401.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040416.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040489.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1040505.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040506.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040531.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040540.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040621.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040624.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040627.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040734.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040741.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040747.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040800.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040851.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040854.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040856.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040859.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040864.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040865.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040867.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040868.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040869.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040870.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040872.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040873.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1040877.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040882.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040885.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040886.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040887.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040890.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040893.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040895.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040896.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040899.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040900.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1040902.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040904.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040905.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040906.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040908.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040910.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040912.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040914.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040918.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040919.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040920.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040923.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040927.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040928.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040932.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040933.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040935.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1040938.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1040939.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040941.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1040942.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040944.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040946.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040952.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040957.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040958.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040964.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040965.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040967.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040973.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040974.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040975.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040977.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040979.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040983.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040985.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040986.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040988.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040990.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040993.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040994.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1040999.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050002.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050003.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050006.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050008.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050018.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050022.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050023.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050027.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050028.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050029.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050032.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050034.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050036.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050038.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050039.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050040.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050041.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050043.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050044.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050050.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1050054.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050055.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050057.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1050058.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050059.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050062.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050063.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050066.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050068.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050070.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1050073.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050078.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050082.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050083.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050084.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050085.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050086.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050089.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050090.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050092.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050104.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050108.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050110.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050112.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050113.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050114.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050115.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050116.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050117.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050119.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050120.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050121.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050122.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050125.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050127.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050132.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050135.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050137.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1050138.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050139.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050142.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050145.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050146.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050147.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050148.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050150.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050151.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050153.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050155.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050157.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050161.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050163.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050164.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1050165.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050167.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050169.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050171.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050173.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050174.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050175.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050176.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050177.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050179.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050181.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1050182.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050183.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1050184.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050185.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050187.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050188.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050191.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050193.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050194.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050197.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050198.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050200.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050205.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050206.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050207.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050208.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050210.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050211.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050214.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1050215.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050216.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050217.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050219.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050220.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050221.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050222.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050224.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050226.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050227.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050228.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050229.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050231.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050232.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050233.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050234.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050235.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050243.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050245.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050246.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050247.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050251.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050254.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050256.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050257.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050258.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050259.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050260.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050261.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050262.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050268.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050273.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050274.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050277.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050278.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050280.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050282.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050285.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050286.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050288.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050290.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050291.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050293.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050294.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050295.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050297.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050298.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050306.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050307.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050309.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050310.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050311.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050316.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050317.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050318.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050320.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050322.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050330.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050332.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050333.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050336.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050339.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050340.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050341.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050342.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050344.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050345.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050347.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050348.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050351.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050356.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050357.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050358.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050359.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050364.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050365.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050367.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050372.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050373.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050374.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050375.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050377.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050378.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050379.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050380.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050383.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050384.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050390.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050393.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050394.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050395.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050400.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050405.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1050406.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050411.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050412.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050415.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050416.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050417.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050421.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050422.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050423.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050424.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050425.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050426.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050427.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050429.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1050430.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050431.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050435.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050436.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1050438.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050440.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050442.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050443.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050446.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050447.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050449.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050450.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050454.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050456.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050457.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050464.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050465.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050466.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050469.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050472.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050474.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050477.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050479.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050480.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050481.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050482.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050483.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050486.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050487.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050489.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050492.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050496.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050500.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050502.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050503.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050505.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050506.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1050509.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050511.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050513.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050514.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050517.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050519.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050521.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050524.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050527.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050528.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050530.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050531.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050534.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050539.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050544.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050545.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050546.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050554.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050556.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050558.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050559.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050560.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050561.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050567.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050568.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050569.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050572.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050573.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050575.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050576.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050577.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050578.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050582.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050583.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050585.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050586.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050587.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050588.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050589.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1050590.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050592.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050594.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050597.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050601.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050602.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050603.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050607.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050610.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050612.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050613.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050614.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050615.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1050616.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050620.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050623.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050625.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050631.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050634.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050638.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050639.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050640.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050652.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050723.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050726.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050765.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050857.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050875.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050884.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050902.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050955.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050970.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050981.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1050990.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060129.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060199.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060235.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060272.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060290.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060300.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060446.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060460.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060505.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060513.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060679.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060747.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060767.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060813.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060903.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060920.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1060983.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1090013.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1090015.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100340.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100358.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100401.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100496.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100552.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1100578.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100684.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100694.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100760.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1100832.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1100858.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100896.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100971.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100972.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100974.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100981.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100991.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1100996.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110001.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110047.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110055.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1110056.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110059.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110078.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110082.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110088.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1110091.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110102.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110103.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110104.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110114.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110119.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110140.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110150.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110162.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110165.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110172.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1110175.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110214.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110226.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110230.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110252.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110254.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110281.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110322.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110329.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110331.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110355.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110368.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110371.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110376.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110396.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110398.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110409.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1110413.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110419.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110444.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110455.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110464.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110472.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1110488.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110492.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110495.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110505.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110509.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110524.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1110570.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110572.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110573.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110584.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110593.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110596.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1110597.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1110616.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110625.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110627.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110632.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110634.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1110638.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110641.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110651.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110687.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110691.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110701.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110710.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110715.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110738.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110747.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1110755.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110760.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110780.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110784.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110805.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110806.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110816.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110855.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110862.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110867.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110868.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1110878.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110917.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110935.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110955.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110957.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110971.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110979.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110991.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1110992.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1120027.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1120081.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1120083.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1120088.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1120103.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140137.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140146.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140151.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140156.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140158.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140159.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140261.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140272.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140319.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140328.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140333.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140365.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1140378.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140382.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140391.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140407.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1140409.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1140429.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140438.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140466.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140467.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140468.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140475.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140563.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140574.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140609.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140611.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140627.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140628.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140639.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140652.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140654.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140661.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1140671.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140692.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140707.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1140721.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1150728.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1150767.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1150784.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1150785.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1150819.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1150862.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1150876.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1150905.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1150924.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1150964.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1160030.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1160059.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1160077.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1160104.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1160298.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170755.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170769.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170777.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170792.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170793.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170796.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170829.JSON,Myotis nattereri,Myotis nattereri
+./test_data//Mnat/P1170830.JSON,Myotis nattereri,Bat_unknown
+./test_data//Mnat/P1170849.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170853.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170889.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170899.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170901.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170921.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170927.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170939.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170959.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170981.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1170993.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1180041.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1180227.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1190049.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1190121.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1190127.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1190159.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1190209.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1190275.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1190303.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1190328.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1190405.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1200877.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1200904.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1240481.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1240486.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1240487.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1250316.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1250321.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1270465.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1270598.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1270635.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1650858.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1650882.JSON,Myotis nattereri,NA
+./test_data//Mnat/P1650984.JSON,NA,NA
+./test_data//Mnat/P1650993.JSON,Myotis nattereri,NA
+./test_data//Nnoc/P1000432.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000460.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000477.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000499.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000502.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000508.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000526.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000547.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000593.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000613.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000685.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000746.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000756.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000862.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000878.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000943.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1000955.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1020011.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1020026.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1020078.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1020698.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1020723.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1020772.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1020780.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1020902.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030023.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030026.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030051.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030077.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030116.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030231.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030468.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030601.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030639.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030847.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1030860.JSON,Nyctalus noctula,Nyctalus noctula
+./test_data//Nnoc/P1040323.JSON,Nyctalus noctula,NA
+./test_data//Nnoc/P1070056.JSON,Nyctalus noctula,NA
+./test_data//Paur/DATA_2017-02-13_P1340593.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-02-13_P1340600.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-02-13_P1340633.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340676.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340689.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340735.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340761.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340773.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340776.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340778.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340782.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340800.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340814.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340818.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340827.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340862.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340864.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340877.JSON,Plecotus auritus_Plecotus austriacus,Plecotus auritus_Plecotus austriacus
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340878.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340885.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340891.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340918.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340954.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340963.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340970.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_134_PANA_P1340986.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350004.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350008.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350013.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350042.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350047.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350130.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350131.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350134.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350157.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350159.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350169.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350192.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-03-19_135_PANA_P1350206.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130033.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130040.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130056.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130080.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130095.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130171.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130215.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130227.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130250.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130251.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130270.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-08-21_P1130281.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-10-29_138_PANA_P1380468.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-10-29_138_PANA_P1380473.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-10-29_138_PANA_P1380481.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-10-29_138_PANA_P1380484.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-10-29_138_PANA_P1380495.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-10-29_138_PANA_P1380519.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-10-29_138_PANA_P1380645.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-10-29_138_PANA_P1380681.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-10-29_138_PANA_P1380739.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2017-10-29_139_PANA_P1390021.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-05-13_134_PANA_P1340823.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-05-13_134_PANA_P1340943.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-05-13_135_PANA_P1350078.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-05-13_135_PANA_P1350126.JSON,Plecotus auritus_Plecotus austriacus,Myotis nattereri
+./test_data//Paur/DATA_2018-05-13_135_PANA_P1350181.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-06-18_136_PANA_P1360483.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-06-18_136_PANA_P1360521.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_136_PANA_P1360831.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_136_PANA_P1360845.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_136_PANA_P1360863.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_136_PANA_P1360881.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_136_PANA_P1360937.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_136_PANA_P1360956.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_136_PANA_P1360990.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_137_PANA_P1370046.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_137_PANA_P1370186.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_137_PANA_P1370204.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_P1150544.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_P1150563.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_P1150574.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_P1150637.JSON,Plecotus auritus_Plecotus austriacus,Myotis nattereri
+./test_data//Paur/DATA_2018-07-14_P1150638.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-07-14_P1150658.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_134_PANA_P1340636.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_134_PANA_P1340742.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_134_PANA_P1340885.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_134_PANA_P1340965.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_134_PANA_P1340985.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350078.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350101.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350143.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350219.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350235.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350242.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350328.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350348.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350563.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350677.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2018-09-09_135_PANA_P1350833.JSON,Plecotus auritus_Plecotus austriacus,Plecotus auritus_Plecotus austriacus
+./test_data//Paur/DATA_2019-07-01_118_PANA_P1180505.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2019-07-01_118_PANA_P1180511.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2019-07-01_118_PANA_P1180515.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2019-09-26_124_PANA_P1240781.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/DATA_2019-09-26_124_PANA_P1240790.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1000439.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1010457.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1010783.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1020050.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1020072.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1020073.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1020912.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1030045.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1030068.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1030235.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1030678.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040758.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040846.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040858.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040860.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040874.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040875.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040884.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040891.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040892.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040924.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040956.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1040976.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050010.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050030.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050048.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050129.JSON,Plecotus auritus_Plecotus austriacus,Myotis nattereri
+./test_data//Paur/P1050461.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050817.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050866.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050912.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050920.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050934.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050937.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050940.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050979.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050989.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050997.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1050999.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060143.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060154.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060239.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060240.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060354.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060358.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060408.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060422.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060437.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060458.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060459.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060461.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060536.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060576.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060580.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060589.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060652.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060662.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060698.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060776.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060814.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1060899.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1070136.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1070699.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1070844.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1070846.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1070887.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1080625.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1090210.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1090382.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1100247.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1100312.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1100370.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1100977.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1110652.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1110801.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1110931.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1140130.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1140141.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1170878.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1180106.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1180334.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1180831.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1180872.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1180926.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1180931.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1180990.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1190210.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1190891.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1190895.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1190920.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P1650937.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2010587.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2010592.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2850885.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2850906.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2850952.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2850958.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2850965.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2850978.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860124.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860153.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860240.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860242.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860313.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860317.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860415.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860441.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860449.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860544.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Paur/P2860553.JSON,Plecotus auritus_Plecotus austriacus,NA
+./test_data//Ppip/P1020661.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040280.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040281.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040327.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040327_002.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040337.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040350_002.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040433.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040444_002.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040458.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040576.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040593.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040659.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040663.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040689.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040702.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040719.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040760.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040770.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040781.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040794.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1040813.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1050080.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1050328.JSON,Pipistrellus sp.,Pipistrellus sp.
+./test_data//Ppip/P1070066.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070070.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070207.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070243.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070306.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070313.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070467.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070471.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070479.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070526.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070545.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070606.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070637.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070673.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070715.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070729.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070758.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070795.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070829.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070855.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070860.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070882.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070925.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070929.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070940.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070978.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1070986.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1080018.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1080023.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1080107.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1080135.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1080155.JSON,Pipistrellus sp.,NA
+./test_data//Ppip/P1090683.JSON,Pipistrellus sp.,NA
+./test_data//Rhin/P1010306.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1010308.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1010342.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1010352.JSON,Rhinolophus sp.,Rhinolophus sp.
+./test_data//Rhin/P1010364.JSON,Rhinolophus sp.,Rhinolophus sp.
+./test_data//Rhin/P1010369.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1010373.JSON,Rhinolophus sp.,Bat_unknown
+./test_data//Rhin/P1010407.JSON,Rhinolophus sp.,Rhinolophus sp.
+./test_data//Rhin/P1010431.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1010501.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1010505.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1010510.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1010714.JSON,Rhinolophus sp.,Myotis mystacinus_Myotis brandtii_Myotis alcathoe
+./test_data//Rhin/P1170024.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170030.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170045.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170060.JSON,Rhinolophus sp.,Bat_hanging
+./test_data//Rhin/P1170117.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170132.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170145.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170156.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170164.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170171.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170193.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170213.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170231.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170233.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170274.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1170280.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1210777.JSON,Rhinolophus ferrumequinum,NA
+./test_data//Rhin/P1220703.JSON,NA,NA
+./test_data//Rhin/P1240612.JSON,Rhinolophus ferrumequinum,NA
+./test_data//Rhin/P1240614.JSON,Rhinolophus ferrumequinum,NA
+./test_data//Rhin/P1260719.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260744.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260810.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260816.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260820.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260826.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260881.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260896.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260924.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260933.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260965.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260966.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260983.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1260989.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1280995.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290030.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290052.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290100.JSON,Rhinolophus sp.,Rhinolophus sp.
+./test_data//Rhin/P1290102.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290119.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290145.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290157.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290172.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290178.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290186.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290193.JSON,Rhinolophus sp.,Rhinolophus sp.
+./test_data//Rhin/P1290208.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290253.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1290265.JSON,Rhinolophus sp.,NA
+./test_data//Rhin/P1320051.JSON,Rhinolophus ferrumequinum,NA
+./test_data//Rhin/P1420730.JSON,Rhinolophus ferrumequinum,NA
+./test_data//Rhin/P1760298.JSON,Rhinolophus ferrumequinum,NA
+./test_data//Rhin/P1760499.JSON,Rhinolophus ferrumequinum,NA
+./test_data//Rhin/P2290061.JSON,Rhinolophus ferrumequinum,NA
+./test_data//Rhin/P2410275.JSON,Rhinolophus ferrumequinum,Rhinolophus ferrumequinum

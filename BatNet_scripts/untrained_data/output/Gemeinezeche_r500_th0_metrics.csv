@@ -1,0 +1,6 @@
+,Precision,Recall,F1,sample_size
+Class: Myotis bechsteinii,1,1,1,445
+Class: Myotis daubentonii,1,1,1,47
+Class: Myotis myotis,1,0.9976,0.9988,425
+Class: Myotis nattereri,1,1,1,80
+Class: Empty,0,NA,NA,0
