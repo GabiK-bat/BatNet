@@ -4,7 +4,7 @@
 
 Download: [BatNet](https://github.com/GabiK-bat/BatNet/releases/download/v2022-12-13/2022-12-13_16h02m33s_BatDetector.zip)
 
-Download: [BatNet ReadMe](https://github.com/GabiK-bat/BatNet/tree/main/ReadMe)
+Download: [BatNet ReadMe](https://github.com/GabiK-bat/BatNet/tree/main/ReadMe/ReadMe.md)
 
 
 Citation:
