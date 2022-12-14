@@ -1,0 +1,15 @@
+,Precision,Recall,F1,sample_size
+Class: Barbastella barbastellus,1,0.988,0.9939,83
+Class: Eptesicus serotinus,1,0.987,0.9935,77
+Class: Myotis bechsteinii,1,1,1,218
+Class: Myotis dasycneme,0.9836,1,0.9917,72
+Class: Myotis daubentonii,0.9745,0.9871,0.9808,60
+Class: Myotis emarginatus,0.9855,1,0.9927,155
+Class: Myotis myotis,0.9917,0.9756,0.9836,68
+Class: Myotis brandtii,0.9859,0.9722,0.979,123
+Class: Myotis nattereri,0.9957,0.9935,0.9946,929
+Class: Nyctalus noctula,1,1,1,39
+Class: Pipistrellus sp.,1,1,1,57
+Class: Plecotus sp.,1,1,1,215
+Class: Rhinolophus sp.,1,1,1,67
+Class: Empty,0,NA,NA,0
