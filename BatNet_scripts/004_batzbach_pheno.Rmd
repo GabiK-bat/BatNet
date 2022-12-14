@@ -1,0 +1,607 @@
+---
+title: "batzbach_pheno"
+output: html_document
+date: "2022-08-14"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(epiR)
+library(lubridate)
+library(scales)
+source("./TimeFrame5.R")
+```
+
+```{r functions}
+bimonthly <- function(x) {
+  x_range <- range(x, na.rm = TRUE)
+  
+  date_range <- c(
+    floor_date(x_range[1], "month"),
+    ceiling_date(x_range[2], "month")
+  )
+  monthly <- seq(date_range[1], date_range[2], by = "1 month")
+  
+  sort(c(monthly, monthly + days(14)))
+}
+
+
+monthly <- function(x) {
+  x_range <- range(x, na.rm = TRUE)
+  
+  date_range <- c(
+    floor_date(x_range[1], "month"),
+    ceiling_date(x_range[2], "month")
+  )
+  monthly <- seq(date_range[1], date_range[2], by = "1 month")
+  
+  sort(c(monthly))
+}
+```
+
+```{r human_pheno_plot}
+df2=read.csv("./untrained_data/human/Batzbach_pseudo_corrected.csv")
+head(df2)
+
+th=70 #threshold
+q = c(.05, .25, .5, .75, .95) #percentiles
+
+percentiles_hum=as.data.frame(matrix(ncol=6, dimnames = list(NULL,c("species_label","quant5", "quant25", "quant50", "quant75", "quant95" ))))
+
+Species_list=c("Mnat","Mdau","Mmyo","Paur")
+
+  for (Species in Species_list)   {
+    Species_plot=ifelse(Species=="Mnat","Myotis nattereri",
+                        ifelse(Species=="Mdau","Myotis daubentonii",
+                          ifelse(Species=="Paur","Plecotus auritus","Myotis myotis")))
+    
+    human_percentiles=df2 %>% 
+    filter(species_label==Species)%>%
+    group_by(species_label) %>% 
+    add_count() %>% 
+    summarize(quant5 = quantile(pseudoday, probs = q[1]),
+              quant25 = quantile(pseudoday, probs = q[2]),
+              quant50 = quantile(pseudoday, probs = q[3]),
+              quant75 = quantile(pseudoday, probs = q[4]),
+              quant95 = quantile(pseudoday, probs = q[5]))
+    
+    percentiles_hum=bind_rows(percentiles_hum,human_percentiles)
+    ref=as.Date("2021-08-01")
+    N=df2 %>% 
+    filter(species_label ==Species) %>%
+      nrow()
+    
+    quant5=human_percentiles$quant5[[1]]+ref  
+    quant25=human_percentiles$quant25[[1]]+ref  
+    quant50=human_percentiles$quant50[[1]]+ref  
+    quant75=human_percentiles$quant75[[1]]+ref  
+    quant95=human_percentiles$quant95[[1]]+ref  
+    
+   maxperday=df2 %>% 
+    mutate(pseudodate=as.Date(pseudodate)) %>% 
+    filter(species_label ==Species)%>%
+    group_by(pseudodate) %>% 
+    count() %>% 
+    summarise(maxday=max(n))
+    
+   max=max(maxperday$maxday)
+   max
+    
+   df2 %>% 
+    mutate(pseudodate=as.Date(pseudodate)) %>% 
+    filter(species_label ==Species)%>%
+    group_by(pseudodate) %>% 
+    count() %>% 
+    ggplot(aes(x=pseudodate, y=n))+
+      geom_bar(stat="identity", fill="#FFA500") + 
+      scale_x_date(breaks = monthly, date_labels= "%b %d", 
+                         limits=c((as.Date("2021-08-01")),as.Date("2021-12-31")))+
+      theme(axis.text.x = element_text(angle=45, hjust = 1))+
+     labs(title=bquote('Batzbach -'~italic(.(Species_plot))),
+                      x="", 
+                      y="human identifications")+
+      geom_vline(aes(xintercept=quant5),size=0.6,linetype="longdash",colour="#606060",alpha=0.62) +
+      geom_vline(aes(xintercept=quant25), size=0.6,colour="#606060",alpha=0.62) +
+      geom_vline(aes(xintercept=quant50), size=1,colour="#606060",alpha=0.62) + 
+      geom_vline(aes(xintercept=quant75), size=0.6,colour="#606060",alpha=0.62) +
+      geom_vline(aes(xintercept=quant95),size=0.6,linetype="longdash",colour="#606060",alpha=0.62)+
+      theme_bw()+
+      geom_label(x = as.Date("2021-12-15"), y = max*0.8, 
+            aes(label = paste0("N=",scales::comma(N))),  
+            inherit.aes = FALSE, fill="white")+
+     theme(plot.title = element_text(hjust = 0.5))+
+    scale_y_continuous(breaks=pretty_breaks(n=6))
+   
+   ggsave(paste0("./real_life_data/phenology/Batzbach_human_",Species,"_corrected.png"),
+       width =15, height =7, dpi = 800, units = "cm", device='png')
+  }
+
+
+
+write.csv(percentiles_hum[-1,], paste0("./real_life_data/phenology/batz_hum.csv"), 
+             row.names = F,
+             quote = F)
+hum=df2 %>% 
+  group_by(pseudodate,species_label) %>% 
+  count()
+```
+
+
+```{r human_composition&rel_abundance}
+#human species composition without empty
+hum_sp=df2 %>% 
+  group_by(species_label) %>% 
+  count() %>% 
+  filter(species_label!="Empty") %>% 
+  arrange(-n)
+hum_sp
+
+#total sum
+total=sum(hum_sp$n)
+total
+
+#human relative abundance
+hum_relabund=df2 %>% 
+  group_by(species_label) %>% 
+  count() %>% 
+  filter(species_label!="Empty") %>% 
+  mutate(prop_hum=round(n*100/total,2)) %>% 
+  arrange(-prop_hum)
+hum_relabund
+```
+
+```{r AI_pheno_plot}
+df2=read.csv("./untrained_data/AI/Batzbach_pseudo.csv") #AI ID with pseudodays
+head(df2)
+
+th=70 #threshold
+q = c(.05, .25, .5, .75, .95) #percentiles
+percentiles_alg=as.data.frame(matrix(ncol=6, dimnames = list(NULL,c("Species","quant5", "quant25", "quant50", "quant75", "quant95" ))))
+
+Species_list=c("Mnat","Mdau","Mmyo","Paur")
+
+  for (cSpecies in Species_list)   {
+    
+    Species_plot=ifelse(cSpecies=="Mnat","Myotis nattereri",
+                        ifelse(cSpecies=="Mdau","Myotis daubentonii",
+                          ifelse(cSpecies=="Paur","Plecotus auritus","Myotis myotis")))
+    
+    algo_percentiles=df2 %>% 
+    filter(Species==cSpecies)%>%
+    filter(Confidence.level>=70) %>% 
+    group_by(Species) %>% 
+    add_count() %>% 
+    summarize(quant5 = quantile(pseudoday, probs = q[1]),
+              quant25 = quantile(pseudoday, probs = q[2]),
+              quant50 = quantile(pseudoday, probs = q[3]),
+              quant75 = quantile(pseudoday, probs = q[4]),
+              quant95 = quantile(pseudoday, probs = q[5]))
+    percentiles_alg=bind_rows(percentiles_alg,algo_percentiles)
+    
+    ref=as.Date("2021-08-01")
+    N=df2 %>% 
+    filter(Species ==cSpecies) %>%
+    filter(Confidence.level>=70) %>% 
+      nrow()
+    
+    quant5=algo_percentiles$quant5[[1]]+ref  
+    quant25=algo_percentiles$quant25[[1]]+ref  
+    quant50=algo_percentiles$quant50[[1]]+ref  
+    quant75=algo_percentiles$quant75[[1]]+ref  
+    quant95=algo_percentiles$quant95[[1]]+ref  
+    
+   maxperday=df2 %>% 
+    mutate(pseudodate=as.Date(pseudodate)) %>% 
+    filter(Species ==cSpecies)%>%
+    filter(Confidence.level>=70) %>% 
+    group_by(pseudodate) %>% 
+    count() %>% 
+    summarise(maxday=max(n))
+    
+   max=max(maxperday$maxday)
+   max
+    
+   df2 %>% 
+    mutate(pseudodate=as.Date(pseudodate)) %>% 
+    filter(Species ==cSpecies)%>%
+    filter(Confidence.level>=70) %>% 
+    group_by(pseudodate) %>% 
+    count() %>% 
+    ggplot(aes(x=pseudodate, y=n))+
+      geom_bar(stat="identity", fill="#187BCD") + 
+      scale_x_date(breaks = monthly, date_labels= "%b %d", 
+                         limits=c((as.Date("2021-08-01")),as.Date("2021-12-31")))+
+      theme(axis.text.x = element_text(angle=45, hjust = 1))+
+      labs(title="",
+                      x="", 
+                      y="BatNet identifications")+
+      geom_vline(aes(xintercept=quant5),size=0.6,linetype="longdash",colour="#606060",alpha=0.62) +
+      geom_vline(aes(xintercept=quant25), size=0.6,colour="#606060",alpha=0.62) +
+      geom_vline(aes(xintercept=quant50), size=1,colour="#606060",alpha=0.62) + 
+      geom_vline(aes(xintercept=quant75), size=0.6,colour="#606060",alpha=0.62) +
+      geom_vline(aes(xintercept=quant95),size=0.6,linetype="longdash",colour="#606060",alpha=0.62)+
+      theme_bw()+
+      geom_label(x = as.Date("2021-12-15"), y = max*0.8, 
+            aes(label = paste0("N=",scales::comma(N))),  
+            inherit.aes = FALSE, fill="white")+
+    scale_y_continuous(breaks=pretty_breaks(n=6))
+   
+      ggsave(paste0("./real_life_data/phenology/Batzbach_th70_",cSpecies,".png"),
+       width =15, height =7, dpi = 800, units = "cm", device='png')
+  }
+
+write.csv(percentiles_alg[-1,], paste0("./real_life_data/phenology/batz_alg.csv"), 
+             row.names = F,
+             quote = F)
+AI=df2 %>% 
+  filter(Confidence.level>=70) %>% 
+  group_by(pseudodate,Species) %>% 
+  count()
+```
+
+```{r ai_composition&rel_abundance}
+df2=read.csv("./untrained_data/AI/Batzbach_pseudo.csv") #AI ID with pseudodays
+head(df2)
+
+unique(df2$label_type)
+#AI species composition without empty above 95%
+AI_sp=df2 %>% 
+  filter(Confidence.level>=95) %>% 
+  group_by(Species) %>% 
+  count() %>% 
+  filter(Species!="Empty") %>% 
+  arrange(-n)
+AI_sp
+
+#total sum above 95%
+total=sum(AI_sp$n)
+total
+
+#sp composition abundance to know what to double check
+AI_check=AI_sp %>%  
+  mutate(AI_prop=round(n*100/total,2)) %>% 
+  arrange(AI_prop) %>% 
+  arrange(-n)
+AI_check
+
+#total sum above 70%
+total70df=df2 %>% 
+  filter(Confidence.level>=70) %>% 
+  group_by(Species) %>% 
+  count() %>% 
+  filter(Species!="Empty")%>% 
+  arrange(-n)
+total70=sum(total70df$n)
+total70
+
+#AI species composition without empty above 70%
+AI_relabund=df2 %>% 
+  filter(Confidence.level>=70) %>% 
+  group_by(Species) %>% 
+  count() %>% 
+  filter(Species!="Empty") %>% 
+  mutate(AI_prop=round(n*100/total70,2)) %>% 
+  arrange(-AI_prop)
+AI_relabund
+```
+
+
+```{r concordance}
+Species_list=c("Mnat","Mdau","Mmyo","Paur")
+
+for(cSpec in Species_list){
+   Species_plot=ifelse(cSpec=="Mnat","Myotis nattereri",
+                        ifelse(cSpec=="Mdau","Myotis daubentonii",
+                               ifelse(cSpec=="Paur","Plecotus auritus","Myotis myotis")))
+   
+   humm=hum %>% 
+  filter(species_label==cSpec)
+  AIm=AI %>% 
+  filter(Species==cSpec)
+
+mdf=inner_join(humm,AIm, by=c("pseudodate","species_label"="Species"))
+
+mdf %>% 
+ ggplot(aes(x=n.x, y=n.y))+
+  geom_point()+
+  geom_abline()+
+  labs(x="human identifications/night",y="BatNet identifications/night")
+
+CCC=round(epi.ccc(mdf$n.x,mdf$n.y)$rho.c[1],3)
+
+maximum=max(mdf$n.x,mdf$n.y)
+
+mdf %>% 
+  ggplot(aes(x=n.x, y=n.y)) + 
+  stat_smooth(method="lm", fullrange=TRUE,col='gray')+
+  geom_point(size=1)+
+  labs(title=bquote('Batzbach -'~italic(.(Species_plot))),
+       y="BatNet identifications/night", 
+       x = "human identifications/night")+
+  theme(axis.text.x=element_text(size=8))+
+  theme_bw()+
+  geom_abline(slope=1, intercept = 0)+
+  coord_fixed(ratio = 1)+
+  geom_text(aes(x = 10, y =max(n.y)*0.8, label = paste0("CCC=",CCC)), hjust = 0,
+            size=3.5)+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())+
+  scale_y_continuous(breaks=pretty_breaks(n=6), limits = c(0,maximum))+
+  scale_x_continuous(breaks=pretty_breaks(n=6),limits = c(0,maximum))+
+  theme(panel.spacing = unit(1, "lines"))+
+  theme(plot.title = element_text(hjust = 0.5))#+
+  #facet_wrap(~species_label)
+  
+  ggsave(paste0("./real_life_data/concordance/Batzbach_",cSpec,"_corrected.png"),
+           width = 10, height = 10, dpi = 800, units = "cm", device='png' )
+}
+
+
+```
+
+```{r mismatches}
+full=read.csv("./real_life_data/mismatch_checking/Batzbach_corrected.csv")
+
+#total number of IDs
+nrow(full)
+#IDs above th
+above_th=full %>% 
+  filter(Confidence.level>=70)
+nrow(above_th)
+#proportion retained with 70% threshold
+round(nrow(above_th)*100/nrow(full),2)
+
+#true ID of images we lose because they are below threshold
+full %>% 
+  filter(Confidence.level<70) %>% 
+  group_by(Species.x) %>% 
+  count() %>% 
+  filter(Species.x!="NA") %>% 
+  arrange(n)
+  
+#multiple bat IDs added above th, without knowing the human ID
+full %>% 
+  filter(Confidence.level>=70) %>% 
+  filter(label_type!="species1") %>% 
+  group_by(Species.y) %>% 
+  filter(Species.y!="Empty") %>% #not-a-bat cases
+  count() %>% 
+  arrange(n)
+
+#matched human and AI ID, corrected: wrong order of labels when multiple bats
+above_th= full %>% 
+  filter(Confidence.level>=70) %>% 
+  filter(!(Species.y=="Empty" & label_type!="species1")) #exclude notabats where human label is incorrect, just a duplicate because of merging
+
+above_th$Confidence.level=ifelse(above_th$Species.y=="Empty",100,above_th$Confidence.level)
+
+mismatch=above_th %>% 
+      filter(Species.y!=Species.x) %>% 
+      filter(Species.y!="Empty") %>%  #we do not check missed detections, but only misclassifications 
+      select(Filename, Date, Time, Place, Species.x, Species.y,Confidence.level, pseudoday, pseudodate)
+nrow(mismatch)
+
+head(above_th)
+above_th=
+  above_th %>% 
+  rename(actual="Species.x", pred="Species.y")
+
+above_th$actual=as.factor(above_th$actual)
+levels(above_th$actual)
+levels(above_th$actual)=c("Empty","Myotis bechsteinii","Myotis brandtii", "Myotis daubentonii","Myotis myotis","Myotis nattereri","Plecotus sp.")
+
+above_th$pred=as.factor(above_th$pred)
+levels(above_th$pred)
+levels(above_th$pred)=c("Barbastella barbastellus","Empty","Myotis bechsteinii","Myotis brandtii", "Myotis dasycneme", "Myotis daubentonii","Myotis emarginatus","Myotis myotis","Myotis nattereri","Plecotus sp.","Pipistrellus sp.","Rhinolophus sp.")
+
+all_levels=union(levels(above_th$pred),levels(above_th$actual))
+
+above_th$actual=factor(above_th$actual, all_levels)
+above_th$pred=factor(above_th$pred, all_levels)
+
+above_th$pred=forcats::fct_relevel(above_th$pred, "Empty", after = Inf)
+above_th$actual=forcats::fct_relevel(above_th$actual, "Empty", after = Inf)
+
+
+```
+
+```{r confmat}
+#confusion matrix
+confmat=caret::confusionMatrix(above_th$pred, above_th$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title="Batzbach, 70%")+
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+ggsave(paste0("./real_life_data/Batzbach_70_cm_corrected.png"),
+       width =16, height =15, dpi = 800, units = "cm", device='png')   
+      
+```
+
+```{r confmat_with_below_th}
+#true ID of images we lose because they are below threshold
+lost=full %>% 
+  filter(Confidence.level<70) %>% 
+  group_by(Species.x) %>% 
+  count() %>% 
+  filter(Species.x!="NA")
+lost
+lost=lost %>% 
+  filter(Species.x!="Empty")
+
+empty_lost=full %>% 
+  filter(Confidence.level<70) %>% 
+  group_by(Species.x) %>% 
+  count() %>% 
+  filter(Species.x=="Empty")
+lost=rbind(as.data.frame(lost),c(Species.x="Bbar",n=""))  
+lost=rbind(as.data.frame(lost),c(Species.x="Mdas",n=""))  
+lost=rbind(as.data.frame(lost),c(Species.x="Mema",n="")) 
+lost=rbind(as.data.frame(lost),c(Species.x="Ppip",n="")) 
+lost=rbind(as.data.frame(lost),c(Species.x="Rhin",n="")) 
+lost =
+  lost %>% 
+  arrange(Species.x)
+lost=rbind(as.data.frame(lost),c(Species.x="Empty",n=empty_lost$n))
+lost
+
+#multiple bat IDs added above th, without knowing the human ID
+multiple=full %>% 
+  filter(Confidence.level>=70) %>% 
+  filter(label_type!="species1") %>% 
+  group_by(Species.y) %>% 
+  filter(Species.y!="Empty") %>% #not-a-bat cases
+  count() 
+
+multiple=rbind(as.data.frame(multiple),c(Species.x="Mema",n="")) 
+multiple=rbind(as.data.frame(multiple),c(Species.x="Ppip",n="")) 
+multiple =
+  multiple %>% 
+  arrange(Species.y)
+multiple=rbind(as.data.frame(multiple),c(Species.y="Empty",n=""))
+multiple
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot(mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = I(ifelse(Freq>0 & Freq<=10,"#F5FFFF",
+                        ifelse(Freq>10 & Freq<=100,"lightblue1",
+                        ifelse(Freq>100 & Freq<=1000,"#C1BBDD",                                 ifelse(Freq>1000,"mediumpurple","white"))))),width=1, height=1),size=0.6,alpha=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=9))+
+  labs(x="human ID", y="BatNet ID",
+       title="Batzbach")+
+  #below threshold values
+  annotate(geom="rect", xmin=0.5, xmax=1.5, ymin=12.5, ymax=13.5,fill="white",alpha=0.6)+ #0
+  annotate(geom="rect",xmin=1.5, xmax=2.5, ymin=12.5, ymax=13.5,fill="#C1BBDD",alpha=0.6)+ #222
+  annotate(geom="rect",xmin=2.5, xmax=3.5, ymin=12.5, ymax=13.5,fill="#C1BBDD",alpha=0.6)+ #128
+  annotate(geom="rect",xmin=3.5, xmax=4.5, ymin=12.5, ymax=13.5,fill="white",alpha=0.6)+ #0
+  annotate(geom="rect",xmin=4.5, xmax=5.5, ymin=12.5, ymax=13.5,fill="#C1BBDD",alpha=0.6)+ #200
+  annotate(geom="rect",xmin=5.5, xmax=6.5, ymin=12.5, ymax=13.5,fill="white",alpha=0.6)+ #0
+  annotate(geom="rect",xmin=6.5, xmax=7.5, ymin=12.5, ymax=13.5,fill="lightblue1",alpha=0.6)+ #40
+  annotate(geom="rect",xmin=7.5, xmax=8.5, ymin=12.5, ymax=13.5,fill="mediumpurple",alpha=0.6)+ #1433
+  annotate(geom="rect",xmin=8.5, xmax=9.5, ymin=12.5, ymax=13.5,fill="#F5FFFF",alpha=0.6)+ #8
+    annotate(geom="rect",xmin=9.5, xmax=10.5, ymin=12.5, ymax=13.5,fill="white",alpha=0.6)+ #0
+    annotate(geom="rect",xmin=10.5, xmax=11.5, ymin=12.5, ymax=13.5,fill="white",alpha=0.6)+ #0
+    annotate(geom="rect",xmin=11.5, xmax=12.5, ymin=12.5, ymax=13.5,fill="#F5FFFF",alpha=0.6)+ #8
+  
+  #multiple bat values
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=0.5, ymax=1.5,fill="#F5FFFF",alpha=0.6)+ #3
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=1.5, ymax=2.5,fill="#C1BBDD",alpha=0.6)+ #243
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=2.5, ymax=3.5,fill="lightblue1",alpha=0.6)+ #27
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=3.5, ymax=4.5,fill="#F5FFFF",alpha=0.6)+ #7
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=4.5, ymax=5.5,fill="lightblue1",alpha=0.6)+ #56
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=5.5, ymax=6.5,fill="white",alpha=0.6)+ #0
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=6.5, ymax=7.5,fill="lightblue1",alpha=0.6)+ #25
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=7.5, ymax=8.5,fill="#C1BBDD",alpha=0.6)+ #429
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=8.5, ymax=9.5,fill="lightblue1",alpha=0.6)+ #34
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=9.5, ymax=10.5,fill="white",alpha=0.6)+ #0
+  annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=10.5, ymax=11.5,fill="#F5FFFF",alpha=0.6)+ #1
+   annotate(geom="rect",xmin=12.5, xmax=13.5, ymin=11.5, ymax=12.5,fill="white",alpha=0.6)+ #0
+  
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = multiple$n,size=2.5)+ #multiple bats added
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+  annotate("text", x = length(all_levels)+4, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+  annotate("text", x = c(1:length(all_levels)), y = length(all_levels)+1, label = lost$n,size=2.5)+ #lost below th
+  
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="F1-score",size=2.2,angle=45,vjust=0.5,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Precision",size=2.2,angle=45,vjust=0.5,hjust=0.4)+
+  annotate("text", x = length(all_levels)+4, y = length(all_levels)+1, label ="Recall",size=2.2,angle=45,vjust=0.5,hjust=0.4)+
+    #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+4), ylim = c(1,length(all_levels)+1),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))+
+  
+  annotate("text", x = -1.2, y = 13, label ="below threshold",size=3,vjust=0.5,hjust=0.5,color="grey30")+
+  
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))+
+  
+  annotate("text", x = 13, y = -1, label ="multiple bats",size=3,angle=45, vjust=-1.5,color="grey30")+
+  
+  geom_rect(aes(xmin=12.5, xmax=13.5, ymin=0.5, ymax=12.5),fill="NA",
+            color="black")+ #vertical box
+  geom_rect(aes(xmin=0.5, xmax=12.5, ymin=12.5, ymax=13.5),fill="NA",
+            color="black")+ #horizontal box
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(axis.title.x = element_text(hjust=1,vjust = 30))
+
+ggsave(paste0("./real_life_data/Batzbach_70_cm_belowth_multiple_corrected.png"),
+       width =16, height =14, dpi = 800, units = "cm", device='png')   
+```
+
+
+```{r percentile_differences}
+alg=read.csv("./real_life_data/phenology/batz_alg.csv")
+hum=read.csv("./real_life_data/phenology/batz_hum.csv")
+head(alg)
+head(hum)
+alg$type="alg"
+hum$type="hum"
+
+alg=alg %>% 
+  gather(key="percentiles", value="days",-type,-Species)
+hum=hum %>% 
+  gather(key="percentiles", value="days",-type,-species_label)
+
+full_join(alg,hum,by = c("Species"="species_label","percentiles")) %>% 
+  select(Species,percentiles,days.x,days.y) %>% 
+  rename("hum_day"=days.y, "alg_day"=days.x) %>% 
+  mutate(day_diff=round(abs(alg_day-hum_day),0))%>% 
+  arrange(day_diff)
+```

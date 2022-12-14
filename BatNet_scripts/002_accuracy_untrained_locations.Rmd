@@ -1,0 +1,1825 @@
+---
+title: "untrained_locations"
+output: html_document
+date: "2022-07-21"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(caret)
+```
+
+#comthurey
+```{r Comthurey_baseline}
+th=0
+merg=read.csv("./untrained_data/human/Comthurey_2020_consensus.csv")
+head(merg)
+
+merg1=merg %>% 
+  filter(Groundtruth!="Bat_unknown") %>% 
+  rename(Species="Species.y",
+         species_label="Groundtruth") %>%
+  select(Filename,Date,Time.x,Species, species_label, Confidence_level,Multiple)
+nrow(merg1)
+head(merg1)
+#View(merg1)
+
+AI_labels=merg1 %>% 
+  filter(Confidence_level>=th) %>% #confidence threshold
+  group_by(Filename,Date) %>% 
+  mutate(label_type=paste0("species",row_number()))
+head(AI_labels)
+#View(AI_labels)
+
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+#human
+AI_labels$species_label=as.factor(AI_labels$species_label)
+levels(AI_labels$species_label)
+levels(AI_labels$species_label)=c("Barbastella barbastellus","Empty","Myotis daubentonii","Myotis myotis","Myotis brandtii","Myotis nattereri","Plecotus sp.")
+AI_labels$species_label=factor(AI_labels$species_label,
+                               levels=c("Barbastella barbastellus","Empty","Myotis brandtii","Myotis daubentonii","Myotis myotis","Myotis nattereri","Plecotus sp."))
+
+#AI
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+levels(AI_labels$Species)=c("Barbastella barbastellus","Empty","Myotis bechsteinii","Myotis dasycneme","Myotis daubentonii","Myotis emarginatus","Myotis myotis","Myotis brandtii","Myotis nattereri","Nyctalus noctula","Pipistrellus sp.","Plecotus sp.","Rhinolophus sp.")
+
+AI_labels$Species=factor(AI_labels$Species, levels=c("Barbastella barbastellus","Empty","Myotis bechsteinii","Myotis brandtii","Myotis dasycneme","Myotis daubentonii","Myotis emarginatus","Myotis myotis","Myotis nattereri","Nyctalus noctula","Pipistrellus sp.","Plecotus sp.","Rhinolophus sp."))
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(AI_labels$species_label)%in% levels(AI_labels$Species))))
+
+df=AI_labels %>% 
+  rename(pred="Species",actual="species_label") 
+nrow(df)
+head(df)
+#View(df)
+
+df= df %>% 
+  filter(label_type=="species1") #keep only main labels
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=levels(df$pred)
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+#IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+head(mismatch)
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+
+#overall accuracy
+confmat$overall
+
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Comthurey"))+
+ annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+ggsave(paste0("./untrained_data/output/Comthurey_th",th,"_cm.png"),
+       width =16, height =13, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+sum(sample_sizes$N)
+
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/Comthurey_th",th,"_metrics.csv"), 
+          row.names = T,
+          quote = F)
+```
+
+```{r Comthurey_r500}
+above_th=read.csv("./real_life_data/mismatch_checking/Comthurey_r500_corrected.csv") %>% 
+  filter(Confidence.level>=0) %>% 
+  filter(!(Species.y=="Empty" & label_type!="species1")) #exclude notabats where human label is incorrect, just a duplicate because of merging
+
+above_th$Confidence.level=ifelse(above_th$Species.y=="Empty",100,above_th$Confidence.level)
+
+head(above_th)
+above_th=
+  above_th %>% 
+  rename(actual="Species.x", pred="Species.y")
+
+above_th$actual=as.factor(above_th$actual)
+levels(above_th$actual)
+levels(above_th$actual)=c("Barbastella barbastellus","Empty","Myotis daubentonii","Myotis myotis","Myotis nattereri","Plecotus sp.")
+
+above_th$pred=as.factor(above_th$pred)
+levels(above_th$pred)
+levels(above_th$pred)=c("Barbastella barbastellus","Empty","Myotis daubentonii","Myotis myotis","Myotis nattereri","Plecotus sp.","Pipistrellus sp.")
+above_th$pred=factor(above_th$pred, levels=c("Barbastella barbastellus","Empty","Myotis daubentonii","Myotis myotis","Myotis nattereri","Pipistrellus sp.","Plecotus sp."))
+
+all_levels=union(levels(above_th$pred),levels(above_th$actual))
+above_th$actual=factor(above_th$actual, all_levels)
+
+above_th$pred=forcats::fct_relevel(above_th$pred, "Empty", after = Inf)
+above_th$actual=forcats::fct_relevel(above_th$actual, "Empty", after = Inf)
+
+
+#confusion matrix
+confmat=caret::confusionMatrix(above_th$pred, above_th$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title="Comthurey_r500")+
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+ggsave(paste0("./untrained_data/output/Comthurey_r500_th0_cm.png"),
+       width =16, height =15, dpi = 800, units = "cm", device='png')   
+      
+```
+
+
+#other sites merged
+```{r merged_human_labels}
+human1=read.csv("./untrained_data/human/Gemeinezeche_2019_human.csv")
+human2=read.csv("./untrained_data/human/Calw_2019_human.csv")
+human3=read.csv("./untrained_data/human/Grube_Emma_2016_human.csv")
+human4=read.csv("./untrained_data/human/Silberberg_2016_human.csv")
+human5=read.csv("./untrained_data/human/Batzbach_2021_human.csv")
+
+human_labels=rbind(human1,human2,human3,human4,human5)
+nrow(human_labels)
+
+str(human_labels)
+human_labels$Individum=as.factor(human_labels$Individum)
+levels(human_labels$Individum)
+
+hum=human_labels %>% 
+  rename(Species="Individum") %>% 
+  filter(Species!="Tandem") %>%
+  filter(Species!="Nordfledermaus") %>% 
+  select(Filename,Date, Time, Place, Species)
+levels(hum$Species)
+
+hum$Species=as.character(hum$Species)
+
+hum$Species=ifelse(hum$Species=="Testbild","Empty",hum$Species)
+hum$Species=ifelse(hum$Species=="fledermausfrei","Empty",hum$Species)
+hum$Species=ifelse(hum$Species=="Schwarzbild","Empty",hum$Species)
+hum$Species=ifelse(hum$Species=="Vogel","Empty",hum$Species)
+hum$Species=ifelse(hum$Species=="S\xe4uger","Empty",hum$Species)
+
+hum$Species=ifelse(hum$Species=="Fledermaus nicht bestimmbar","Bat_unknown",hum$Species)
+hum$Species=ifelse(hum$Species=="Fehlausl\xf6sung","Bat_unknown",hum$Species)
+
+hum$Species=ifelse(hum$Species=="Langohrfledermaus","Plecotus auritus_Plecotus austriacus",hum$Species)
+hum$Species=ifelse(hum$Species=="Bechsteinfledermaus","Myotis bechsteinii",hum$Species)
+hum$Species=ifelse(hum$Species=="Wasserfledermaus","Myotis daubentonii",hum$Species)
+hum$Species=ifelse(hum$Species=="Fransenfledermaus","Myotis nattereri",hum$Species)
+hum$Species=ifelse(hum$Species=="Mausohr","Myotis myotis_Myotis blythii",hum$Species)
+hum$Species=ifelse(hum$Species=="Bartfledermaus","Myotis mystacinus_Myotis brandtii_Myotis alcathoe",hum$Species)
+hum$Species=ifelse(hum$Species=="Mopsfledermaus","Barbastella barbastellus",hum$Species)
+hum$Species=ifelse(hum$Species=="Zwergfledermaus","Pipistrellus sp.",hum$Species)
+hum$Species=ifelse(hum$Species=="Breitfl\xfcgelfledermaus","Eptesicus serotinus",hum$Species)
+
+
+unique(hum$Species)
+hum$Species=as.factor(hum$Species)
+
+#sample size per site per species
+head(hum)
+hum %>% 
+  group_by(Place,Species) %>% 
+  count()
+
+#no threshold
+th=0
+```
+
+```{r Gemeinezeche}
+#human labels
+hum1=hum %>% 
+  filter(Place=="Gemeinezeche") %>% 
+  filter(Species!="Bat_unknown") %>% 
+  rename(species_label="Species") %>% 
+  droplevels()
+nrow(hum1)
+hum1$species_label=as.factor(hum1$species_label)
+levels(hum1$species_label)
+levels(hum1$species_label)=c("Myotis bechsteinii","Myotis daubentonii","Myotis myotis", "Myotis nattereri")
+
+#AI labels
+AI_labels=read.csv("./untrained_data/AI/Gemeinezeche_2019.csv", sep=";")
+head(AI_labels)
+
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Confidence.level=ifelse(is.na(AI_labels$Confidence.level),0,AI_labels$Confidence.level)
+
+AI_labels=AI_labels %>% 
+  select(Filename, Species,Confidence.level,Multiple) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number()))
+
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+
+levels(AI_labels$Species)=c("Barbastella barbastellus","Empty","Eptesicus serotinus","Myotis bechsteinii","Myotis dasycneme","Myotis daubentonii","Myotis myotis","Myotis nattereri","Rhinolophus sp.")
+levels(AI_labels$Species)
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(hum1$species_label)%in% levels(AI_labels$Species))))
+
+df=inner_join(AI_labels, hum1) %>% #inner - not used for pheno
+  rename(pred="Species",actual="species_label") %>%
+  filter(label_type=="species1") %>% 
+   filter(Confidence.level>=th)#confidence threshold
+nrow(df)
+head(df)
+#View(df)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=levels(df$pred)
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+#IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+mismatch
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+unique(mismatch$Multiple)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Gemeinezeche"))+
+ annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1, size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision, size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall, size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+ggsave(paste0("./untrained_data/output/Gemeinezeche_th",th,"_cm.png"),
+       width =16, height =14, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+sum(sample_sizes$N)
+
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/Gemeinezeche_th",th,"_metrics.csv"), 
+          row.names = T,
+          quote = F)
+```
+
+
+```{r Gemeinezeche_r500}
+#human labels
+hum1=hum %>% 
+  filter(Place=="Gemeinezeche") %>% 
+  filter(Species!="Bat_unknown") %>% 
+  rename(species_label="Species") %>% 
+  droplevels()
+nrow(hum1)
+hum1$species_label=as.factor(hum1$species_label)
+levels(hum1$species_label)
+levels(hum1$species_label)=c("Myotis bechsteinii","Myotis daubentonii","Myotis myotis", "Myotis nattereri")
+
+#AI labels
+AI_labels=read.csv("./untrained_data/AI/Gemeinezeche_r500.csv", sep=";")
+head(AI_labels)
+
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Confidence.level=ifelse(is.na(AI_labels$Confidence.level),0,AI_labels$Confidence.level)
+
+AI_labels=AI_labels %>% 
+   select(Filename, Species,Confidence.level,Multiple) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number()))
+
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+
+levels(AI_labels$Species)=c("Empty","Myotis bechsteinii","Myotis daubentonii","Myotis myotis","Myotis nattereri")
+levels(AI_labels$Species)
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(hum1$species_label)%in% levels(AI_labels$Species))))
+
+df=inner_join(AI_labels, hum1) %>% #inner - not used for pheno
+  rename(pred="Species",actual="species_label") %>%
+  filter(label_type=="species1") %>% 
+   filter(Confidence.level>=th)#confidence threshold
+nrow(df)
+head(df)
+#View(df)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=levels(df$pred)
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+#IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+mismatch
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+unique(mismatch$Multiple)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Gemeinezeche_r500"))+
+ annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1, size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision, size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall, size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+ggsave(paste0("./untrained_data/output/Gemeinezeche_r500_th",th,"_cm.png"),
+       width =16, height =14, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+sum(sample_sizes$N)
+
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/Gemeinezeche_r500_th",th,"_metrics.csv"), 
+          row.names = T,
+          quote = F)
+```
+
+```{r Grube_Emma}
+#human labels
+hum1=hum %>% 
+  filter(Place=="Grube Emma") %>% 
+  filter(Species!="Bat_unknown") %>% 
+  rename(species_label="Species") %>% 
+  droplevels()
+nrow(hum1)
+hum1$species_label=as.factor(hum1$species_label)
+levels(hum1$species_label)
+levels(hum1$species_label)=c("Empty","Myotis bechsteinii","Myotis daubentonii","Myotis myotis", "Myotis brandtii", "Myotis nattereri")
+
+hum1$species_label <- factor(hum1$species_label, levels=c("Empty","Myotis bechsteinii","Myotis brandtii","Myotis daubentonii","Myotis myotis",  "Myotis nattereri"))
+
+#AI labels
+AI_labels=read.csv("./untrained_data/AI/GrubeEmma_2016.csv", sep=";")
+head(AI_labels)
+
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Confidence.level=ifelse(is.na(AI_labels$Confidence.level),0,AI_labels$Confidence.level)
+
+AI_labels=AI_labels %>% 
+  select(Filename, Species,Confidence.level,Multiple) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number()))
+
+unique(AI_labels$label_type)
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+
+levels(AI_labels$Species)=c("Barbastella barbastellus","Empty","Myotis bechsteinii","Myotis dasycneme","Myotis daubentonii","Myotis myotis","Myotis brandtii","Myotis nattereri","Nyctalus noctula","Plecotus sp.")
+levels(AI_labels$Species)
+
+AI_labels$Species<- factor(AI_labels$Species, levels=c("Barbastella barbastellus","Empty","Myotis bechsteinii","Myotis brandtii","Myotis dasycneme","Myotis daubentonii","Myotis myotis","Myotis nattereri","Nyctalus noctula","Plecotus sp."))
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(hum1$species_label)%in% levels(AI_labels$Species))))
+
+df=inner_join(AI_labels, hum1) %>% #inner - not used for pheno
+  rename(pred="Species",actual="species_label") %>% 
+  filter(label_type=="species1") %>% #keep only main labels  
+   filter(Confidence.level>=th)#confidence threshold
+nrow(df)
+head(df)
+#View(df)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=levels(df$pred)
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+#IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+head(mismatch)
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+unique(mismatch$Multiple)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Grube Emma"))+
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+
+ggsave(paste0("./untrained_data/output/GrubeEmma_th",th,"_cm.png"),
+       width =16, height =14, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+sum(sample_sizes$N)
+
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/GrubeEmma_th",th,"_metrics.csv"), 
+          row.names = T,
+          quote = F)
+```
+
+```{r Grube_Emma_r500}
+#human labels
+hum1=hum %>% 
+  filter(Place=="Grube Emma") %>% 
+  filter(Species!="Bat_unknown") %>% 
+  rename(species_label="Species") %>% 
+  droplevels()
+nrow(hum1)
+hum1$species_label=as.factor(hum1$species_label)
+levels(hum1$species_label)
+levels(hum1$species_label)=c("Empty","Myotis bechsteinii","Myotis daubentonii","Myotis myotis", "Myotis brandtii", "Myotis nattereri")
+hum1$species_label=factor(hum1$species_label,levels=c("Empty","Myotis bechsteinii","Myotis brandtii","Myotis daubentonii","Myotis myotis",  "Myotis nattereri"))
+
+
+#AI labels
+AI_labels=read.csv("./untrained_data/AI/GrubeEmma_r500.csv", sep=";")
+head(AI_labels)
+
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Confidence.level=ifelse(is.na(AI_labels$Confidence.level),0,AI_labels$Confidence.level)
+
+AI_labels=AI_labels %>% 
+  select(Filename, Species,Confidence.level,Multiple) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number()))
+
+unique(AI_labels$label_type)
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+
+levels(AI_labels$Species)=c("Empty","Myotis bechsteinii","Myotis daubentonii","Myotis myotis","Myotis brandtii","Myotis nattereri")
+levels(AI_labels$Species)
+AI_labels$Species=factor(AI_labels$Species,levels=c("Empty","Myotis bechsteinii","Myotis brandtii","Myotis daubentonii","Myotis myotis","Myotis nattereri"))
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(hum1$species_label)%in% levels(AI_labels$Species))))
+
+df=inner_join(AI_labels, hum1) %>% #inner - not used for pheno
+  rename(pred="Species",actual="species_label") %>% 
+  filter(label_type=="species1") %>% #keep only main labels  
+   filter(Confidence.level>=th)#confidence threshold
+nrow(df)
+head(df)
+#View(df)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=levels(df$pred)
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+#IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+head(mismatch)
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+unique(mismatch$Multiple)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Grube Emma_r500"))+
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+
+ggsave(paste0("./untrained_data/output/GrubeEmma_r500_th",th,"_cm.png"),
+       width =16, height =14, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+sum(sample_sizes$N)
+
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/GrubeEmma_r500_th",th,"_metrics.csv"), 
+          row.names = T,
+          quote = F)
+```
+
+```{r Silberberg}
+#human labels
+hum1=hum %>% 
+  filter(Place=="Silberberg") %>% 
+  filter(Species!="Bat_unknown") %>% 
+  rename(species_label="Species") %>% 
+  droplevels()
+nrow(hum1)
+hum1$species_label=as.factor(hum1$species_label)
+levels(hum1$species_label)
+levels(hum1$species_label)=c("Barbastella barbastellus","Myotis daubentonii","Myotis myotis", "Myotis nattereri", "Plecotus sp.")
+
+#AI labels
+AI_labels=read.csv("./untrained_data/AI/Silberberg_2016.csv", sep=";")
+head(AI_labels)
+
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Confidence.level=ifelse(is.na(AI_labels$Confidence.level),0,AI_labels$Confidence.level)
+
+AI_labels=AI_labels %>% 
+  select(Filename, Species,Confidence.level,Multiple) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number()))
+
+unique(AI_labels$label_type)
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+levels(AI_labels$Species)=c("Barbastella barbastellus","Empty","Eptesicus serotinus","Myotis dasycneme","Myotis daubentonii","Myotis myotis","Myotis brandtii","Myotis nattereri","Pipistrellus sp.","Plecotus sp.")
+AI_labels$Species=factor(AI_labels$Species,levels=c("Barbastella barbastellus","Empty","Eptesicus serotinus","Myotis brandtii","Myotis dasycneme","Myotis daubentonii","Myotis myotis","Myotis nattereri","Pipistrellus sp.","Plecotus sp."))
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(hum1$species_label)%in% levels(AI_labels$Species))))
+
+df=inner_join(AI_labels, hum1) %>% #inner - not used for pheno 
+  rename(pred="Species",actual="species_label") %>% 
+  filter(label_type=="species1") %>% #keep only main labels 
+  filter(Confidence.level>=th) #confidence threshold
+nrow(df)
+head(df)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=levels(df$pred)
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+#IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+head(mismatch)
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+unique(mismatch$Multiple)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Silberberg"))+
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1, size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision, size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall, size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+
+ggsave(paste0("./untrained_data/output/Silberberg_th",th,"_cm.png"),
+       width =16, height =14, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+sum(sample_sizes$N)
+
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/Silberberg_th",th,"_metrics.csv"), 
+          row.names = T,
+          quote = F)
+```
+
+```{r Silberberg_r500}
+hum1=hum %>% 
+  filter(Place=="Silberberg") %>% 
+  filter(Species!="Bat_unknown") %>% 
+  rename(species_label="Species") %>% 
+  droplevels()
+nrow(hum1)
+hum1$species_label=as.factor(hum1$species_label)
+levels(hum1$species_label)
+levels(hum1$species_label)=c("Barbastella barbastellus","Myotis daubentonii","Myotis myotis", "Myotis nattereri", "Plecotus sp.")
+
+#AI labels
+AI_labels=read.csv("./untrained_data/AI/Silberberg_r500.csv", sep=";")
+head(AI_labels)
+
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Confidence.level=ifelse(is.na(AI_labels$Confidence.level),0,AI_labels$Confidence.level)
+
+AI_labels=AI_labels %>% 
+  select(Filename, Species,Confidence.level,Multiple) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number()))
+
+unique(AI_labels$label_type)
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+levels(AI_labels$Species)=c("Barbastella barbastellus","Empty","Eptesicus serotinus","Myotis daubentonii","Myotis myotis","Myotis nattereri","Plecotus sp.")
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(hum1$species_label)%in% levels(AI_labels$Species))))
+
+df=inner_join(AI_labels, hum1) %>% #inner - not used for pheno 
+  rename(pred="Species",actual="species_label") %>% 
+  filter(label_type=="species1") %>% #keep only main labels 
+  filter(Confidence.level>=th) #confidence threshold
+nrow(df)
+head(df)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=union(levels(df$pred),levels(df$actual))
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+#IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+head(mismatch)
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+unique(mismatch$Multiple)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Silberberg_r500"))+
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1, size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision, size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall, size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+
+ggsave(paste0("./untrained_data/output/Silberberg_r500_th",th,"_cm.png"),
+       width =16, height =14, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+sum(sample_sizes$N)
+
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/Silberberg_r500_th",th,"_metrics.csv"), 
+          row.names = T,
+          quote = F)
+
+```
+
+```{r Calw}
+unique(hum$Place)
+#human labels
+hum1=hum %>% 
+  filter(Place=="Calw-Forsttunnel-Eingang") %>% 
+  filter(Species!="Bat_unknown") %>% 
+  rename(species_label="Species") %>% 
+  droplevels()
+nrow(hum1)
+hum1$species_label=as.factor(hum1$species_label)
+levels(hum1$species_label)
+levels(hum1$species_label)=c("Empty","Eptesicus serotinus","Myotis myotis","Myotis brandtii", "Myotis nattereri","Pipistrellus sp.", "Plecotus sp.")
+hum1$species_label=factor(hum1$species_label,levels=c("Empty","Eptesicus serotinus","Myotis brandtii","Myotis myotis", "Myotis nattereri","Pipistrellus sp.", "Plecotus sp."))
+
+#AI labels
+AI_labels=read.csv("./untrained_data/AI/Calw_2019.csv", sep=";")
+head(AI_labels)
+
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Confidence.level=ifelse(is.na(AI_labels$Confidence.level),0,AI_labels$Confidence.level)
+
+AI_labels=AI_labels %>% 
+  select(Filename, Species,Confidence.level,Multiple) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number()))
+
+unique(AI_labels$label_type)
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+levels(AI_labels$Species)=c("Barbastella barbastellus","Empty","Eptesicus serotinus","Myotis bechsteinii","Myotis daubentonii","Myotis myotis","Myotis brandtii","Myotis nattereri","Pipistrellus sp.","Plecotus sp.","Rhinolophus sp.")
+
+AI_labels$Species=factor(AI_labels$Species,levels=c("Barbastella barbastellus","Empty","Eptesicus serotinus","Myotis bechsteinii","Myotis brandtii","Myotis daubentonii","Myotis myotis","Myotis nattereri","Pipistrellus sp.","Plecotus sp.","Rhinolophus sp."))
+
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(hum1$species_label)%in% levels(AI_labels$Species))))
+
+df=inner_join(AI_labels, hum1) %>% #inner - not used for pheno
+  rename(pred="Species",actual="species_label") %>% 
+  filter(label_type=="species1") %>%  #keep only main labels
+  filter(Confidence.level>=th)  #confidence threshold
+nrow(df)
+head(df)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=levels(df$pred)
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+##IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+head(mismatch)
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+unique(mismatch$Multiple)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Calw"))+
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+
+ggsave(paste0("./untrained_data/output/Calw_th",th,"_cm.png"),
+       width =16, height =14, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+sum(sample_sizes$N)
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/Calw_th",th,"_metrics.csv"), 
+          row.names = T,
+          quote = F)
+
+```
+
+```{r Calw_500}
+#human labels
+hum1=hum %>% 
+  filter(Place=="Calw-Forsttunnel-Eingang") %>% 
+  filter(Species!="Bat_unknown") %>% 
+  rename(species_label="Species") %>% 
+  droplevels()
+nrow(hum1)
+hum1$species_label=as.factor(hum1$species_label)
+levels(hum1$species_label)
+levels(hum1$species_label)=c("Empty","Eptesicus serotinus","Myotis myotis","Myotis brandtii", "Myotis nattereri","Pipistrellus sp.", "Plecotus sp.")
+hum1$species_label=factor(hum1$species_label,levels=c("Empty","Eptesicus serotinus","Myotis brandtii","Myotis myotis", "Myotis nattereri","Pipistrellus sp.", "Plecotus sp."))
+
+#AI labels
+AI_labels=read.csv("./untrained_data/AI/Calw_r500.csv", sep=";")
+head(AI_labels)
+
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Confidence.level=ifelse(is.na(AI_labels$Confidence.level),0,AI_labels$Confidence.level)
+
+AI_labels=AI_labels %>% 
+  select(Filename, Species,Confidence.level,Multiple) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number()))
+
+unique(AI_labels$label_type)
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+levels(AI_labels$Species)=c("Empty","Eptesicus serotinus","Myotis myotis","Myotis brandtii","Myotis nattereri","Pipistrellus sp.","Plecotus sp.")
+AI_labels$Species=factor(AI_labels$Species,levels=c("Empty","Eptesicus serotinus","Myotis brandtii","Myotis myotis","Myotis nattereri","Pipistrellus sp.","Plecotus sp."))
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(hum1$species_label)%in% levels(AI_labels$Species))))
+
+df=inner_join(AI_labels, hum1) %>% #inner - not used for pheno
+  rename(pred="Species",actual="species_label") %>% 
+  filter(label_type=="species1") %>% #keep only main labels
+  filter(Confidence.level>=th)  #confidence threshold
+nrow(df)
+head(df)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=levels(df$pred)
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+##IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+head(mismatch)
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+unique(mismatch$Multiple)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Calw_r500"))+
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+
+ggsave(paste0("./untrained_data/output/Calw_th",th,"_cm_r500.png"),
+       width =16, height =14, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/Calw_th",th,"r500__metrics.csv"), 
+          row.names = T,
+          quote = F)
+
+```
+
+```{r Batzbach}
+unique(hum$Place)
+#human labels
+hum1=hum %>% 
+  filter(Place=="Batzbach") %>% 
+  filter(Species!="Bat_unknown") %>% 
+  rename(species_label="Species") %>% 
+  droplevels() %>% 
+  group_by(Filename) %>% 
+  mutate(ID=paste0(Filename,row_number()))
+nrow(hum1)
+hum1$species_label=as.factor(hum1$species_label)
+levels(hum1$species_label)
+levels(hum1$species_label)=c("Empty","Myotis bechsteinii","Myotis daubentonii","Myotis myotis","Myotis brandtii", "Myotis nattereri", "Plecotus sp.")
+hum1$species_label=factor(hum1$species_label,levels=c("Empty","Myotis bechsteinii","Myotis brandtii","Myotis daubentonii","Myotis myotis", "Myotis nattereri", "Plecotus sp."))
+#View(hum1)
+
+#AI labels
+AI_labels=read.csv("./untrained_data/AI/Batzbach_2021.csv", sep=";")
+head(AI_labels)
+
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Confidence.level=ifelse(is.na(AI_labels$Confidence.level),0,AI_labels$Confidence.level)
+
+AI_labels=AI_labels %>% 
+  select(Filename, Species,Confidence.level,Multiple) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number())) %>% 
+  mutate(ID=paste0(Filename,row_number()))
+
+unique(AI_labels$label_type)
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(hum1$species_label)%in% levels(AI_labels$Species))))
+
+#View(AI_labels)
+
+df=inner_join(AI_labels, hum1, by="ID") %>% 
+  select(-Filename.y,-ID) %>% 
+  rename(pred="Species",actual="species_label",Filename="Filename.x") %>%   filter(Confidence.level>=th)
+nrow(df)
+head(df)
+#View(df)
+
+#keep only main labels for conf mat
+df=read.csv("./untrained_data/output/Batzbach_2021_merged_corr.csv")
+df=df %>%
+  filter(label_type=="species1")
+head(df)
+
+df$pred=as.factor(df$pred)
+levels(df$pred)
+levels(df$pred)=c("Barbastella barbastellus","Empty","Eptesicus serotinus","Myotis bechsteinii","Myotis brandtii", "Myotis dasycneme","Myotis daubentonii","Myotis emarginatus","Myotis myotis","Myotis nattereri","Nyctalus noctula","Plecotus sp.","Pipistrellus sp.","Rhinolophus sp.")
+df$pred=factor(df$pred,levels=c("Barbastella barbastellus","Empty","Eptesicus serotinus","Myotis bechsteinii","Myotis brandtii", "Myotis dasycneme","Myotis daubentonii","Myotis emarginatus","Myotis myotis","Myotis nattereri","Nyctalus noctula","Pipistrellus sp.","Plecotus sp.","Rhinolophus sp."))
+
+df$actual=as.factor(df$actual)
+levels(df$actual)
+levels(df$actual)=c("Empty","Myotis bechsteinii","Myotis brandtii","Myotis daubentonii","Myotis myotis","Myotis nattereri","Plecotus sp.")
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=levels(df$pred)
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+#IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+head(mismatch)
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+unique(mismatch$Multiple)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Batzbach"))+
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+
+ggsave(paste0("./untrained_data/output/Batzbach_th",th,"_cm.png"),
+       width =16, height =15, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+sum(sample_sizes$N)
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/Batzbach_th",th,"_metrics.csv"), 
+          row.names = T,
+          quote = F)
+```
+
+```{r Batzbach_r500}
+unique(hum$Place)
+#human labels
+hum1=hum %>% 
+  filter(Place=="Batzbach") %>% 
+  filter(Species!="Bat_unknown") %>% 
+  rename(species_label="Species") %>% 
+  droplevels() %>% 
+  group_by(Filename) %>% 
+  mutate(ID=paste0(Filename,row_number()))
+nrow(hum1)
+hum1$species_label=as.factor(hum1$species_label)
+levels(hum1$species_label)
+levels(hum1$species_label)=c("Empty","Myotis bechsteinii","Myotis daubentonii","Myotis myotis","Myotis brandtii", "Myotis nattereri", "Plecotus sp.")
+hum1$species_label=factor(hum1$species_label, levels=c("Empty","Myotis bechsteinii","Myotis brandtii","Myotis daubentonii","Myotis myotis", "Myotis nattereri", "Plecotus sp."))
+
+#View(hum1)
+
+#AI labels
+AI_labels=read.csv("./untrained_data/AI/Batzbach_r500.csv", sep=";")
+head(AI_labels)
+
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Confidence.level=ifelse(is.na(AI_labels$Confidence.level),0,AI_labels$Confidence.level)
+
+AI_labels=AI_labels %>% 
+  select(Filename, Species,Confidence.level,Multiple) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number())) %>% 
+  mutate(ID=paste0(Filename,row_number()))
+
+unique(AI_labels$label_type)
+print(paste("How many species AI labels:",length(unique(AI_labels$label_type))))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+
+levels(AI_labels$Species)=c("Barbastella barbastellus","Empty","Eptesicus serotinus","Myotis bechsteinii","Myotis dasycneme","Myotis daubentonii","Myotis emarginatus","Myotis myotis","Myotis brandtii", "Myotis nattereri","Nyctalus noctula","Pipistrellus sp.","Plecotus sp.","Rhinolophus sp.")
+
+AI_labels$Species=factor(AI_labels$Species, levels=c("Barbastella barbastellus","Empty","Eptesicus serotinus","Myotis bechsteinii","Myotis brandtii","Myotis dasycneme","Myotis daubentonii","Myotis emarginatus","Myotis myotis", "Myotis nattereri","Nyctalus noctula","Pipistrellus sp.","Plecotus sp.","Rhinolophus sp."))
+
+
+print(paste("All human labels are predicted (at least once) by the AI:",all(levels(hum1$species_label)%in% levels(AI_labels$Species))))
+
+#View(AI_labels)
+
+df=inner_join(AI_labels, hum1, by="ID") %>% 
+  select(-Filename.y,-ID) %>% 
+  rename(pred="Species",actual="species_label",Filename="Filename.x") %>%   filter(Confidence.level>=th)
+nrow(df)
+head(df)
+#View(df)
+
+df$pred=as.factor(df$pred)
+levels(df$pred)
+
+df$actual=as.factor(df$actual)
+levels(df$actual)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=levels(df$pred)
+levels(df$pred)
+levels(df$actual)
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+levels(df$pred)
+
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+df$actual=forcats::fct_relevel(df$actual, "Empty", after = Inf)
+
+head(df)
+
+#IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+head(mismatch)
+
+print(paste("Number of mismatches :",nrow(mismatch)))
+#View(mismatch)
+
+# error
+nrow(mismatch)*100/nrow(df)
+
+unique(mismatch$Multiple)
+
+#confusion matrix
+confmat=caret::confusionMatrix(df$pred, df$actual, mode = "everything")  
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+confmat2[nrow(confmat2),]=NA
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+  ggplot( mapping = aes(x = Var2,
+                        y = Var1)) +
+  geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+  scale_color_manual(values=c("black",NA))+ 
+  geom_text(aes(label = Freq ), vjust = 0.5,
+            colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+  scale_fill_gradient(low = alpha("lightblue1",0.4),
+                      high = "mediumpurple",na.value = "white",
+                      trans = "log")+
+  theme_bw()+
+  theme(legend.position = "none")+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        axis.text=element_text(size=8))+
+  labs(x="human ID", y="BatNet ID",
+       title=paste("Batzbach_r500"))+
+  annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+  annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+  annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+  annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+  #coord_cartesian(xlim = c(1, 16), clip = "off")+
+  coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+
+ggsave(paste0("./untrained_data/output/Batzbach_th",th,"_cm_r500.png"),
+       width =16, height =15, dpi = 800, units = "cm", device='png')
+
+metrics=as.data.frame(confmat$byClass)
+str(metrics)
+metrics2=metrics %>% 
+  select(Precision, Recall, F1,) %>% 
+  mutate_if(is.numeric,round, digits=4)
+
+sample_sizes=cm %>% 
+  group_by(Var2) %>% 
+  summarise(N=sum(Freq))
+sum(sample_sizes$N)
+#final table for test data
+metrics2$sample_size=sample_sizes$N
+metrics2
+
+write.csv(metrics2, paste0("./untrained_data/output/Batzbach_r500_th",th,"_metrics.csv"), 
+          row.names = T,
+          quote = F)
+```
+

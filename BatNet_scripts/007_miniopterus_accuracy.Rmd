@@ -1,0 +1,186 @@
+---
+title: "Minopterus_accuracy"
+output: html_document
+date: "2022-08-10"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(caret)
+library(jsonlite)
+library(grid)
+```
+
+###EXPANDED TEST DATA: all Miniopterus images (including from Dunes)
+#MINI58 model - used in the paper
+
+```{r human_expanded_Dunes}
+#human ID labels
+human_labels1=read.csv("./test_miniopterus/test_human_labels.csv")
+head(human_labels1)
+human_labels2=read.csv("./test_miniopterus/test_human_labels_miniopterus.csv")
+head(human_labels2)
+
+human_labels=bind_rows(human_labels1,human_labels2)
+head(human_labels)
+tail(human_labels)
+#View(human_labels)
+human_labels$species=gsub(pattern="Rhinolophus ferrumequinum", 
+                          replacement = "Rhinolophus sp.",human_labels$species)
+human_labels$species2=gsub(pattern="Rhinolophus ferrumequinum", 
+                          replacement = "Rhinolophus sp.",human_labels$species2)
+
+#human labels arranged
+human_labels_all=human_labels %>% 
+  rename(species1="species") %>% 
+  gather(key="label_type", value="species_label",-filename_path) %>% 
+  filter(!is.na(species_label)) %>% 
+  arrange(filename_path) %>% 
+  mutate(Filename=str_split_fixed(filename_path,fixed("/"),5)[,5]) %>% 
+  mutate(Filename=gsub(pattern="JSON",replacement = "JPG",Filename)) %>% 
+  select(Filename,species_label,label_type) %>% 
+  filter(species_label!="Bat_unknown") %>% 
+  filter(species_label!="Bat_hanging")
+
+head(human_labels_all)
+
+human_labels_all$species_label=as.factor(human_labels_all$species_label)
+levels(human_labels_all$species_label)
+
+levels(human_labels_all$species_label)=c("Barbastella barbastellus","Eptesicus serotinus","Miniopterus schreibersii","Myotis bechsteinii","Myotis dasycneme","Myotis daubentonii","Myotis emarginatus","Myotis myotis","Myotis brandtii", "Myotis nattereri","Nyctalus noctula","Pipistrellus sp.","Plecotus sp.","Rhinolophus sp.")
+
+
+#sample size per species (only considering main species)
+samples=human_labels_all %>% 
+  filter(label_type=="species1") %>% 
+  group_by(species_label) %>% 
+  count() 
+sum(samples$n)
+minimum_sample_size=min(samples$n)
+print(paste("Sample size per species:",minimum_sample_size))
+samples
+```
+
+
+```{r AI_expanded_Dunes}
+AI_labels=read.csv("./test_miniopterus/Miniopterus_test_expanded_Dunes_E10_LR0001_Mini58.csv", sep=";")
+head(AI_labels)
+#View(AI_labels)
+AI_labels$Species=ifelse(AI_labels$Species=="","Empty",AI_labels$Species)
+AI_labels$Species=gsub(pattern="Rhinolophus ferrumequinum", 
+                          replacement = "Rhinolophus sp.",AI_labels$Species)
+
+AI_labels=AI_labels %>% 
+  select(Filename, Species,Confidence.level) %>% 
+  group_by(Filename) %>% 
+  mutate(label_type=paste0("species",row_number()))
+
+AI_labels$Species=as.factor(AI_labels$Species)
+levels(AI_labels$Species)
+
+levels(AI_labels$Species)= c("Barbastella barbastellus","Empty","Eptesicus serotinus","Miniopterus schreibersii","Myotis bechsteinii","Myotis dasycneme","Myotis daubentonii","Myotis emarginatus","Myotis myotis","Myotis brandtii","Myotis nattereri","Nyctalus noctula","Pipistrellus sp.","Plecotus sp.","Rhinolophus sp.")
+levels(AI_labels$Species)
+
+```
+
+```{r merged_table_expanded_Dunes}
+df_orig=inner_join(AI_labels, human_labels_all) %>% 
+  rename(pred="Species",actual="species_label") %>% 
+  filter(label_type=="species1")
+#View(df)
+head(df_orig)
+df_orig$Confidence.level=as.numeric(df_orig$Confidence.level)
+
+df=df_orig
+nrow(df)
+df$pred=factor(df$pred)
+df$pred=forcats::fct_relevel(df$pred, "Empty", after = Inf)
+
+all_levels=union(levels(df$pred),levels(df$actual))
+
+df$actual=factor(df$actual, all_levels)
+levels(df$actual)
+
+head(df)
+#IDs where human and algo disagree
+mismatch=df %>% 
+  filter(pred!=actual)
+mismatch
+#View(mismatch)
+#files where there is a mismatch between the human ID and the algo ID
+mism=df %>% 
+  filter(Filename%in%mismatch$Filename)
+#View(mism)
+```
+
+#Classification accuracy
+```{r confusion_matrix_Dunes}
+confmat=confusionMatrix(df$pred, df$actual, mode = "everything")
+confmat
+#overall accuracy
+confmat$overall
+#accuracy per class
+confmat$byClass
+```
+
+```{r cm_plot_percentage_Dunes}
+cm=as.data.frame(confmat$table)
+cm=cm %>% rename(Var1="Prediction",Var2="Reference")
+head(cm)
+#F1-scores
+confmat2=as.data.frame(confmat$byClass)
+confmat2$F1=round(confmat2$F1,2)
+confmat2$Precision=round(confmat2$Precision,2)
+confmat2$Recall=round(confmat2$Recall,2)
+nrow(confmat2)
+confmat2[nrow(confmat2),]=NA
+#confusion matrix plot with percentages
+
+cm2=cm %>% 
+  mutate(border = case_when(Var1 == Var2 ~ "diagonal", 
+                            Var1 != Var2 ~ "not_diagonal")) %>% 
+  group_by(Var2) %>% 
+  mutate(percentage=round(Freq/sum(Freq),2))
+cm2$percentage[is.na(cm2$percentage)] = 0
+
+```
+
+```{r cm_test_final_Dunes}
+#confusion matrix test data, no threshold, unequal sample sizes
+cm2 %>% 
+        ggplot( mapping = aes(x = Var2,
+                              y = Var1)) +
+        geom_tile(aes(fill = Freq ,width=1, height=1),size=0.6) +
+        scale_color_manual(values=c("black",NA))+ 
+        geom_text(aes(label = Freq ), vjust = 0.5,
+                  colour=ifelse(cm2$Freq =="0", "white", "black"), size=2.5) +
+        scale_fill_gradient(low = alpha("lightblue1",0.4),
+                            high = "mediumpurple",na.value = "white",
+                            trans = "log")+
+        theme_bw()+
+        theme(legend.position = "none")+
+        theme(panel.grid.major = element_blank(), 
+              panel.grid.minor = element_blank(),
+              axis.text=element_text(size=8))+
+        labs(x="human ID", y="BatNet ID")+
+        annotate("text", x = length(all_levels)+1, y = c(1:length(all_levels)), label = confmat2$F1,size=2.5)+
+        annotate("text", x = length(all_levels)+2, y = c(1:length(all_levels)), label = confmat2$Precision,size=2.5)+
+        annotate("text", x = length(all_levels)+3, y = c(1:length(all_levels)), label = confmat2$Recall,size=2.5)+
+        annotate("text", x = length(all_levels)+1, y = length(all_levels)+1, label ="F1-score", size=2.5,angle=45,vjust=0,hjust=0.4)+
+        annotate("text", x = length(all_levels)+2, y = length(all_levels)+1, label ="Precision",size=2.5,angle=45,vjust=0,hjust=0.4)+
+        annotate("text", x = length(all_levels)+3, y = length(all_levels)+1, label ="Recall",size=2.5,angle=45,vjust=0,hjust=0.4)+
+        #coord_cartesian(xlim = c(1, 16), clip = "off")+
+        coord_equal(xlim = c(1,length(all_levels)+3), ylim = c(1,length(all_levels)),expand=T,clip = "off")+
+        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+ ggsave(paste0("./output/test_expanded_Dunes_Miniopterus_cm_mini58_no_th.png"),
+        width =16, height =16, dpi = 800, units = "cm", device='png')
+
+df_orig%>% 
+  filter(Confidence.level<70) %>% 
+  group_by(actual) %>% 
+  count() 
+```
