@@ -59,12 +59,12 @@ The output csv file contains the following columns: file name, date when image w
 ## Running *BatNet* in batch mode (Windows)
 **Step 1.** Run Command prompt (cmd) as Administrator
 
-**Step 2.**Navigate to the unzipped folder where the `main.bat` file is saved 
+**Step 2.** Navigate to the unzipped folder where the `main.bat` file is saved 
 ```
 cd C:\BatNet
 ```
 
-**Step 3. **Specify the input folder where the camera trap images are saved (all jpg files will be processed from the target folder), and the folder where the output csv file should be saved. Note: paths that include spaces should be placed between “ “ symbols.
+**Step 3.** Specify the input folder where the camera trap images are saved (all jpg files will be processed from the target folder), and the folder where the output csv file should be saved. Note: paths that include spaces should be placed between “ “ symbols.
 ```
 main.bat 
 --input=\\C:\Camera_trap\Batzbach\**\*.jpg 
