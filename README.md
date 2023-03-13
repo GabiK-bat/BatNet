@@ -4,7 +4,7 @@
 
 **Download**: [BatNet](https://github.com/GabiK-bat/BatNet/releases/download/v2022-12-13/2022-12-13_16h02m33s_BatDetector.zip)  
 **Download**: [Test images](https://github.com/GabiK-bat/BatNet/tree/main/test_images/)  
-**Download**: [Manual species identification guide](https://github.com/GabiK-bat/BatNet/blob/main/ID_english_final.pdf) 
+**Download**: [Manual species identification guide](https://github.com/GabiK-bat/BatNet/blob/main/ID_english_final.pdf)   
 **View**: [BatNet User's manual](https://github.com/GabiK-bat/BatNet/tree/main/ReadMe/ReadMe.md)  
 
 
