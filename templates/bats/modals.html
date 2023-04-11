@@ -28,11 +28,17 @@
         <div class="ui divider"></div>
 
         <div class="field">
-          <label>Confidence Threshold</label>
+          <label>Flags</label>
           <div class="ui right labeled input" id="settings-confidence-threshold">
-            <input type="number" step="1" min="0" max="100" style="width: 5ch;" value="75" id='settings-confidence-threshold-input'>
+            <input type="number" step="1" min="0" max="100" style="width: 5ch;" value="70" id='settings-confidence-threshold-input'>
             <div class="ui basic label"> % </div>
             <label style="padding:10px">Flag predictions with confidence below this value</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui toggle checkbox" id="settings-flag-negatives">
+            <input type="checkbox">
+            <label>Flag low-confidence Not-a-Bats</label>
           </div>
         </div>
 

@@ -11,9 +11,15 @@ def process_image(imagepath, settings):
     return result
 
 
-def load_exif_datetime(filename):
+def load_exif_datetime(filename:str) -> str:
     with open(filename, 'rb') as f:
-        exif_f = exif.Image(f)
+        try:
+            exif_f = exif.Image(f)
+        except:
+            #can fail for some weird exif formats
+            print('Could not load exif')
+            return
+        
         if exif_f.has_exif :
             if 'datetime_original' in exif_f.list_all():
                 return exif_f.datetime_original

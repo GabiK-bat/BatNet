@@ -10,6 +10,7 @@ class Settings(BaseSettings):
         d = super().get_defaults()
         d.update({
             'confidence_threshold'     : 70,
+            'flag_negatives'           : True,
             'export_boxes'             : False,
         })
         return d

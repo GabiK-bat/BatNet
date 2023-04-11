@@ -58,11 +58,17 @@ BatResults = class {
         for (let i = 0; i < n; i++) {
             const confidence = Object.values(sort_object_by_value(this.predictions)[i])[0]
             const _lowconf   = (confidence <= hiconf_threshold);
-            lowconfs.push(_lowconf)
+
             const label      = this.labels[i];
-            //if(! (r.prediction[''] > hiconf_threshold) ){
-            if( !(!label || (label.toLowerCase()=='not-a-bat')) ){                                                                    //TODO: plus confidence high ????
-                amount += 1;
+            const is_negative 
+              = (label.toLowerCase()==GLOBAL.App.NEGATIVE_CLASS.toLowerCase()) || !label
+            
+            if(!is_negative || GLOBAL.settings['flag_negatives']) {
+              lowconfs.push(_lowconf)
+            }
+            
+            if(!is_negative){
+              amount += 1;
             }
         }
         

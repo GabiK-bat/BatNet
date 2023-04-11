@@ -75,6 +75,13 @@ BatDetection = class extends BaseDetection {
       }
     }
 
+    static update_all_flags(){
+        const filenames = Object.keys(GLOBAL.files)
+        for(const filename of filenames) {
+            this.update_flags(filename)
+        }
+    }
+
     static on_flag(event){
       event.stopPropagation();
       const $cell   = $(event.target).closest('td')
@@ -87,4 +94,5 @@ BatDetection = class extends BaseDetection {
       this.update_flags(filename)
     }
 }
+
 
