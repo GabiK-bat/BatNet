@@ -21,13 +21,14 @@ BatFileInput = class extends BaseFileInput{
     
     //override
     static async load_result(filename, resultfiles){
+        const _this = this;
         const promise = new Promise(async (resolve, reject) => {
             const reader  = new FileReader();
             reader.onload = async function(){
                 const text = reader.result;
                 const data = JSON.parse(text);
 
-                let results = {labels:[], boxes:[]}
+                let results = Object.assign(data, {labels:[], boxes:[]})
                 for(const i in data.shapes){
                     results.labels.push( {[data.shapes[i].label]:1.0} )
                     let box = data.shapes[i].points.flat()
@@ -39,6 +40,11 @@ BatFileInput = class extends BaseFileInput{
                     ]
                     results.boxes.push( box )
                 }
+                if(!results.datetime) {
+                    //earlier version which did not save datetime
+                    //have to do a roundtrip to the backend to read exif
+                    results.datetime = await _this.fetch_exif_datetime_via_backend(filename)
+                }
                 
                 GLOBAL.App.Detection.set_results(filename, results)
                 resolve()
@@ -49,6 +55,13 @@ BatFileInput = class extends BaseFileInput{
         })
         return promise;
     }
-    
-}  //end PollenFileInput
+
+    static async fetch_exif_datetime_via_backend(filename) {
+        const file = GLOBAL.files[filename]
+        await upload_file_to_flask(file)
+        const response = await $.get('read_exif_datetime', {filename:filename})
+        $.get(`delete_image/${filename}`)
+        return response['datetime']
+    }
+}
 

@@ -8,6 +8,11 @@ import numpy as np
 
 
 class App(BaseApp):
+    def __init__(self, *a, **kw):
+        super().__init__(*a, **kw)
+
+        self.route('/read_exif_datetime')(self.read_exif_datetime)
+
 
     #TODO: unify
     #override
@@ -39,4 +44,14 @@ class App(BaseApp):
         
         ok = backend.training.start_training(imagefiles, targetfiles, options, self.settings)
         return ok
+    
+    def read_exif_datetime(self):
+        filename = flask.request.args['filename']
+        full_path = os.path.join(self.cache_path, filename)
+        if not os.path.exists(full_path):
+            flask.abort(404)
+        
+        return flask.jsonify({
+            'datetime':  backend.processing.load_exif_datetime(full_path),
+        })
 
