@@ -1,6 +1,6 @@
 # BatNet
 
-*BatNet* is an open-source, deep learning-based tool for rapid and accurate bat species identification from camera trap images, as described in Krivek et al., submitted. The baseline model is trained to identify the following 13 bat species or species complexes: *Barbastella barbastellus, Eptesicus serotinus, Myotis bechsteinii, Myotis dasycneme, Myotis daubentonii, Myotis emarginatus, Myotis myotis/M. blythii, Myotis brandtii/M. alcathoe/M. mystacinus, Myotis nattereri, Nyctalus noctula, Pipistrellus pipistrellus/P. pygmaeus, Plecotus auritus/P. austriacus, Rhinolophus hipposideros/R. ferrumequinum.*
+*BatNet* is an open-source, deep learning-based tool for rapid and accurate bat species identification from camera trap images, as described in Krivek et al., 2023. The baseline model is trained to identify the following 13 bat species or species complexes: *Barbastella barbastellus, Eptesicus serotinus, Myotis bechsteinii, Myotis dasycneme, Myotis daubentonii, Myotis emarginatus, Myotis myotis/M. blythii, Myotis brandtii/M. alcathoe/M. mystacinus, Myotis nattereri, Nyctalus noctula, Pipistrellus pipistrellus/P. pygmaeus, Plecotus auritus/P. austriacus, Rhinolophus hipposideros/R. ferrumequinum.*
 
 **Download**: [BatNet](https://github.com/GabiK-bat/BatNet/releases/download/v2023-07-14/2023-07-14_15h38m02s_BatDetector.zip)  
 **Download**: [Test images](https://github.com/GabiK-bat/BatNet/tree/main/test_images/)  
