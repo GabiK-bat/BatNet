@@ -104,7 +104,7 @@ The output csv file contains the following columns: file name, date when image w
  
  ![p10](https://user-images.githubusercontent.com/79314212/207565707-214ebcd7-6611-43d6-aa31-8a20c9ba0bde.png)
  
- 
+ Note: if you get an error "Traning failed", try to use a different browser (tested on Firefox).
  
 **It is highly recommended that before ecological inference users test the model performance (both the baseline or the new, retrained) on a subsample of manually identified camera trap images to uncover possible hidden or new biases.**
 
