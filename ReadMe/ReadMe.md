@@ -30,17 +30,26 @@ The user-friendly graphical interface allows us to combine the automated species
  
  
  
-**Step 5. Review the detections and identifications:** clicking on a species identification or filename will open the original image, showing a bounding box around each detected bat and the corresponding species identification. Hovering over the species label will show the confidence level of the identification. Images can be sorted based on the confidence level of their identifications, allowing users to review all images below the chosen confidence threshold. Identifications can be removed by clicking on the red X in the upper right corner of each bounding box. Bounding boxes can be resized by pulling the lower right corner of the box and can be moved around by the grey square in the middle of the bounding box. For each image a menu bar appears on the top left corner with four icons:
+**Step 5. Review the detections and identifications:** 
+
+Clicking on a species identification or filename will open the original image, showing a bounding box around each detected bat and the corresponding species identification. Hovering over the species label will show the confidence level of the identification. Images can be sorted based on the confidence level of their identifications, allowing users to review all images below the chosen confidence threshold. Identifications can be removed by clicking on the red X in the upper right corner of each bounding box. Bounding boxes can be resized by pulling the lower right corner of the box and can be moved around by the grey square in the middle of the bounding box. 
+
+For each image a menu bar appears on the top left corner with four icons:
 -	Click on the first icon (black triangle) to process again the image.
 -	Clicking on the second icon (eye) allows us to show/hide the bounding boxes from an image (e.g. when multiple identifications are overlapping), and change the brightness of the image.
 -	The third icon (bounding box) allows us to add new bounding boxes with species identification to the image (from a drop-down menu or by typing species name), when bats were not detected in the image. 
 -	The fourth icon (question mark) is a summary of short keys: shift + drag to move the image, shift + mouse wheel to zoom and shift + double-click to reset the image. 
 
-Before ecological inference, manual review is highly recommended:
-- Check all identifications below the confidence threshold (default 70%) and correct if needed.
-- Double-check rare species, even if above the threshold.
-- Check empty images — if a bat is present but was missed, draw a box and assign the correct species.
-- For images with multiple detections: ideally keep only the bat that triggered the light barrier/camera and delete background bats. If it is unclear which bat triggered it (or multiple bats passed at once) keep all of them.
+**Important!**
+
+**1) When running BatNet on images from a new site, first always check if bats being correctly detected (i.e., bounding box placed around the bat without cutting of part of it). If the detection does not work well, you need to train a site-specific detection model (see Retraining *BatNet* section).**
+
+**2) Before ecological inference, manual review is highly recommended:**
+**- Check all identifications below the confidence threshold (default 70%) and correct if needed.**
+**- Double-check rare species, even if above the threshold.**
+**- Check empty images — if a bat is present but was missed, draw a box and assign the correct species.**
+**- For images with multiple detections: ideally keep only the bat that triggered the light barrier/camera and delete background bats. If it is unclear which bat triggered it (or multiple bats passed at once) keep all of them.**
+
 
  
 ![p5](https://user-images.githubusercontent.com/79314212/207563431-2c1a1d7f-5ed1-4f74-8a37-4cdea95c0ede.png)
@@ -94,7 +103,8 @@ The output csv file contains the following columns: file name, date when image w
  
  
  
-**Step 4.** Select if only the detector should be retrained or both the detector and the classifier. Retraining only the detector to create a site-specific model is useful when applying *BatNet* on new backgrounds and the performance of the baseline model is not sufficient. Retraining both the detector and classifier should be used when creating a model that can identify a new species that was not included in our original training data. Annotations for all *Classes of interest* should be included to avoid learning the new species but forgetting the other species. 
+**Step 4.** Select if only the detector should be retrained or both the detector and the classifier. Retraining only the detector to create a site-specific model is useful when applying *BatNet* on new backgrounds and the performance of the baseline model is not sufficient. 
+Retraining both the detector and classifier should be used when creating a model that can identify a new species that was not included in our original training data. Important: Annotations for all *Classes of interest* should be included to avoid learning the new species but forgetting the other species. 
 
 ![p9](https://user-images.githubusercontent.com/79314212/207565620-a8fcf9b1-682e-4a9c-a7c8-0a7543f0dc56.png)
 
