@@ -28,9 +28,12 @@ BatFileInput = class extends BaseFileInput{
                 const text = reader.result;
                 const data = JSON.parse(text);
 
+                const predictions = get_or_infer_predictions_from_labelme(data)
+
                 let results = Object.assign(data, {labels:[], boxes:[]})
                 for(const i in data.shapes){
-                    results.labels.push( {[data.shapes[i].label]:1.0} )
+                    //results.labels.push( {[data.shapes[i].label]:1.0} )
+                    results.labels.push(predictions[i])
                     let box = data.shapes[i].points.flat()
                         box = [
                             Math.min(box[0], box[2]), 
@@ -65,3 +68,41 @@ BatFileInput = class extends BaseFileInput{
     }
 }
 
+
+
+
+// type PartialLabelMeObject = {
+//     shapes: {
+//         label: string
+//     }[],
+//     predictions: Record<string, number>[],
+// }
+
+/** Return Record<string, number>[] label-to-probability mappings from 
+ *  either `.predictions` if present in the object and valid, 
+ *  or construct an artificial one from `shapes::label` with 1.0 probability */
+function get_or_infer_predictions_from_labelme(labelme_object/*:PartialLabelMeObject*/) {
+    const predictions = labelme_object.predictions
+
+    const predictions_are_valid =
+        Array.isArray(predictions) &&
+        predictions.every(
+            (prediction) =>
+                prediction &&
+                typeof prediction === "object" &&
+                !Array.isArray(prediction) &&
+                Object.values(prediction).every(
+                    (probability) =>
+                        typeof probability === "number" &&
+                        Number.isFinite(probability) &&
+                        probability >= 0 &&
+                        probability <= 1
+                )
+        )
+
+    if(predictions_are_valid)
+        return predictions
+    
+    //else
+    return (labelme_object?.shapes ?? []).map((shape) => ({[shape.label]: 1.0}))
+}
