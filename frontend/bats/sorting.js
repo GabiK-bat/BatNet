@@ -8,14 +8,14 @@ BatSorting = class extends BaseSorting {
         if(column_index==2)
             this.on_sort_by_confidence(event)
     }
-
+    
     //called when user clicks on "Flags" column head
     static on_sort_by_confidence(event){
         const $col      = $(event.target);
         const direction = $col.hasClass('ascending')? 'descending' : 'ascending';
         this._clear_sorted()
         $col.addClass(['sorted', direction]);
-
+        
         let   filenames   = Object.keys(GLOBAL.files)
         const predictions = filenames.map(f => GLOBAL.files[f].results.predictions)
         const confidences = predictions.map(  P => P.map(  p => Object.values(p).reduce( (r,c) => Math.max(r,c) )  )  )  //ugh
@@ -27,28 +27,41 @@ BatSorting = class extends BaseSorting {
         filenames         = order.map(i => filenames[i]);
         if(direction == 'ascending')
             filenames = filenames.reverse()
-
+        
         this.set_new_file_order(filenames)
     }
-
+    
     //called when user clicks on "Detected Bats" column head
     static on_sort_by_number(event){
         const $col       = $(event.target);
         const direction  = $col.hasClass('ascending')? 'descending' : 'ascending';
         this._clear_sorted()
         $col.addClass(['sorted', direction]);
-
+        
         let   filenames   = Object.keys(GLOBAL.files)
         const labels      = filenames.map(f => GLOBAL.files[f].results.labels)
-        //sort by number of labels in each file
-        const order       = arange(labels.length).sort( (a,b) => (labels[b].length - labels[a].length) )
+        const order       = argsort_string_arrays(labels)
         filenames         = order.map(i => filenames[i]);
         if(direction=='ascending')
             filenames = filenames.reverse()
-
+        
         this.set_new_file_order(filenames)
     }
 }
 
 
 
+/** Sort indices for string[][], primarily by array length, secondarily alphabetically,
+ *  order-independent within an array. */
+function argsort_string_arrays(arrays) {
+    return arrays
+      .map((x, i) => [x, i])
+      .sort(([a], [b]) => {
+        if(a.length !== b.length)
+            return b.length - a.length;
+        return [...a].sort().join("\0").localeCompare([...b].sort().join("\0"));
+      })
+      .map(([, i]) => i);
+}
+    
+  
