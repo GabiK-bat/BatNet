@@ -2,6 +2,7 @@ import base.backend.cli as base_cli
 from base.backend.app import path_to_main_module
 
 import os, datetime, sys
+import PIL.Image
 from . import processing
 from . import settings
 
@@ -34,6 +35,7 @@ def results_to_csv(results, export_boxes=False):
     ]
     if export_boxes:
         header.append('Box')
+        header.append('Box (relative)')
 
     species_codes_file = os.path.join(path_to_main_module(), 'species_codes.txt')
     species_codes = settings.parse_species_codes_file(path=species_codes_file)
@@ -52,7 +54,7 @@ def results_to_csv(results, export_boxes=False):
     
 
         if n==0:
-            csv_item   = [filename, date, time, '', multiple, '', '', ''] + ([''] if export_boxes else [])
+            csv_item   = [filename, date, time, '', multiple, '', '', ''] + (['',''] if export_boxes else [])
             csv_data.append( csv_item )
         
         for i in range(len(selectedlabels)):
@@ -64,8 +66,15 @@ def results_to_csv(results, export_boxes=False):
             confidence_str = f'{confidence*100:.1f}'
             csv_item       = [filename, date, time, unsure, multiple, label, code, confidence_str]
             if export_boxes:
-                box  = ' '.join( [ f'{x:.1f}' for x in result['boxes'][i] ] )
-                csv_item.append(box)
+                box      = result['boxes'][i]
+                box_str  = ' '.join( [ f'{x:.1f}' for x in box ] )
+                csv_item.append(box_str)
+                
+                W,H         = PIL.Image.open(r['filename']).size
+                rel_box     = [box[0]/W, box[1]/H, box[2]/W, box[3]/H]
+                rel_box_str = ' '.join( [ f'{x:.3f}' for x in rel_box ] )
+                csv_item.append(rel_box_str)
+
             csv_data.append(csv_item)
         
         #sanity check
