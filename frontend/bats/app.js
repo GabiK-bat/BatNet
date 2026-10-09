@@ -48,46 +48,43 @@ BatResults = class {
         this.datetime    = raw_results['datetime']
     }
 
+    is_negative(label){
+        return !label || (label.toLowerCase() == GLOBAL.App.NEGATIVE_CLASS.toLowerCase());
+    }
+
+    /** Low-confidence flags for one file.
+     *  - return_per_result=false: file-level flags, e.g. ['unsure', 'multiple']
+     *  - return_per_result=true:  'unsure'/'' per detection, aligned with this.labels
+     *                             (and thus with the rows csv_data_for_file() writes)   */
     compute_flags(filename, return_per_result=false){
-        const hiconf_threshold = GLOBAL.settings.confidence_threshold/100 ?? 0.70
-        let lowconfs = [];
-        let amount   = 0;
-        let flags    = []
+        const hiconf_threshold = (GLOBAL.settings.confidence_threshold ?? 70) / 100;
 
-        const n     = this.labels.length;
-        for (let i = 0; i < n; i++) {
-            const confidence = Object.values(sort_object_by_value(this.predictions)[i])[0]
-            const _lowconf   = (confidence <= hiconf_threshold);
+        //one entry per detection; detections exempt from flagging get `false`
+        const lowconfs = this.labels.map( (label, i) => {
+            const confidence = Object.values(this.predictions[i])[0];
+            const flaggable  = !this.is_negative(label) || GLOBAL.settings['flag_negatives'];
+            return flaggable && (confidence <= hiconf_threshold);
+        })
 
-            const label      = this.labels[i];
-            const is_negative 
-              = (label.toLowerCase()==GLOBAL.App.NEGATIVE_CLASS.toLowerCase()) || !label
-            
-            if(!is_negative || GLOBAL.settings['flag_negatives']) {
-              lowconfs.push(_lowconf)
-            }
-            
-            if(!is_negative){
-              amount += 1;
-            }
+        const manually_flagged = $(`[filename="${filename}"] td.flags-cell`).hasClass('manual-flag');
+        const unsure           = (lowconfs.includes(true) != manually_flagged);
+
+        if(return_per_result){
+            if(manually_flagged)
+                return lowconfs.map( _ => unsure? 'unsure' : '' );
+            return lowconfs.map( lowconf => lowconf? 'unsure' : '' );
         }
-        
-        const manual_flags = $(`[filename="${filename}"] td.flags-cell`).hasClass('manual-flag')
-        const lowconf = lowconfs.includes(true) ^ manual_flags;
-        if(lowconf)
-          flags.push('unsure');
-      
-        if(return_per_result)
-          if(manual_flags)
-            return lowconfs.map(x => {return lowconf? 'unsure' : ''});
-          else
-            return lowconfs.map(x => {return x? 'unsure' : ''});
-      
-        if(amount==0)
-          flags.push('empty');
-        else if(amount>1)
-          flags.push('multiple');
-        
-        return flags
+
+        const flags = [];
+        if(unsure)
+            flags.push('unsure');
+
+        const n_bats = this.labels.filter( label => !this.is_negative(label) ).length;
+        if(n_bats == 0)
+            flags.push('empty');
+        else if(n_bats > 1)
+            flags.push('multiple');
+
+        return flags;
     }
 }

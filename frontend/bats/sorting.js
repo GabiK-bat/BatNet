@@ -17,7 +17,7 @@ BatSorting = class extends BaseSorting {
         $col.addClass(['sorted', direction]);
         
         let   filenames   = Object.keys(GLOBAL.files)
-        const predictions = filenames.map(f => GLOBAL.files[f].results.predictions)
+        const predictions = filenames.map(f => GLOBAL.files[f].results?.predictions ?? [])  //unprocessed files sort as empty
         const confidences = predictions.map(  P => P.map(  p => Object.values(p).reduce( (r,c) => Math.max(r,c) )  )  )  //ugh
         //lowest confidence level per filename
         let   worstconf   = confidences.map( x => x.reduce( (x,carry) => Math.min(x, carry), 100 ) )
@@ -39,7 +39,7 @@ BatSorting = class extends BaseSorting {
         $col.addClass(['sorted', direction]);
         
         let   filenames   = Object.keys(GLOBAL.files)
-        const labels      = filenames.map(f => GLOBAL.files[f].results.labels)
+        const labels      = filenames.map(f => GLOBAL.files[f].results?.labels ?? [])  //unprocessed files sort as empty
         const order       = argsort_string_arrays(labels)
         filenames         = order.map(i => filenames[i]);
         if(direction=='ascending')
